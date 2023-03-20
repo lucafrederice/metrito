@@ -90,5 +90,5 @@ export default function Product({ product }: {
         transactions: Transaction[]
     }
 }) {
-
+    return (<>hello</>)
 }
