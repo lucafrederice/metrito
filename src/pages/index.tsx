@@ -42,40 +42,6 @@ const announcements = [
   },
 ]
 
-
-const chartdata = [
-  {
-    date: "Jan 22",
-    SemiAnalysis: 2890,
-    "The Pragmatic Engineer": 2338,
-  },
-  {
-    date: "Feb 22",
-    SemiAnalysis: 2756,
-    "The Pragmatic Engineer": 2103,
-  },
-  {
-    date: "Mar 22",
-    SemiAnalysis: 3322,
-    "The Pragmatic Engineer": 2194,
-  },
-  {
-    date: "Apr 22",
-    SemiAnalysis: 3470,
-    "The Pragmatic Engineer": 2108,
-  },
-  {
-    date: "May 22",
-    SemiAnalysis: 3475,
-    "The Pragmatic Engineer": 1812,
-  },
-  {
-    date: "Jun 22",
-    SemiAnalysis: 3129,
-    "The Pragmatic Engineer": 1726,
-  },
-];
-
 const cities = [
   {
     name: "New York",
@@ -150,10 +116,12 @@ export const getStaticProps = async () => {
       })
     }
 
+  console.log(transactions)
+
   const transactionByDay: {
     date: string,
-    complete: number,
-    cancelled: number,
+    Approved: number,
+    Cancelled: number,
   }[] = []
 
 
@@ -161,31 +129,48 @@ export const getStaticProps = async () => {
     const transaction = transactions[i]
 
     const alreadyExists = transactionByDay.find(trans => trans.date === transaction.order_date)
+
     if (alreadyExists) {
-      if (transaction.status === "CANCELLED") alreadyExists.cancelled += transaction.price
-      if (transaction.status === "COMPLETE") alreadyExists.complete += transaction.price
+      if (transaction.status === "CANCELLED") alreadyExists.Cancelled += transaction.price
+      if (transaction.status === "COMPLETE") alreadyExists.Approved += transaction.price
     }
 
-    if (!alreadyExists) {
+    if (!alreadyExists)
       transactionByDay.push({
         date: transaction.order_date,
-        complete: transaction.status === "COMPLETE" ? transaction.price : 0,
-        cancelled: transaction.status === "CANCELLED" ? transaction.price : 0,
+        Approved: transaction.status === "COMPLETE" ? transaction.price : 0,
+        Cancelled: transaction.status === "CANCELLED" ? transaction.price : 0,
       })
-    }
   }
 
+  const transactionByPaymentType: {
+    type: string,
+    sales: number
+  }[] = []
+
+  for (let i = 0; i < transactions.length; i++) {
+    const transaction = transactions[i]
+
+    const alreadyExists = transactionByPaymentType.find(trans => trans.type === transaction.payment_type)
+
+    if (alreadyExists && transaction.status === "COMPLETE") alreadyExists.sales += transaction.price
+    if (!alreadyExists && transaction.status === "COMPLETE") transactionByPaymentType.push({
+      type: transaction.payment_type,
+      sales: transaction.price
+    })
+  }
 
   return {
     props: {
-      transactionByDay
+      transactionByDay,
+      transactionByPaymentType
     },
   }
 }
 
 
 export default function Home(props: any) {
-  const { transactionByDay } = props
+  const { transactionByDay, transactionByPaymentType } = props
 
   return (
     <>
@@ -213,7 +198,7 @@ export default function Home(props: any) {
                     Below you can see the comparison of successfull and non-successfull sales over time.
                   </p>
                 </header>
-                <AreaChart data={transactionByDay} index="date" categories={["complete", "cancelled"]} colors={["teal", "red"]}
+                <AreaChart data={transactionByDay} index="date" categories={["Approved", "Cancelled"]} colors={["teal", "red"]}
                   valueFormatter={(n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(n)} className="h-96" />
               </div>
             </section>
@@ -234,10 +219,11 @@ export default function Home(props: any) {
                 </header>
                 <DonutChart
                   className="mt-6 h-72"
-                  data={cities}
+                  data={transactionByPaymentType}
                   category="sales"
-                  index="name"
+                  index="type"
                   variant='pie'
+                  valueFormatter={(n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(n)}
                 />
 
                 <Legend
