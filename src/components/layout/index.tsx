@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import { Menu, Popover, Transition } from '@headlessui/react'
 import {
     AcademicCapIcon,
@@ -13,13 +13,12 @@ import {
 } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
+import useAxios from '@/hooks/useAxios'
+import Link from 'next/link'
+import { Product } from '@prisma/client'
 
 const navigation = [
     { name: 'Home', href: '#', current: true },
-    { name: 'Profile', href: '#', current: false },
-    { name: 'Resources', href: '#', current: false },
-    { name: 'Company Directory', href: '#', current: false },
-    { name: 'Openings', href: '#', current: false },
 ]
 
 function classNames(...classes: string[]) {
@@ -27,6 +26,52 @@ function classNames(...classes: string[]) {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+
+    const [response] = useAxios("/api/products");
+    const [navigation, setNavigation] = useState([
+        { name: 'Home', href: '/', current: true }
+    ])
+
+    useEffect(
+        () => {
+            if (response) setNavigation(
+                prev => [
+                    ...prev,
+                    //@ts-ignore
+                    ...response.products.map(
+                        (item: Product) => {
+                            return {
+                                name: item.name,
+                                href: `/${item.id}`,
+                                current: globalThis.window.location.pathname === `/${item.id}`
+                            }
+                        }
+                    )
+                ]
+            )
+        },
+        [response]
+    )
+
+    useEffect(
+        () => {
+            setNavigation(
+                prev => [
+                    ...prev.map(
+                        nav => {
+                            return {
+                                name: nav.name,
+                                href: nav.href,
+                                current: globalThis.window.location.pathname === nav.href
+                            }
+                        }
+                    )
+                ]
+            )
+        },
+        [globalThis?.window?.location?.pathname]
+    )
+
     return (
         <>
             <div className="min-h-full">
@@ -49,7 +94,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                             <div className="hidden lg:block lg:col-span-2">
                                                 <nav className="flex space-x-4">
                                                     {navigation.map((item) => (
-                                                        <a
+                                                        <Link
                                                             key={item.name}
                                                             href={item.href}
                                                             className={classNames(
@@ -59,7 +104,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                             aria-current={item.current ? 'page' : undefined}
                                                         >
                                                             {item.name}
-                                                        </a>
+                                                        </Link>
                                                     ))}
                                                 </nav>
                                             </div>
@@ -140,13 +185,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
                                                 <div className="mt-3 px-2 space-y-1">
                                                     {navigation.map((item) => (
-                                                        <a
+                                                        <Link
                                                             key={item.name}
                                                             href={item.href}
-                                                            className="block rounded-md px-3 py-2 text-base text-gray-900 font-medium hover:bg-gray-100 hover:text-gray-800"
+                                                            className="block rounded-md px-3 py-2 text-base text-gray-700 font-medium hover:bg-gray-100 hover:text-gray-800"
                                                         >
                                                             {item.name}
-                                                        </a>
+                                                        </Link>
                                                     ))}
                                                 </div>
                                             </div>

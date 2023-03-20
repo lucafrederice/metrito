@@ -116,8 +116,6 @@ export const getStaticProps = async () => {
       })
     }
 
-  console.log(transactions)
-
   const transactionByDay: {
     date: string,
     Approved: number,
@@ -160,17 +158,20 @@ export const getStaticProps = async () => {
     })
   }
 
+  const paymentTypes: string[] = [...transactionByPaymentType.map(trans => trans.type.toLowerCase())]
+
   return {
     props: {
       transactionByDay,
-      transactionByPaymentType
+      transactionByPaymentType,
+      paymentTypes
     },
   }
 }
 
 
 export default function Home(props: any) {
-  const { transactionByDay, transactionByPaymentType } = props
+  const { transactionByDay, transactionByPaymentType,paymentTypes } = props
 
   return (
     <>
@@ -228,7 +229,7 @@ export default function Home(props: any) {
 
                 <Legend
                   className="flex justify-center"
-                  categories={citiesName}
+                  categories={paymentTypes}
                 />
               </div>
             </section>
