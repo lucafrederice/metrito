@@ -132,11 +132,11 @@ export const getStaticProps = async () => {
       if (transaction.warranty_expire_date)
         warranty_expire_date = transaction.warranty_expire_date.toLocaleDateString()
 
-      if (transaction.price) price = transaction.price.toFixed(2)
+      if (transaction.price) price = Number(transaction.price.toFixed(2))
 
-      if (transaction.hotmart_fee_total) hotmart_fee_total = transaction.hotmart_fee_total.toFixed(2)
-      if (transaction.hotmart_fee_fixed) hotmart_fee_fixed = transaction.hotmart_fee_fixed.toFixed(2)
-      if (transaction.hotmart_fee_base) hotmart_fee_base = transaction.hotmart_fee_base.toFixed(2)
+      if (transaction.hotmart_fee_total) hotmart_fee_total = Number(transaction.hotmart_fee_total.toFixed(2))
+      if (transaction.hotmart_fee_fixed) hotmart_fee_fixed = Number(transaction.hotmart_fee_fixed.toFixed(2))
+      if (transaction.hotmart_fee_base) hotmart_fee_base = Number(transaction.hotmart_fee_base.toFixed(2))
 
       transactions.push({
         ...transaction,
@@ -150,35 +150,43 @@ export const getStaticProps = async () => {
       })
     }
 
-    const transactionByDay: {
-      date: string,
-      cancelled: number,
-      complete: number
-    }[] = []
+  const transactionByDay: {
+    date: string,
+    complete: number,
+    cancelled: number,
+  }[] = []
 
 
   for (let i = 0; i < transactions.length; i++) {
     const transaction = transactions[i]
 
     const alreadyExists = transactionByDay.find(trans => trans.date === transaction.order_date)
-    if (alreadyExists) 
+    if (alreadyExists) {
+      if (transaction.status === "CANCELLED") alreadyExists.cancelled += transaction.price
+      if (transaction.status === "COMPLETE") alreadyExists.complete += transaction.price
+    }
 
-    if (!alreadyExists)
-
-    if (transaction.status === "CANCELLED")
-    if (transaction.status === "COMPLETE")
+    if (!alreadyExists) {
+      transactionByDay.push({
+        date: transaction.order_date,
+        complete: transaction.status === "COMPLETE" ? transaction.price : 0,
+        cancelled: transaction.status === "CANCELLED" ? transaction.price : 0,
+      })
+    }
   }
 
 
   return {
     props: {
-      transactions
+      transactionByDay
     },
   }
 }
 
 
-export default function Home() {
+export default function Home(props: any) {
+  const { transactionByDay } = props
+
   return (
     <>
       <Head>
@@ -205,7 +213,8 @@ export default function Home() {
                     Below you can see the comparison of successfull and non-successfull sales over time.
                   </p>
                 </header>
-                <AreaChart data={chartdata} index="date" categories={["SemiAnalysis", "The Pragmatic Engineer"]} colors={["teal", "red"]} className="h-96" />
+                <AreaChart data={transactionByDay} index="date" categories={["complete", "cancelled"]} colors={["teal", "red"]}
+                  valueFormatter={(n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(n)} className="h-96" />
               </div>
             </section>
           </div>
