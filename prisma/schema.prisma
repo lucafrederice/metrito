@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Token {
+  type       String    @id
+  value      String     @db.Text
+  token_type String
+  expires_in DateTime?
+  scope      String?
+  jti        String?
+}
+
+model Cache {
+  id         String   @id @default(cuid())
+  updated_at DateTime
+}
+
+model Transaction {
+  id String @unique
+
+  status String?
+
+  order_date           DateTime?
+  approved_date        DateTime?
+  warranty_expire_date DateTime?
+
+  is_subscription Boolean?
+  commission_as   String?
+
+  price    Decimal? @db.Money
+  currency String?
+
+  offer_code          String?
+  payment_mode        String?
+  payment_type        String?
+  payment_method      String?
+  installments_number Int?
+
+  hotmart_fee_total    Decimal? @db.Money
+  hotmart_fee_fixed    Decimal? @db.Money
+  hotmart_fee_base     Decimal? @db.Money
+  hotmart_fee_currency String?
+
+  customerId String?
+  customer   User?   @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  productId Int?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  commisions Commission[]
+}
+
+model User {
+  id String @id
+
+  name       String?
+  trade_name String?
+  email      String?
+  phone      String?
+  cellphone  String?
+  locale     String?
+
+  address   Address?
+  documents Document[]
+
+  commissions  Commission[]
+  products     Product[] // as a producer
+  transactions Transaction[] // as a buyer
+}
+
+model Product {
+  id   Int     @unique
+  name String?
+
+  producerId String?
+  producer   User?   @relation(fields: [producerId], references: [id], onDelete: Cascade)
+
+  transactions Transaction[]
+}
+
+model Commission {
+  id String @id @default(cuid())
+
+  value    Decimal? @db.Money
+  currency String?
+  source   String?
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  transactionId String?
+  transaction   Transaction? @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+}
+
+model Address {
+  id String @id @default(cuid())
+
+  street       String?
+  neighborhood String?
+  country      String?
+  number       String?
+  zip_code     String?
+  complement   String?
+  state        String?
+  city         String?
+
+  userId String? @unique
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Document {
+  value String @id
+
+  type String?
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
