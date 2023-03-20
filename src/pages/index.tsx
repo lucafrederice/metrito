@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import { AreaChart, DonutChart, Legend } from "@tremor/react";
 import { prisma } from '../../prisma/client';
 import { Transaction } from '@prisma/client';
+import MotionWrapper from '@/components/animation/motionWrapper';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -171,7 +172,7 @@ export const getStaticProps = async () => {
 
 
 export default function Home(props: any) {
-  const { transactionByDay, transactionByPaymentType,paymentTypes } = props
+  const { transactionByDay, transactionByPaymentType, paymentTypes } = props
 
   return (
     <>
@@ -181,61 +182,62 @@ export default function Home(props: any) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <MotionWrapper>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+          <h1 className="sr-only">Home</h1>
+          {/* Main 3 column grid */}
+          <div className="grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-8">
+            {/* Left column */}
+            <div className="grid grid-cols-1 gap-4 lg:col-span-2">
+              {/* Welcome panel */}
+              <section aria-labelledby="overview">
+                <div className="rounded-lg shadow-xl bg-white p-6 grid justify-items-start content-center gap-12">
+                  <header>
+                    <h2 className="text-lg font-medium text-gray-900" id="overview-title">
+                      Overview
+                    </h2>
+                    <p className='text-sm sm:text-base text-gray-700'>
+                      Below you can see the comparison of successfull and non-successfull sales over time.
+                    </p>
+                  </header>
+                  <AreaChart data={transactionByDay} index="date" categories={["Approved", "Cancelled"]} colors={["teal", "red"]}
+                    valueFormatter={(n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(n)} className="h-96" />
+                </div>
+              </section>
+            </div>
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h1 className="sr-only">Home</h1>
-        {/* Main 3 column grid */}
-        <div className="grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-8">
-          {/* Left column */}
-          <div className="grid grid-cols-1 gap-4 lg:col-span-2">
-            {/* Welcome panel */}
-            <section aria-labelledby="overview">
-              <div className="rounded-lg shadow-xl bg-white p-6 grid justify-items-start content-center gap-12">
-                <header>
-                  <h2 className="text-lg font-medium text-gray-900" id="overview-title">
-                    Overview
-                  </h2>
-                  <p className='text-sm sm:text-base text-gray-700'>
-                    Below you can see the comparison of successfull and non-successfull sales over time.
-                  </p>
-                </header>
-                <AreaChart data={transactionByDay} index="date" categories={["Approved", "Cancelled"]} colors={["teal", "red"]}
-                  valueFormatter={(n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(n)} className="h-96" />
-              </div>
-            </section>
-          </div>
+            {/* Right column */}
+            <div className="grid grid-cols-1 gap-4">
+              {/* Announcements */}
+              <section aria-labelledby="details">
+                <div className="rounded-lg bg-white shadow-xl p-6 grid justify-items-start content-center gap-10">
+                  <header>
+                    <h2 className="text-lg sm:text-base font-medium text-gray-900" id="details-title">
+                      Details
+                    </h2>
+                    <p className='text-sm text-gray-700'>
+                      Compare sales percentage by product.
+                    </p>
+                  </header>
+                  <DonutChart
+                    className="mt-6 h-72"
+                    data={transactionByPaymentType}
+                    category="sales"
+                    index="type"
+                    variant='pie'
+                    valueFormatter={(n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(n)}
+                  />
 
-          {/* Right column */}
-          <div className="grid grid-cols-1 gap-4">
-            {/* Announcements */}
-            <section aria-labelledby="details">
-              <div className="rounded-lg bg-white shadow-xl p-6 grid justify-items-start content-center gap-10">
-                <header>
-                  <h2 className="text-lg sm:text-base font-medium text-gray-900" id="details-title">
-                    Details
-                  </h2>
-                  <p className='text-sm text-gray-700'>
-                    Compare sales percentage by product.
-                  </p>
-                </header>
-                <DonutChart
-                  className="mt-6 h-72"
-                  data={transactionByPaymentType}
-                  category="sales"
-                  index="type"
-                  variant='pie'
-                  valueFormatter={(n) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(n)}
-                />
-
-                <Legend
-                  className="flex justify-center"
-                  categories={paymentTypes}
-                />
-              </div>
-            </section>
+                  <Legend
+                    className="flex justify-center"
+                    categories={paymentTypes}
+                  />
+                </div>
+              </section>
+            </div>
           </div>
         </div>
-      </div>
+      </MotionWrapper>
     </>
   )
 }
