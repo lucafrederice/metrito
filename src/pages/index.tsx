@@ -4,83 +4,50 @@ import { AreaChart, DonutChart, Legend } from "@tremor/react";
 import { prisma } from '../../prisma/client';
 import { Transaction } from '@prisma/client';
 import MotionWrapper from '@/components/animation/motionWrapper';
+import { BanknotesIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] })
 
-const user = {
-  name: 'Chelsea Hagon',
-  email: 'chelsea.hagon@example.com',
-  role: 'Human Resources Manager',
-  imageUrl:
-    'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
-const stats = [
-  { label: 'Vacation days left', value: 12 },
-  { label: 'Sick days left', value: 4 },
-  { label: 'Personal days left', value: 2 },
-]
-const announcements = [
-  {
-    id: 1,
-    title: 'Office closed on July 2nd',
-    href: '#',
-    preview:
-      'Cum qui rem deleniti. Suscipit in dolor veritatis sequi aut. Vero ut earum quis deleniti. Ut a sunt eum cum ut repudiandae possimus. Nihil ex tempora neque cum consectetur dolores.',
-  },
-  {
-    id: 2,
-    title: 'New password policy',
-    href: '#',
-    preview:
-      'Alias inventore ut autem optio voluptas et repellendus. Facere totam quaerat quam quo laudantium cumque eaque excepturi vel. Accusamus maxime ipsam reprehenderit rerum id repellendus rerum. Culpa cum vel natus. Est sit autem mollitia.',
-  },
-  {
-    id: 3,
-    title: 'Office closed on July 2nd',
-    href: '#',
-    preview:
-      'Tenetur libero voluptatem rerum occaecati qui est molestiae exercitationem. Voluptate quisquam iure assumenda consequatur ex et recusandae. Alias consectetur voluptatibus. Accusamus a ab dicta et. Consequatur quis dignissimos voluptatem nisi.',
-  },
-]
-
-const cities = [
-  {
-    name: "New York",
-    sales: 9800,
-  },
-  {
-    name: "London",
-    sales: 4567,
-  },
-  {
-    name: "Hong Kong",
-    sales: 3908,
-  },
-  {
-    name: "San Francisco",
-    sales: 2400,
-  },
-  {
-    name: "Singapore",
-    sales: 1908,
-  },
-  {
-    name: "Zurich",
-    sales: 1398,
-  },
-];
-
-const citiesName = cities.map(item => item.name)
-
-
 export const getStaticProps = async () => {
-  const res = await prisma.transaction.findMany({})
+  const desc = await prisma.transaction.findMany({
+    orderBy: {
+      order_date: "desc"
+    },
+    include: {
+      product: true,
+    },
+  })
+
+  const tableCount = await prisma.transaction.count({})
+
+
+  const table = desc.map(
+    transaction => {
+      return {
+        id: transaction.id,
+        href: `/${transaction.id}`,
+        name: transaction.product?.name,
+        amount: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: transaction.currency || "BRL" }).format(Number(transaction.price?.toFixed(2))),
+        currency: transaction.currency,
+        status: transaction.status,
+        date: transaction?.order_date?.toLocaleDateString(),
+        datetime: transaction?.order_date?.toISOString()
+      }
+    }
+  )
+
+  const asc = await prisma.transaction.findMany({
+    orderBy: {
+      order_date: "asc"
+    }
+  })
 
   const transactions: any = []
 
-  if (res)
-    for (let i = 0; i < res?.length; i++) {
-      const transaction = res[i]
+  if (asc)
+    for (let i = 0; i < asc?.length; i++) {
+      const transaction = asc[i]
       let approved_date = null
       let order_date = null
       let warranty_expire_date = null
@@ -99,7 +66,10 @@ export const getStaticProps = async () => {
       if (transaction.warranty_expire_date)
         warranty_expire_date = transaction.warranty_expire_date.toLocaleDateString()
 
-      if (transaction.price) price = Number(transaction.price.toFixed(2))
+      if (transaction.price) {
+        if (transaction.currency === "USD") price = Number(transaction.price.toFixed(2)) * 5
+        if (transaction.currency !== "USD") price = Number(transaction.price.toFixed(2))
+      }
 
       if (transaction.hotmart_fee_total) hotmart_fee_total = Number(transaction.hotmart_fee_total.toFixed(2))
       if (transaction.hotmart_fee_fixed) hotmart_fee_fixed = Number(transaction.hotmart_fee_fixed.toFixed(2))
@@ -116,6 +86,7 @@ export const getStaticProps = async () => {
         hotmart_fee_base
       })
     }
+
 
   const transactionByDay: {
     date: string,
@@ -165,14 +136,16 @@ export const getStaticProps = async () => {
     props: {
       transactionByDay,
       transactionByPaymentType,
-      paymentTypes
+      paymentTypes,
+      table,
+      tableCount
     },
   }
 }
 
 
 export default function Home(props: any) {
-  const { transactionByDay, transactionByPaymentType, paymentTypes } = props
+  const { transactionByDay, transactionByPaymentType, paymentTypes, table, tableCount } = props
 
   return (
     <>
@@ -186,7 +159,7 @@ export default function Home(props: any) {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
           <h1 className="sr-only">Home</h1>
           {/* Main 3 column grid */}
-          <div className="grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-8">
+          <div className="grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-8 mb-10">
             {/* Left column */}
             <div className="grid grid-cols-1 gap-4 lg:col-span-2">
               {/* Welcome panel */}
@@ -234,6 +207,149 @@ export default function Home(props: any) {
                   />
                 </div>
               </section>
+            </div>
+          </div>
+
+          {/* Activity list (smallest breakpoint only) */}
+          <div className="sm:hidden">
+            <h3 className='text-lg text-gray-800 font-semibold'>Records</h3>
+            <p className='text-sm text-gray-600 mb-5'>Track each transaction below.</p>
+            <ul
+              role="list"
+              className="mt-2 divide-y divide-gray-200 overflow-hidden shadow-lg sm:hidden rounded-t-lg"
+            >
+              {table.map((transaction: any) => (
+                <li key={transaction.id}>
+                  <Link
+                    href={transaction.href}
+                    className="block px-4 py-4 bg-white hover:bg-gray-50"
+                  >
+                    <span className="flex items-center space-x-4">
+                      <span className="flex-1 flex space-x-2 truncate">
+                        <BanknotesIcon
+                          className="flex-shrink-0 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        <span className="flex flex-col text-gray-500 text-sm truncate">
+                          <span className="truncate">
+                            {transaction.name}
+                          </span>
+                          <span>
+                            <span className="text-gray-900 font-medium">
+                              {transaction.amount}
+                            </span>{" "}
+                            {transaction.currency}
+                          </span>
+                          <time dateTime={transaction.datetime}>
+                            {transaction.date}
+                          </time>
+                        </span>
+                      </span>
+                      <span
+                        className={`${transaction.status === "COMPLETE" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"} inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] capitalize font-medium`}
+                      >
+                        {transaction.status}
+                      </span>
+                      <ChevronRightIcon
+                        className="flex-shrink-0 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            {/* Pagination */}
+            <nav
+              className="bg-white px-4 py-3 grid place-items-center border-t border-gray-200 rounded-b-lg shadow-lg"
+              aria-label="Pagination"
+            >
+              <p className="text-sm text-center text-gray-700">
+                Showing <span className="font-medium">{tableCount}</span> to{" "}
+                <span className="font-medium">{tableCount}</span> of{" "}
+                <span className="font-medium">{tableCount}</span> results
+              </p>
+            </nav>
+          </div>
+
+          {/* Activity table (small breakpoint and up) */}
+          <div className="hidden sm:flex flex-col mt-2">
+            <h3 className='text-lg text-gray-800 font-semibold'>Records</h3>
+            <p className='text-sm text-gray-600 mb-5'>Track each transaction below.</p>
+            <div className="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead>
+                  <tr>
+                    <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Transactions
+                    </th>
+                    <th className="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Amount
+                    </th>
+                    <th className="hidden px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider md:block">
+                      Status
+                    </th>
+                    <th className="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Date
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {table.map((transaction: any) => (
+                    <tr key={transaction.id} className="bg-white">
+                      <td className=" w-full whitespace-nowrap text-sm text-gray-900">
+                        <Link href={transaction.href}>
+                          <div className="flex  px-6 py-4 ">
+                            <a
+                              href={transaction.href}
+                              className="group inline-flex space-x-2 truncate text-sm"
+                            >
+                              <BanknotesIcon
+                                className="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                aria-hidden="true"
+                              />
+                              <p className="text-gray-500 truncate group-hover:text-gray-900">
+                                {transaction.name}
+                              </p>
+                            </a>
+                          </div>
+                        </Link>
+                      </td>
+                      <td className="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
+                        <span className="text-gray-900 font-medium">
+                          {transaction.amount}{" "}
+                        </span>
+                        {transaction.currency}
+                      </td>
+                      <td className="hidden px-6 py-4 whitespace-nowrap text-sm text-gray-500 md:block">
+                        <span
+                          className={`${transaction.status === "COMPLETE" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"} inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize`}
+                        >
+                          {transaction.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
+                        <time dateTime={transaction.datetime}>
+                          {transaction.date}
+                        </time>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {/* Pagination */}
+              <nav
+                className="bg-white px-4 py-3 grid place-items-center border-t border-gray-200 sm:px-6"
+                aria-label="Pagination"
+              >
+                <div className="hidden sm:block">
+                  <p className="text-sm text-center text-gray-700">
+                    Showing <span className="font-medium">{tableCount}</span> to{" "}
+                    <span className="font-medium">{tableCount}</span> of{" "}
+                    <span className="font-medium">{tableCount}</span> results
+                  </p>
+                </div>
+              </nav>
             </div>
           </div>
         </div>

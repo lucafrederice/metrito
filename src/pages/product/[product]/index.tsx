@@ -1,6 +1,6 @@
 import { Product as ProductType, Transaction } from "@prisma/client";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { prisma } from "../../../prisma/client";
+import { prisma } from "../../../../prisma/client";
 
 export const getStaticPaths = async () => {
     const products = await prisma.product.findMany({

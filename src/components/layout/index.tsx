@@ -42,7 +42,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         (item: Product) => {
                             return {
                                 name: item.name,
-                                href: `/${item.id}`,
+                                href: `/product/${item.id}`,
                                 current: globalThis.window.location.pathname === `/${item.id}`
                             }
                         }
@@ -92,19 +92,41 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                         <div className="lg:grid lg:grid-cols-3 lg:gap-8 lg:items-center">
                                             {/* Left nav */}
                                             <div className="hidden lg:block lg:col-span-2">
-                                                <nav className="flex space-x-4">
+                                                <nav className="flex items-center space-x-4">
                                                     {navigation.map((item) => (
-                                                        <Link
-                                                            key={item.name}
-                                                            href={item.href}
-                                                            className={classNames(
-                                                                item.current ? 'text-white' : 'text-cyan-100',
-                                                                'text-sm font-medium rounded-md bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10'
-                                                            )}
-                                                            aria-current={item.current ? 'page' : undefined}
-                                                        >
-                                                            {item.name}
-                                                        </Link>
+                                                        <>
+                                                            {
+                                                                item.name === "Home" ? (
+                                                                    <>
+                                                                        <Link
+                                                                            key={item.name}
+                                                                            href={item.href}
+                                                                            className={classNames(
+                                                                                item.current ? 'text-white' : 'text-cyan-100',
+                                                                                'text-sm font-medium rounded-md bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10'
+                                                                            )}
+                                                                            aria-current={item.current ? 'page' : undefined}
+                                                                        >
+                                                                            {item.name}
+                                                                        </Link>
+                                                                        <div className='w-[2px] h-7 rounded-lg grid place-items-center'>
+                                                                            <div className='bg-blue-300 w-[2px] h-full' />
+                                                                        </div>
+                                                                    </>
+                                                                )
+                                                                    : <Link
+                                                                        key={item.name}
+                                                                        href={item.href}
+                                                                        className={classNames(
+                                                                            item.current ? 'text-white' : 'text-cyan-100',
+                                                                            'text-sm font-medium rounded-md bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10'
+                                                                        )}
+                                                                        aria-current={item.current ? 'page' : undefined}
+                                                                    >
+                                                                        {item.name}
+                                                                    </Link>
+                                                            }
+                                                        </>
                                                     ))}
                                                 </nav>
                                             </div>
