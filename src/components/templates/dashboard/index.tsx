@@ -9,7 +9,7 @@ export default function Dashboard(props: any) {
 
     return (
         <>
-            <MotionWrapper layoutId={pageName}>
+            <MotionWrapper key={pageName}>
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                     <h1 className="sr-only">{pageName}</h1>
                     <h1 className="sm:hidden text-xl text-white pb-5">{pageName}</h1>
