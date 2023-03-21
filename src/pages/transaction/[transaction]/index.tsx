@@ -36,9 +36,9 @@ export const getStaticProps = async (context: any) => {
 
     const transaction = {
         ...trans,
-        approved_date: trans?.approved_date?.toLocaleDateString(),
-        order_date: trans?.order_date?.toLocaleDateString(),
-        warranty_expire_date: trans?.warranty_expire_date?.toLocaleDateString(),
+        approved_date: trans?.approved_date ? trans?.approved_date?.toLocaleDateString() : "",
+        order_date: trans?.order_date ? trans?.order_date?.toLocaleDateString() : "",
+        warranty_expire_date: trans?.warranty_expire_date ? trans?.warranty_expire_date?.toLocaleDateString() : "",
         price: trans?.currency === "USD" ? Number(trans?.price?.toFixed(2)) * 5 : Number(trans?.price?.toFixed(2)),
         hotmart_fee_total: Number(trans?.hotmart_fee_total?.toFixed(2)),
         hotmart_fee_fixed: Number(trans?.hotmart_fee_fixed?.toFixed(2)),
