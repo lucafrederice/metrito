@@ -53,7 +53,20 @@ export const getStaticProps = async (context: any) => {
 }
 
 export default function Transaction(props: any) {
-    const { transaction } = props
+    const { transaction: trans } = props
+
+    let transaction = { ...trans }
+
+    console.log(transaction)
+
+    transaction.hotmart_fee_total = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: transaction?.currency || "BRL" }).format(Number(transaction?.hotmart_fee_total?.toFixed(2)))
+
+    transaction.hotmart_fee_base = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: transaction?.currency || "BRL" }).format(Number(transaction?.hotmart_fee_base?.toFixed(2)))
+
+    transaction.hotmart_fee_fixed = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: transaction?.currency || "BRL" }).format(Number(transaction?.hotmart_fee_fixed?.toFixed(2)))
+
+    transaction.price = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: transaction?.currency || "BRL" }).format(Number(transaction?.price?.toFixed(2)))
+
 
     let details: any = []
     for (const key in transaction) {
@@ -83,7 +96,7 @@ export default function Transaction(props: any) {
         }
 
     }
-    console.log(details)
+
 
     const router = useRouter()
     return (
@@ -114,7 +127,7 @@ export default function Transaction(props: any) {
                     <div className="border-gray-200">
                         <div>
                             <h3 className="text-lg leading-6 font-medium text-gray-900">Transaction Details</h3>
-                            <p className="mt-1 text-sm text-gray-500">Info about purchase, price, customer, commissions, and more.</p>
+                            <p className="mt-1 text-sm max-w-xs sm:max-w-full text-gray-500">Info about purchase, price, customer, commissions, and more.</p>
                         </div>
                         <dl className="sm:divide-y sm:divide-gray-200">
                             {
