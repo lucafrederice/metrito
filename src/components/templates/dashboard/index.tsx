@@ -2,6 +2,7 @@ import MotionWrapper from "@/components/animation/motionWrapper"
 import { BanknotesIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
 import { AreaChart, DonutChart, Legend } from "@tremor/react"
 import Link from "next/link"
+import { motion } from "framer-motion"
 
 export default function Dashboard(props: any) {
     const { pageName, transactionByDay, transactionByPaymentType, paymentTypes, table, tableCount } = props
@@ -73,7 +74,7 @@ export default function Dashboard(props: any) {
                             className="mt-2 divide-y divide-gray-200 overflow-hidden shadow-lg sm:hidden rounded-t-lg"
                         >
                             {table.map((transaction: any) => (
-                                <li key={transaction.id}>
+                                <motion.li key={transaction.id} layoutId={transaction.id}>
                                     <Link
                                         href={transaction.href}
                                         className="block px-4 py-4 bg-white hover:bg-gray-50"
@@ -110,7 +111,7 @@ export default function Dashboard(props: any) {
                                             />
                                         </span>
                                     </Link>
-                                </li>
+                                </motion.li>
                             ))}
                         </ul>
                         {/* Pagination */}
