@@ -54,6 +54,37 @@ export const getStaticProps = async (context: any) => {
 
 export default function Transaction(props: any) {
     const { transaction } = props
+
+    let details: any = []
+    for (const key in transaction) {
+        if (key === "product") {
+            for (const prodKey in transaction.product) {
+                if (prodKey !== "id")
+                    details.push({
+                        key: "product_" + prodKey,
+                        value: transaction.product[prodKey]
+                    })
+            }
+
+        }
+
+        if (key !== "product") {
+            if (key === "is_subscription")
+                details.push({
+                    key: key,
+                    value: transaction[key] ? "yes" : "no"
+                })
+
+            if (key !== "is_subscription")
+                details.push({
+                    key: key,
+                    value: transaction[key]
+                })
+        }
+
+    }
+    console.log(details)
+
     const router = useRouter()
     return (
         <>
@@ -63,8 +94,8 @@ export default function Transaction(props: any) {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <motion.div layoutId={transaction.id} className={"fixed inset-0 bg-white"}>
-                <div className="max-w-xl h-full p-5 pt-10 grid content-top relative"
+            <motion.div layoutId={transaction.id} className={"fixed inset-0 bg-white overflow-y-scroll"}>
+                <div className="p-5 pt-10 grid place-items-center relative"
                     style={{
                         paddingBottom: "calc(env(safe-area-inset-bottom) + 1.5rem)",
                     }}
@@ -80,18 +111,22 @@ export default function Transaction(props: any) {
                             <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                         </button>
                     </div>
-                    <div className="mt-5 border-gray-200">
+                    <div className="border-gray-200">
                         <div>
                             <h3 className="text-lg leading-6 font-medium text-gray-900">Transaction Details</h3>
-                            <p className="mt-1 text-sm text-gray-500 max-w-xs sm:max-w-0">Info about purchase, price, customer, commissions, and more.</p>
+                            <p className="mt-1 text-sm text-gray-500">Info about purchase, price, customer, commissions, and more.</p>
                         </div>
                         <dl className="sm:divide-y sm:divide-gray-200">
                             {
+                                details.map(
+                                    (obj: any) => (
+                                        <div key={obj.value} className="py-4 sm:py-5 sm:px-8 sm:grid sm:grid-cols-2 sm:gap-4">
+                                            <dt className="text-sm font-medium text-gray-500">{obj.key}</dt>
+                                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:text-right">{obj.value}</dd>
+                                        </div>
+                                    )
+                                )
                             }
-                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                                <dt className="text-sm font-medium text-gray-500">Full name</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">Margot Foster</dd>
-                            </div>
                         </dl>
                     </div>
                 </div>
