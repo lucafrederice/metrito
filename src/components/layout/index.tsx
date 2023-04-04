@@ -527,14 +527,24 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                         </div>
                                     </div>
                                     <div
-                                        className={`${startScroll ? "hidden" : ""} sm:hidden absolute w-8 inset-y-0 left-0 grid place-items-center bg-gradient-to-l from-transparent to-gray-200`}
+                                        className={`${startScroll ? "opacity-0 pointer-events-none" : ""} sm:hidden absolute w-8 inset-y-0 left-1 grid place-items-center bg-gradient-to-l from-transparent to-gray-100 ease-in-out transition-all duration-300`}
                                     >
-                                        <ArrowSmallLeftIcon className='w-4 h-4 text-gray-700 animate-pulse' />
+                                        <div
+                                            className='grid place-items-center p-1 rounded-full bg-white shadow-md'
+                                        >
+                                            <ArrowSmallLeftIcon className='w-5 h-5 text-gray-700 animate-pulse' />
+
+                                        </div>
                                     </div>
                                     <div
-                                        className={`${endScroll ? "hidden" : ""} sm:hidden absolute w-8 inset-y-0 right-0 grid place-items-center bg-gradient-to-r from-transparent to-gray-200`}
+                                        className={`${endScroll ? "opacity-0 pointer-events-none" : ""} sm:hidden absolute w-8 inset-y-0 right-1 grid place-items-center bg-gradient-to-r from-transparent to-gray-100 ease-in-out transition-all duration-300`}
                                     >
-                                        <ArrowSmallRightIcon className='w-4 h-4 text-gray-700 animate-pulse' />
+                                        <div
+                                            className='grid place-items-center p-1 rounded-full bg-white shadow-md'
+                                        >
+                                            <ArrowSmallRightIcon className='w-5 h-5 text-gray-700 animate-pulse' />
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
