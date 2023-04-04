@@ -613,10 +613,9 @@ export default function Example() {
                                                             </td>
                                                             <td className="hidden px-6 py-4 whitespace-nowrap text-sm text-gray-500 md:block">
                                                                 <span
-                                                                    className={classNames(
-                                                                        statusStyles?.[transaction?.status],
+                                                                    className={
                                                                         "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize"
-                                                                    )}
+                                                                    }
                                                                 >
                                                                     {transaction.status}
                                                                 </span>
