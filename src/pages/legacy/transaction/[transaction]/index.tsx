@@ -57,8 +57,6 @@ export default function Transaction(props: any) {
 
     let transaction = { ...trans }
 
-    console.log(transaction)
-
     transaction.hotmart_fee_total = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: transaction?.currency || "BRL" }).format(Number(transaction?.hotmart_fee_total?.toFixed(2)))
 
     transaction.hotmart_fee_base = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: transaction?.currency || "BRL" }).format(Number(transaction?.hotmart_fee_base?.toFixed(2)))

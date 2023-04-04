@@ -8,9 +8,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Layout>
       <AnimationWrapper>
-        <DashboardPropsProvider>
-          <Component {...pageProps} />
-        </DashboardPropsProvider>
+        {/* <DashboardPropsProvider> */}
+        <Component {...pageProps} />
+        {/* </DashboardPropsProvider> */}
       </AnimationWrapper>
     </Layout>
   )
