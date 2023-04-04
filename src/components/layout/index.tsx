@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useMemo, useState } from 'react'
+import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { Menu, Popover, Transition } from '@headlessui/react'
 import {
     AcademicCapIcon,
@@ -18,7 +18,8 @@ import {
     Cog6ToothIcon,
     ChartBarIcon,
     ChevronDownIcon,
-    ArrowSmallRightIcon
+    ArrowSmallRightIcon,
+    ArrowSmallLeftIcon
 } from '@heroicons/react/24/outline'
 import { ChevronRightIcon, ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
@@ -42,6 +43,28 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const [navigation, setNavigation] = useState([
         { name: 'Home', href: '/', current: false }
     ])
+    const scrollRef = useRef<HTMLDivElement>(null)
+    const [startScroll, setStartScroll] = useState(false)
+    const [endScroll, setEndScroll] = useState(false)
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (scrollRef.current && scrollRef.current.scrollLeft > 0)
+                setStartScroll(false);
+            if (scrollRef.current && scrollRef.current.scrollLeft <= 0)
+                setStartScroll(true);
+            if (scrollRef.current && Math.ceil(scrollRef.current.scrollLeft + globalThis.window.innerWidth) >= scrollRef.current.scrollWidth - 15)
+                setEndScroll(true);
+            if (scrollRef.current && Math.ceil(scrollRef.current.scrollLeft + globalThis.window.innerWidth) < scrollRef.current.scrollWidth - 15)
+                setEndScroll(false);
+        };
+
+        scrollRef.current?.addEventListener("scroll", handleScroll);
+
+        return () => {
+            scrollRef.current?.removeEventListener("scroll", handleScroll);
+        };
+    }, [scrollRef?.current?.scrollLeft]);
 
     useEffect(
         () => {
@@ -459,7 +482,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 
                                 <div className="relative">
-                                    <div className='w-full py-2 px-2 sm:px-0 overflow-x-scroll sm:overflow-visible'>
+                                    <div ref={scrollRef} className='w-full py-2 px-2 sm:px-0 overflow-x-scroll sm:overflow-visible'>
                                         <div className="lg:grid lg:grid-cols-3 lg:gap-8 lg:items-center">
                                             {/* Left nav */}
                                             <div className="lg:col-span-2">
@@ -504,9 +527,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                         </div>
                                     </div>
                                     <div
-                                        className='sm:hidden absolute w-8 inset-y-0 right-0 grid place-items-center bg-transparent backdrop-blur-sm'
+                                        className={`${startScroll ? "hidden" : ""} sm:hidden absolute w-8 inset-y-0 left-0 grid place-items-center bg-gradient-to-l from-transparent to-gray-200`}
                                     >
-                                        <ArrowSmallRightIcon className='w-4 h-4 text-gray-400 ' />
+                                        <ArrowSmallLeftIcon className='w-4 h-4 text-gray-700 animate-pulse' />
+                                    </div>
+                                    <div
+                                        className={`${endScroll ? "hidden" : ""} sm:hidden absolute w-8 inset-y-0 right-0 grid place-items-center bg-gradient-to-r from-transparent to-gray-200`}
+                                    >
+                                        <ArrowSmallRightIcon className='w-4 h-4 text-gray-700 animate-pulse' />
                                     </div>
                                 </div>
                             </div>
