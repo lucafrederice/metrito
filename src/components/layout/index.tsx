@@ -19,18 +19,38 @@ import {
     ChartBarIcon,
     ChevronDownIcon,
     ArrowSmallRightIcon,
-    ArrowSmallLeftIcon
+    ArrowSmallLeftIcon,
+    TableCellsIcon,
+    ArrowTrendingUpIcon,
+    RectangleGroupIcon
 } from '@heroicons/react/24/outline'
 import { ChevronRightIcon, ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
 import useAxios from '@/hooks/useAxios'
 import Link from 'next/link'
 import { Product } from '@prisma/client'
-import { useRouter } from 'next/router'
 import Icon from '../logo'
+import Metrito from '../metrito'
 
-const navigation = [
-    { name: 'Home', href: '#', current: true },
+const WorkspaceNavigation = [
+    { id: 1001, name: 'Overview', href: '#', Icon: (props: any) => <ChartBarIcon {...props} /> },
+    { id: 1002, name: 'Projetos', href: '#', Icon: (props: any) => <RectangleStackIcon {...props} /> },
+    { id: 1003, name: 'Conexões', href: '#', Icon: (props: any) => <CircleStackIcon {...props} /> },
+    { id: 1004, name: 'Membros', href: '#', Icon: (props: any) => <UserGroupIcon {...props} /> },
+    { id: 1005, name: 'Configurações', href: '#', Icon: (props: any) => <Cog6ToothIcon {...props} /> },
+]
+
+const BrandNavigation = [
+    { id: 2001, name: 'Overview', href: '#', Icon: (props: any) => <ChartBarIcon {...props} /> },
+    {
+        id: 2002, name: 'Dashboards', href: '#', Icon: (props: any) =>
+            <TableCellsIcon {...props} />
+        // <RectangleGroupIcon {...props} />
+    },
+    { id: 2003, name: 'Painel de Vendas', href: '#', Icon: (props: any) => <ArrowTrendingUpIcon {...props} /> },
+    { id: 2004, name: 'Conexões', href: '#', Icon: (props: any) => <CircleStackIcon {...props} /> },
+    { id: 2005, name: 'Membros', href: '#', Icon: (props: any) => <UserGroupIcon {...props} /> },
+    { id: 2006, name: 'Configurações', href: '#', Icon: (props: any) => <Cog6ToothIcon {...props} /> },
 ]
 
 function classNames(...classes: string[]) {
@@ -40,15 +60,19 @@ function classNames(...classes: string[]) {
 export default function Layout({ children }: { children: React.ReactNode }) {
 
     const [response] = useAxios("/api/products");
-    const [navigation, setNavigation] = useState([
-        { name: 'Home', href: '/', current: false }
-    ])
+    const [navigation, setNavigation] = useState("")
+
     const scrollRef = useRef<HTMLDivElement>(null)
+    const [scrollAvailable, setScrollAvailable] = useState(false)
     const [startScroll, setStartScroll] = useState(false)
     const [endScroll, setEndScroll] = useState(false)
 
     useEffect(() => {
         const handleScroll = () => {
+            if (scrollRef.current && scrollRef.current.scrollWidth > globalThis.window.innerWidth)
+                setScrollAvailable(true)
+            if (scrollRef.current && scrollRef.current.scrollWidth <= globalThis.window.innerWidth)
+                setScrollAvailable(false)
             if (scrollRef.current && scrollRef.current.scrollLeft > 0)
                 setStartScroll(false);
             if (scrollRef.current && scrollRef.current.scrollLeft <= 0)
@@ -59,52 +83,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 setEndScroll(false);
         };
 
+        handleScroll()
+
         scrollRef.current?.addEventListener("scroll", handleScroll);
 
         return () => {
             scrollRef.current?.removeEventListener("scroll", handleScroll);
         };
-    }, [scrollRef?.current?.scrollLeft]);
+    }, [scrollRef?.current?.scrollLeft, scrollRef?.current?.scrollWidth, globalThis?.window?.innerWidth]);
 
-    useEffect(
-        () => {
-            if (response) setNavigation(
-                prev => [
-                    ...prev,
-                    //@ts-ignore
-                    ...response.products.map(
-                        (item: Product) => {
-                            return {
-                                name: item.name,
-                                href: `/product/${item.id}`,
-                                current: globalThis.window.location.pathname === `/product/${item.id}`
-                            }
-                        }
-                    )
-                ]
-            )
-        },
-        [response]
-    )
-
-    useEffect(
-        () => {
-            setNavigation(
-                prev => [
-                    ...prev.map(
-                        nav => {
-                            return {
-                                name: nav.name,
-                                href: nav.href,
-                                current: globalThis.window.location.pathname === nav.href
-                            }
-                        }
-                    )
-                ]
-            )
-        },
-        [globalThis?.window?.location?.pathname]
-    )
 
     return (
         <>
@@ -113,7 +100,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     {({ open }) => (
                         <>
                             <div className="max-w-7xl mx-auto w-full">
-                                <div className=" flex items-center sm:items-center justify-between lg:justify-between py-2 sm:py-0 px-2 sm:px-0 sm:justify-center">
+                                <div className=" flex items-center sm:items-center justify-between lg:justify-between py-2 sm:py-0 px-2 sm:px-0">
                                     {/* Logo */}
                                     <div className="">
                                         {/* <Link href="/" className='max-w-sm'>
@@ -126,22 +113,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                         <div className='w-full h-full py-4 px-2 flex items-center gap-1 sm:gap-2 '>
                                             <Link
                                                 href={'#'}
+                                                onClick={() => setNavigation("")}
                                                 className='cursor-pointer grid justify-items-center content-center bg-black bg-opacity-0 hover:bg-opacity-10 px-0 sm:px-1 py-0 sm:py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500'
                                             >
                                                 <Icon
-                                                    className="w-9 h-9 fill-gray-700 "
-                                                // src="/logo-xs_1.svg"
-                                                // alt=""
+                                                    className="md:hidden w-9 h-9 fill-gray-700 "
+                                                />
+                                                <Metrito
+                                                    className="hidden md:block w-32 h-9 fill-gray-700 "
                                                 />
                                             </Link>
                                             <div className="grid place-items-center">
-                                                <ChevronRightIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                                                <ChevronRightIcon className="h-6 w-6 text-gray-300" aria-hidden="true" />
                                             </div>
 
-                                            <Menu as="div" className="relative inline-block text-left max-w-[160px] sm:w-fit sm:max-w-xs">
+                                            <Menu as="div" className="relative inline-block text-left max-w-[11rem] sm:w-fit sm:max-w-[13rem]">
                                                 <div>
                                                     <span className="flex w-full justify-between items-center gap-1">
-                                                        <Link href="#" className="hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                        <Link
+                                                            href="#"
+                                                            onClick={() => setNavigation("workspace")}
+                                                            className="hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
                                                             <img
                                                                 className="w-8 h-8 bg-gray-300 rounded flex-shrink-0"
                                                                 src="/v4.png"
@@ -168,7 +160,54 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                     leaveFrom="transform opacity-100 scale-100"
                                                     leaveTo="transform opacity-0 scale-95"
                                                 >
-                                                    <Menu.Items className="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
+                                                    <Menu.Items className="z-10 min-w-[8rem] sm:min-w-[10rem] origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
+                                                        <div className="grid gap-2 p-1">
+                                                            <Menu.Item>
+                                                                <Link
+                                                                    href="#"
+                                                                    onClick={() => setNavigation("workspace")}
+                                                                    className="hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                    <img
+                                                                        className="w-8 h-8 bg-gray-300 rounded flex-shrink-0"
+                                                                        src="/v4.png"
+                                                                        alt=""
+                                                                    />
+                                                                    <span className="flex-1 flex flex-col min-w-0">
+                                                                        <span className="text-gray-900 text-sm font-medium tracking-wide truncate">V4 Company</span>
+                                                                    </span>
+                                                                </Link>
+                                                            </Menu.Item>
+                                                            <Menu.Item>
+                                                                <Link
+                                                                    href="#"
+                                                                    onClick={() => setNavigation("workspace")}
+                                                                    className="hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                    <img
+                                                                        className="w-8 h-8 bg-gray-300 rounded flex-shrink-0"
+                                                                        src="/v4.png"
+                                                                        alt=""
+                                                                    />
+                                                                    <span className="flex-1 flex flex-col min-w-0">
+                                                                        <span className="text-gray-900 text-sm font-medium tracking-wide truncate">V4 Company</span>
+                                                                    </span>
+                                                                </Link>
+                                                            </Menu.Item>
+                                                            <Menu.Item>
+                                                                <Link
+                                                                    href="#"
+                                                                    onClick={() => setNavigation("workspace")}
+                                                                    className="hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                    <img
+                                                                        className="w-8 h-8 bg-gray-300 rounded flex-shrink-0"
+                                                                        src="/v4.png"
+                                                                        alt=""
+                                                                    />
+                                                                    <span className="flex-1 flex flex-col min-w-0">
+                                                                        <span className="text-gray-900 text-sm font-medium tracking-wide truncate">V4 Company</span>
+                                                                    </span>
+                                                                </Link>
+                                                            </Menu.Item>
+                                                        </div>
                                                         <div className="py-1">
                                                             <Menu.Item>
                                                                 {({ active }) => (
@@ -179,33 +218,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                                             'block px-4 py-2 text-sm'
                                                                         )}
                                                                     >
-                                                                        View profile
-                                                                    </a>
-                                                                )}
-                                                            </Menu.Item>
-                                                            <Menu.Item>
-                                                                {({ active }) => (
-                                                                    <a
-                                                                        href="#"
-                                                                        className={classNames(
-                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                            'block px-4 py-2 text-sm'
-                                                                        )}
-                                                                    >
-                                                                        Settings
-                                                                    </a>
-                                                                )}
-                                                            </Menu.Item>
-                                                            <Menu.Item>
-                                                                {({ active }) => (
-                                                                    <a
-                                                                        href="#"
-                                                                        className={classNames(
-                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                            'block px-4 py-2 text-sm'
-                                                                        )}
-                                                                    >
-                                                                        Notifications
+                                                                        Criar Workspace
                                                                     </a>
                                                                 )}
                                                             </Menu.Item>
@@ -220,35 +233,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                                             'block px-4 py-2 text-sm'
                                                                         )}
                                                                     >
-                                                                        Get desktop app
-                                                                    </a>
-                                                                )}
-                                                            </Menu.Item>
-                                                            <Menu.Item>
-                                                                {({ active }) => (
-                                                                    <a
-                                                                        href="#"
-                                                                        className={classNames(
-                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                            'block px-4 py-2 text-sm'
-                                                                        )}
-                                                                    >
-                                                                        Support
-                                                                    </a>
-                                                                )}
-                                                            </Menu.Item>
-                                                        </div>
-                                                        <div className="py-1">
-                                                            <Menu.Item>
-                                                                {({ active }) => (
-                                                                    <a
-                                                                        href="#"
-                                                                        className={classNames(
-                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                            'block px-4 py-2 text-sm'
-                                                                        )}
-                                                                    >
-                                                                        Logout
+                                                                        Gerenciar Workspaces
                                                                     </a>
                                                                 )}
                                                             </Menu.Item>
@@ -257,16 +242,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                 </Transition>
                                             </Menu>
                                             <div className="hidden sm:grid place-items-center">
-                                                <ChevronRightIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                                                <ChevronRightIcon className="h-6 w-6 text-gray-300" aria-hidden="true" />
                                             </div>
 
-                                            <Menu as="div" className="hidden relative sm:inline-block text-left max-w-[160px] sm:w-fit sm:max-w-xs">
+                                            <Menu as="div" className="hidden relative sm:inline-block text-left max-w-[11rem] sm:w-fit sm:max-w-[13rem]">
                                                 <div>
                                                     <span className="flex w-full justify-between items-center gap-1">
-                                                        <Link href="#" className="cursor-pointer hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                        <Link
+                                                            href="#"
+                                                            onClick={() => setNavigation("brand")}
+                                                            className="cursor-pointer hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                                                        >
 
                                                             <span className="flex-1 flex flex-col min-w-0">
-                                                                <span className="text-gray-900 text-sm font-medium tracking-wide truncate">Ifood</span>
+                                                                <span className="text-gray-900 text-sm font-medium tracking-wide truncate">Ifood Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, culpa.</span>
                                                             </span>
                                                         </Link>
                                                         <Menu.Button className="self-stretch px-1 rounded-md transition-all ease-in  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
@@ -286,7 +275,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                     leaveFrom="transform opacity-100 scale-100"
                                                     leaveTo="transform opacity-0 scale-95"
                                                 >
-                                                    <Menu.Items className="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
+                                                    <Menu.Items className="z-10 min-w-[8rem] sm:min-w-[10rem] origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
                                                         <div className="py-1">
                                                             <Menu.Item>
                                                                 {({ active }) => (
@@ -381,12 +370,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                     {/* Menu button */}
                                     <div className="flex justify-end gap-2 sm:gap-1 overflow-visible">
 
-                                        <Link
-                                            href="#"
-                                            className="text-sm text-gray-600 font-medium rounded-md px-1 sm:px-2 sm:py-2 bg-black bg-opacity-0 hover:bg-opacity-10  justify-between items-center gap-2 hidden sm:flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
-                                        >
-                                            <ArrowsPointingOutIcon className='w-5 h-5' />
-                                        </Link>
 
                                         <Link
                                             href="#"
@@ -477,76 +460,90 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                 <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                                             )}
                                         </Popover.Button>
+
+
+                                        <Link
+                                            href="#"
+                                            className="text-sm text-gray-600 font-medium rounded-md px-1 sm:px-2 sm:py-2 bg-black bg-opacity-0 hover:bg-opacity-10  justify-between items-center gap-2 hidden sm:flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                                        >
+                                            <ArrowsPointingOutIcon className='w-5 h-5' />
+                                        </Link>
                                     </div>
                                 </div>
 
 
-                                <div className="relative">
-                                    <div ref={scrollRef} className='w-full py-2 px-2 sm:px-0 overflow-x-scroll sm:overflow-visible'>
-                                        <div className="lg:grid lg:grid-cols-3 lg:gap-8 lg:items-center">
-                                            {/* Left nav */}
-                                            <div className="lg:col-span-2">
-                                                <nav className="flex items-center space-x-4">
-                                                    <Link
-                                                        href="#"
-                                                        className="text-sm text-gray-600 font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
-                                                    >
-                                                        <ChartBarIcon className='w-4 h-4' />
-                                                        Overview
-                                                    </Link>
-                                                    <Link
-                                                        href="#"
-                                                        className="text-sm text-gray-600 font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
-                                                    >
-                                                        <RectangleStackIcon className='w-4 h-4' />
-                                                        Projetos
-                                                    </Link>
-                                                    <Link
-                                                        href="#"
-                                                        className="text-sm text-gray-600 font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
-                                                    >
-                                                        <CircleStackIcon className='w-4 h-4' />
-                                                        Conexões
-                                                    </Link>
-                                                    <Link
-                                                        href="#"
-                                                        className="text-sm text-gray-600 font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
-                                                    >
-                                                        <UserGroupIcon className='w-4 h-4' />
-                                                        Membros
-                                                    </Link>
-                                                    <Link
-                                                        href="#"
-                                                        className="text-sm text-gray-600 font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
-                                                    >
-                                                        <Cog6ToothIcon className='w-4 h-4' />
-                                                        Configurações
-                                                    </Link>
-                                                </nav>
+                                {
+                                    navigation &&
+                                    (
+                                        <div className="relative">
+                                            <div ref={scrollRef} className='w-full py-2 px-2 sm:px-0 overflow-x-scroll md:overflow-visible'>
+                                                <div className="lg:grid lg:grid-cols-3 lg:gap-8 lg:items-center">
+                                                    {/* Left nav */}
+                                                    <div className="lg:col-span-2">
+                                                        <nav className="flex items-center space-x-4">
+                                                            {
+                                                                navigation === "workspace" ?
+                                                                    WorkspaceNavigation.map(
+                                                                        item => (
+                                                                            <Link
+                                                                                key={item.id}
+                                                                                href="#"
+                                                                                className="text-sm text-gray-500 whitespace-nowrap font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                                                                            >
+                                                                                <item.Icon className='w-4 h-4' />
+                                                                                {item.name}
+                                                                            </Link>
+                                                                        )
+                                                                    )
+                                                                    :
+                                                                    navigation === "brand" ?
+                                                                        BrandNavigation.map(
+                                                                            item => (
+                                                                                <Link
+                                                                                    key={item.id}
+                                                                                    href="#"
+                                                                                    className="text-sm text-gray-500 whitespace-nowrap font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                                                                                >
+                                                                                    <item.Icon className='w-4 h-4' />
+                                                                                    {item.name}
+                                                                                </Link>
+                                                                            )
+                                                                        )
+                                                                        : ""
+                                                            }
+                                                        </nav>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        className={`${startScroll ? "opacity-0 pointer-events-none" : ""} sm:hidden absolute w-8 inset-y-0 left-1 grid place-items-center bg-gradient-to-l from-transparent to-gray-100 ease-in-out transition-all duration-300`}
-                                    >
-                                        <div
-                                            className='grid place-items-center p-1 rounded-full bg-white shadow-md'
-                                        >
-                                            <ArrowSmallLeftIcon className='w-5 h-5 text-gray-700 animate-pulse' />
+                                            {
+                                                scrollAvailable && (
+                                                    <>
+                                                        <div
+                                                            className={`${startScroll ? "opacity-0 pointer-events-none" : ""}  absolute w-8 inset-y-0 left-1 grid place-items-center bg-gradient-to-l from-transparent to-gray-100 ease-in-out transition-all duration-300`}
+                                                        >
+                                                            <div
+                                                                className='grid place-items-center p-1 rounded-full bg-white shadow-md'
+                                                            >
+                                                                <ArrowSmallLeftIcon className='w-5 h-5 text-gray-700 animate-pulse' />
 
-                                        </div>
-                                    </div>
-                                    <div
-                                        className={`${endScroll ? "opacity-0 pointer-events-none" : ""} sm:hidden absolute w-8 inset-y-0 right-1 grid place-items-center bg-gradient-to-r from-transparent to-gray-100 ease-in-out transition-all duration-300`}
-                                    >
-                                        <div
-                                            className='grid place-items-center p-1 rounded-full bg-white shadow-md'
-                                        >
-                                            <ArrowSmallRightIcon className='w-5 h-5 text-gray-700 animate-pulse' />
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            className={`${endScroll ? "opacity-0 pointer-events-none" : ""} absolute w-8 inset-y-0 right-1 grid place-items-center bg-gradient-to-r from-transparent to-gray-100 ease-in-out transition-all duration-300`}
+                                                        >
+                                                            <div
+                                                                className='grid place-items-center p-1 rounded-full bg-white shadow-md'
+                                                            >
+                                                                <ArrowSmallRightIcon className='w-5 h-5 text-gray-700 animate-pulse' />
 
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                )
+                                            }
                                         </div>
-                                    </div>
-                                </div>
+                                    )
+                                }
                             </div>
 
                             <Transition.Root as={Fragment}>
@@ -607,15 +604,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                 </div>
 
                                                 <div className="mt-3 px-2 space-y-1">
-                                                    {navigation.map((item) => (
-                                                        <Link
-                                                            key={item.name}
-                                                            href={item.href}
-                                                            className="block rounded-md px-3 py-2 text-base text-gray-700 font-medium hover:bg-gray-100 hover:text-gray-800"
-                                                        >
-                                                            {item.name}
-                                                        </Link>
-                                                    ))}
+                                                    <Link
+                                                        href={"#"}
+                                                        className="block rounded-md px-3 py-2 text-base text-gray-700 font-medium hover:bg-gray-100 hover:text-gray-800"
+                                                    >
+                                                        Item.name
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </Popover.Panel>
