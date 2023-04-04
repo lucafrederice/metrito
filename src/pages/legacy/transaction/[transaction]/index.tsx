@@ -1,4 +1,4 @@
-import { prisma } from "../../../../prisma/client"
+import { prisma } from "../../../../../prisma/client"
 import { motion } from "framer-motion"
 import Head from "next/head"
 import { PaperClipIcon, XMarkIcon } from "@heroicons/react/20/solid"
