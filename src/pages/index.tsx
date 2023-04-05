@@ -8,7 +8,7 @@ function classNames(...classes: any) {
 export default function Index() {
     return (
         <MotionWrapper>
-            <div key="index" className="min-h-screen px-4 py-12 w-full grid place-items-center auto-rows-min gap-4">
+            <div key="index" className="min-h-screen px-4 py-6 md:py-10 w-full grid place-items-center auto-rows-min gap-4">
                 <div className="text-left w-full max-w-7xl">
                     <h1 className="text-lg font-semibold text-gray-500">Nome da página</h1>
                 </div>
