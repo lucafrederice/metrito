@@ -34,24 +34,24 @@ import Icon from '../logo'
 import Metrito from '../metrito'
 
 const WorkspaceNavigation = [
-    { id: 1001, name: 'Overview', href: '#', Icon: (props: any) => <ChartBarIcon {...props} /> },
-    { id: 1002, name: 'Projetos', href: '#', Icon: (props: any) => <RectangleStackIcon {...props} /> },
-    { id: 1003, name: 'Conexões', href: '#', Icon: (props: any) => <CircleStackIcon {...props} /> },
-    { id: 1004, name: 'Membros', href: '#', Icon: (props: any) => <UserGroupIcon {...props} /> },
-    { id: 1005, name: 'Configurações', href: '#', Icon: (props: any) => <Cog6ToothIcon {...props} /> },
+    { id: 1001, name: 'Overview', href: '', Icon: (props: any) => <ChartBarIcon {...props} /> },
+    { id: 1002, name: 'Projetos', href: 'brands', Icon: (props: any) => <RectangleStackIcon {...props} /> },
+    { id: 1003, name: 'Conexões', href: 'connections', Icon: (props: any) => <CircleStackIcon {...props} /> },
+    { id: 1004, name: 'Membros', href: 'members', Icon: (props: any) => <UserGroupIcon {...props} /> },
+    { id: 1005, name: 'Configurações', href: 'settings', Icon: (props: any) => <Cog6ToothIcon {...props} /> },
 ]
 
 const BrandNavigation = [
-    { id: 2001, name: 'Overview', href: '#', Icon: (props: any) => <ChartBarIcon {...props} /> },
+    { id: 2001, name: 'Overview', href: '', Icon: (props: any) => <ChartBarIcon {...props} /> },
     {
-        id: 2002, name: 'Dashboards', href: '#', Icon: (props: any) =>
+        id: 2002, name: 'Dashboards', href: 'dashboards', Icon: (props: any) =>
             <TableCellsIcon {...props} />
         // <RectangleGroupIcon {...props} />
     },
-    { id: 2003, name: 'Painel de Vendas', href: '#', Icon: (props: any) => <ArrowTrendingUpIcon {...props} /> },
-    { id: 2004, name: 'Conexões', href: '#', Icon: (props: any) => <CircleStackIcon {...props} /> },
-    { id: 2005, name: 'Membros', href: '#', Icon: (props: any) => <UserGroupIcon {...props} /> },
-    { id: 2006, name: 'Configurações', href: '#', Icon: (props: any) => <Cog6ToothIcon {...props} /> },
+    { id: 2003, name: 'Painel de Vendas', href: 'sales-panel', Icon: (props: any) => <ArrowTrendingUpIcon {...props} /> },
+    { id: 2004, name: 'Conexões', href: 'connections', Icon: (props: any) => <CircleStackIcon {...props} /> },
+    { id: 2005, name: 'Membros', href: 'members', Icon: (props: any) => <UserGroupIcon {...props} /> },
+    { id: 2006, name: 'Configurações', href: 'settings', Icon: (props: any) => <Cog6ToothIcon {...props} /> },
 ]
 
 function classNames(...classes: string[]) {
@@ -128,7 +128,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         <div className="col-start-1 row-start-1">
                             <div className='w-full h-full py-4 px-2 flex items-center gap-1 sm:gap-2 '>
                                 <Link
-                                    href={'#'}
+                                    href={'/'}
                                     onClick={() => setNavigation("")}
                                     className='cursor-pointer grid justify-items-center content-center bg-black bg-opacity-0 hover:bg-opacity-10 px-0 sm:px-1 py-0 sm:py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500'
                                 >
@@ -151,7 +151,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                     <div>
                                         <span className="flex w-full justify-between items-center gap-1">
                                             <Link
-                                                href="#"
+                                                href="/workspaces/workspace"
                                                 onClick={() => setNavigation("workspace")}
                                                 className="hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
                                                 <img
@@ -187,7 +187,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                         (item, i) =>
                                                             <Menu.Item key={i}>
                                                                 <Link
-                                                                    href="#"
+                                                                    href={`/workspaces/${i}`}
                                                                     onClick={() => setNavigation("workspace")}
                                                                     className="hover:bg-gray-200 px-3 py-2 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
                                                                     <img
@@ -235,7 +235,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                     <div>
                                         <span className="flex w-full justify-between items-center gap-1">
                                             <Link
-                                                href="#"
+                                                href="/workspaces/workspace/brands/brand"
                                                 onClick={() => setNavigation("brand")}
                                                 className="cursor-pointer hover:bg-gray-200 px-1 sm:px-2 py-2 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
                                             >
@@ -261,7 +261,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                         leaveFrom="transform opacity-100 scale-100"
                                         leaveTo="transform opacity-0 scale-95"
                                     >
-                                        <Menu.Items className="z-10 min-w-[11rem] sm:min-w-[13rem] origin-top absolute right-0 left-0 mt-1 rounded-md shadow-2xl bg-gray-100 ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
+                                        <Menu.Items className="z-10 min-w-[11rem] sm:min-w-[13rem] absolute right-0 mt-1 rounded-md shadow-2xl bg-gray-100 ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
                                             <div className="grid gap-3 py-1 px-1 max-h-64 overflow-y-scroll">
                                                 <Menu.Item>
                                                     <Link
@@ -303,7 +303,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                         className={'text-gray-700 font-medium flex flex-row items-center gap-2 px-4 py-4 text-xs hover:bg-gray-100'}
                                                     >
                                                         <PlusIcon className='h-5 w-5' />
-                                                        Criar Workspace
+                                                        Criar Projeto
                                                     </Link>
                                                 </Menu.Item>
                                                 <Menu.Item>
@@ -312,7 +312,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                         className={'text-gray-700 font-medium flex flex-row items-center gap-2 px-4 py-4 text-xs hover:bg-gray-100 rounded-b-md'}
                                                     >
                                                         <Cog6ToothIcon className='h-5 w-5' />
-                                                        Gerenciar Workspaces
+                                                        Gerenciar Projetos
                                                     </Link>
                                                 </Menu.Item>
                                             </div>
@@ -433,7 +433,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                             item => (
                                                                 <Link
                                                                     key={item.id}
-                                                                    href="#"
+                                                                    href={`/workspaces/workspace/${item.href}`}
                                                                     className="text-sm text-gray-500 whitespace-nowrap font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
                                                                 >
                                                                     <item.Icon className='w-4 h-4' />
@@ -447,7 +447,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                                 item => (
                                                                     <Link
                                                                         key={item.id}
-                                                                        href="#"
+                                                                        href={`/workspaces/workspace/brands/brand/${item.href}`}
                                                                         className="text-sm text-gray-500 whitespace-nowrap font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
                                                                     >
                                                                         <item.Icon className='w-4 h-4' />
