@@ -292,7 +292,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                         href="#"
                                                         onClick={() => setNavigation("workspace")}
                                                         className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                                        <span className="text-gray-700 text-sm truncate">McDonald's</span>
+                                                        <span className="text-gray-700 text-sm truncate">McDonald&apos;s</span>
                                                     </Link>
                                                 </Menu.Item>
                                             </div>
