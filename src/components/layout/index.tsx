@@ -123,33 +123,30 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className='absolute -z-10 w-full h-[20rem] bg-gray-50 shadow-md'></div>
 
                 <div className="max-w-7xl mx-auto w-full">
-                    <div className=" flex items-center sm:items-center justify-between lg:justify-between py-2 sm:py-0 px-2 sm:px-0">
+                    <div className="grid grid-cols-2 grid-rows-2 sm:flex sm:justify-start py-2 sm:py-0 px-2 sm:px-0">
                         {/* Logo */}
-                        <div className="">
-                            {/* <Link href="/" className='max-w-sm'>
-                                            <span className="sr-only">Metrito</span>
-                                            <Image priority alt={"Metrito"} src={"/logo.svg"} width={150} height={50} style={{
-                                                height: "auto"
-                                            }} />
-                                        </Link> */}
-
+                        <div className="col-start-1 row-start-1">
                             <div className='w-full h-full py-4 px-2 flex items-center gap-1 sm:gap-2 '>
                                 <Link
                                     href={'#'}
                                     onClick={() => setNavigation("")}
                                     className='cursor-pointer grid justify-items-center content-center bg-black bg-opacity-0 hover:bg-opacity-10 px-0 sm:px-1 py-0 sm:py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500'
                                 >
-                                    <Icon
+                                    {/* <Icon
                                         className="md:hidden w-9 h-9 fill-gray-700 "
-                                    />
+                                    /> */}
                                     <Metrito
-                                        className="hidden md:block w-32 h-9 fill-gray-700 "
+                                        className="block w-32 h-9 fill-gray-700 "
                                     />
                                 </Link>
-                                <div className="grid place-items-center">
+                                <div className="hidden sm:block place-items-center">
                                     <ChevronRightIcon className="h-6 w-6 text-gray-300" aria-hidden="true" />
                                 </div>
+                            </div>
+                        </div>
 
+                        <div className="row-start-2 col-span-2 sm:row-start-1 sm:col-span-1 ">
+                            <div className='w-full h-full py-4 px-2 flex items-center gap-1 sm:gap-2 '>
                                 <Menu as="div" className="relative inline-block text-left max-w-[11rem] sm:w-fit sm:max-w-[13rem]">
                                     <div>
                                         <span className="flex w-full justify-between items-center gap-1">
@@ -229,11 +226,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                         </Menu.Items>
                                     </Transition>
                                 </Menu>
-                                <div className="hidden sm:grid place-items-center">
+
+                                <div className="grid place-items-center">
                                     <ChevronRightIcon className="h-6 w-6 text-gray-300" aria-hidden="true" />
                                 </div>
 
-                                <Menu as="div" className="hidden relative sm:inline-block text-left max-w-[11rem] sm:w-fit sm:max-w-[13rem]">
+                                <Menu as="div" className="relative inline-block text-left max-w-[11rem] sm:w-fit sm:max-w-[13rem]">
                                     <div>
                                         <span className="flex w-full justify-between items-center gap-1">
                                             <Link
@@ -243,7 +241,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                             >
 
                                                 <span className="flex-1 flex flex-col min-w-0">
-                                                    <span className="text-gray-900 text-sm font-medium tracking-wide truncate">Ifood Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, culpa.</span>
+                                                    <span className="text-gray-900 text-sm font-medium tracking-wide truncate">Ifood</span>
                                                 </span>
                                             </Link>
                                             <Menu.Button className="self-stretch px-1 rounded-md transition-all ease-in  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
@@ -326,7 +324,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 
                         {/* Menu button */}
-                        <div className="flex justify-end gap-2 sm:gap-1 overflow-visible">
+                        <div className="place-self-end sm:place-self-center sm:flex-1 w-fit h-full flex justify-end items-center gap-2 sm:gap-3">
 
 
                             <Link
