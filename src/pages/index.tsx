@@ -19,23 +19,23 @@ export default function Index() {
                         <div
                             className="grid grid-cols-2 grid-rows-2 gap-2"
                         >
-                            <div className="py-15 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
+                            <div className="py-16 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
                                 <span>Foto</span>
                                 <h2 className="font-semibold text-lg">Nome</h2>
                                 <p>Role</p>
                             </div>
-                            <div className="py-15 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
+                            <div className="py-16 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
                                 <span>Foto</span>
                                 <h2 className="font-semibold text-lg">Nome</h2>
                                 <p>Role</p>
                             </div>
-                            <div className="py-15 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
+                            <div className="py-16 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
                                 <span>Foto</span>
                                 <h2 className="font-semibold text-lg">Nome</h2>
                                 <p>Role</p>
                             </div>
                             <div className="grid shadow rounded-md bg-gray-200">
-                                <div className="py-15 md:py-20 px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 grid place-items-center gap-2" >
+                                <div className="py-16 md:py-20 px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 grid place-items-center gap-2" >
                                     <h2 className="font-semibold text-lg text-gray-600 text-center drop-shadow-lg">+ Adicionar Workspace</h2>
                                 </div>
                             </div>
