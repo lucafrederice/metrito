@@ -91,7 +91,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         return () => {
             scrollRef.current?.removeEventListener("scroll", handleScroll);
         };
-    }, []);
+    }, [navigation]);
 
     const navbarRef = useRef<HTMLDivElement>(null)
     const [navbarShadow, setNavbarShadow] = useState<boolean>()
