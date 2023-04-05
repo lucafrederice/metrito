@@ -91,7 +91,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         return () => {
             scrollRef.current?.removeEventListener("scroll", handleScroll);
         };
-    }, [scrollRef?.current?.scrollLeft, scrollRef?.current?.scrollWidth, globalThis?.window?.innerWidth]);
+    }, []);
 
     const navbarRef = useRef<HTMLDivElement>(null)
     const [navbarShadow, setNavbarShadow] = useState<boolean>()
@@ -114,7 +114,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 globalThis?.window?.removeEventListener("scroll", handleScroll);
             };
         },
-        [globalThis?.window?.scrollY]
+        []
     )
 
     return (
