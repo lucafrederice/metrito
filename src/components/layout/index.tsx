@@ -258,143 +258,145 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                         </Menu.Items>
                                                     </Transition>
                                                 </Menu>
-
-                                                <div className="grid place-items-center">
-                                                    <ChevronRightIcon className="h-6 w-6 text-gray-300" aria-hidden="true" />
-                                                </div>
                                             </>
                                         }
 
                                         {
                                             router.query?.brand &&
-                                            <Menu as="div" className="relative inline-block text-left max-w-[11rem] sm:w-fit sm:max-w-[13rem]">
-                                                <div>
-                                                    <span className="flex w-full justify-between items-center gap-1">
-                                                        <Link
-                                                            href={`/workspaces/${router?.query?.workspace}/brands/${router?.query?.brand}`}
-                                                            onClick={() => setNavigation("brand")}
-                                                            className="cursor-pointer hover:bg-gray-200 px-1 sm:px-2 py-2 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
-                                                        >
-
-                                                            <span className="flex-1 flex flex-col min-w-0">
-                                                                <span className="text-gray-900 text-sm font-medium tracking-wide truncate">Ifood</span>
-                                                            </span>
-                                                        </Link>
-                                                        <Menu.Button className="self-stretch px-1 sm:px-2 py-2 sm:py-2 rounded-md transition-all ease-in  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                                            <ChevronUpDownIcon
-                                                                className="flex-shrink-0 h-5 w-5 text-gray-600"
-                                                                aria-hidden="true"
-                                                            />
-                                                        </Menu.Button>
-                                                    </span>
+                                            <>
+                                                <div className="grid place-items-center">
+                                                    <ChevronRightIcon className="h-6 w-6 text-gray-300" aria-hidden="true" />
                                                 </div>
-                                                <Transition
-                                                    as={Fragment}
-                                                    enter="transition ease-out duration-100"
-                                                    enterFrom="transform opacity-0 scale-95"
-                                                    enterTo="transform opacity-100 scale-100"
-                                                    leave="transition ease-in duration-75"
-                                                    leaveFrom="transform opacity-100 scale-100"
-                                                    leaveTo="transform opacity-0 scale-95"
-                                                >
-                                                    <Menu.Items className="z-10 min-w-[11rem] sm:min-w-[13rem] absolute right-0 mt-1 rounded-md shadow-2xl bg-gray-100 ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
-                                                        <div className="grid gap-3 py-1 px-1 max-h-64 overflow-y-scroll">
-                                                            <Menu.Item>
-                                                                <Link
-                                                                    href="#"
-                                                                    onClick={() => setNavigation("workspace")}
-                                                                    className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                                                    <span className="text-gray-700 text-sm truncate">Disney</span>
-                                                                </Link>
-                                                            </Menu.Item>
-                                                            <Menu.Item>
-                                                                <Link
-                                                                    href="#"
-                                                                    onClick={() => setNavigation("workspace")}
-                                                                    className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                                                    <span className="text-gray-700 text-sm truncate">Coca Cola</span>
-                                                                </Link>
-                                                            </Menu.Item>
-                                                            <Menu.Item>
-                                                                <Link
-                                                                    href="#"
-                                                                    onClick={() => setNavigation("workspace")}
-                                                                    className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                                                    <span className="text-gray-700 text-sm truncate">McDonald&apos;s</span>
-                                                                </Link>
-                                                            </Menu.Item>
-                                                            <Menu.Item>
-                                                                <Link
-                                                                    href="#"
-                                                                    onClick={() => setNavigation("workspace")}
-                                                                    className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                                                    <span className="text-gray-700 text-sm truncate">Consultoria</span>
-                                                                </Link>
-                                                            </Menu.Item>
-                                                            <Menu.Item>
-                                                                <Link
-                                                                    href="#"
-                                                                    onClick={() => setNavigation("workspace")}
-                                                                    className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                                                    <span className="text-gray-700 text-sm truncate">Consultoria</span>
-                                                                </Link>
-                                                            </Menu.Item>
-                                                            <Menu.Item>
-                                                                <Link
-                                                                    href="#"
-                                                                    onClick={() => setNavigation("workspace")}
-                                                                    className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                                                    <span className="text-gray-700 text-sm truncate">Consultoria</span>
-                                                                </Link>
-                                                            </Menu.Item>
-                                                            <Menu.Item>
-                                                                <Link
-                                                                    href="#"
-                                                                    onClick={() => setNavigation("workspace")}
-                                                                    className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                                                    <span className="text-gray-700 text-sm truncate">Consultoria</span>
-                                                                </Link>
-                                                            </Menu.Item>
-                                                            <Menu.Item>
-                                                                <Link
-                                                                    href="#"
-                                                                    onClick={() => setNavigation("workspace")}
-                                                                    className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                                                    <span className="text-gray-700 text-sm truncate">Consultoria</span>
-                                                                </Link>
-                                                            </Menu.Item>
-                                                            <Menu.Item>
-                                                                <Link
-                                                                    href="#"
-                                                                    onClick={() => setNavigation("workspace")}
-                                                                    className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                                                    <span className="text-gray-700 text-sm truncate">Consultoria</span>
-                                                                </Link>
-                                                            </Menu.Item>
-                                                        </div>
-                                                        <div className="bg-white rounded-b-md grid gap-1 pt-1 ">
-                                                            <Menu.Item>
-                                                                <Link
-                                                                    href="#"
-                                                                    className={'text-gray-700 font-medium flex flex-row items-center gap-2 px-4 py-4 text-xs hover:bg-gray-100'}
-                                                                >
-                                                                    <PlusIcon className='h-5 w-5' />
-                                                                    Criar Projeto
-                                                                </Link>
-                                                            </Menu.Item>
-                                                            <Menu.Item>
-                                                                <Link
-                                                                    href="#"
-                                                                    className={'text-gray-700 font-medium flex flex-row items-center gap-2 px-4 py-4 text-xs hover:bg-gray-100 rounded-b-md'}
-                                                                >
-                                                                    <Cog6ToothIcon className='h-5 w-5' />
-                                                                    Gerenciar Projetos
-                                                                </Link>
-                                                            </Menu.Item>
-                                                        </div>
-                                                    </Menu.Items>
-                                                </Transition>
-                                            </Menu>
+
+                                                <Menu as="div" className="relative inline-block text-left max-w-[11rem] sm:w-fit sm:max-w-[13rem]">
+                                                    <div>
+                                                        <span className="flex w-full justify-between items-center gap-1">
+                                                            <Link
+                                                                href={`/workspaces/${router?.query?.workspace}/brands/${router?.query?.brand}`}
+                                                                onClick={() => setNavigation("brand")}
+                                                                className="cursor-pointer hover:bg-gray-200 px-1 sm:px-2 py-2 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                                                            >
+
+                                                                <span className="flex-1 flex flex-col min-w-0">
+                                                                    <span className="text-gray-900 text-sm font-medium tracking-wide truncate">Ifood</span>
+                                                                </span>
+                                                            </Link>
+                                                            <Menu.Button className="self-stretch px-1 sm:px-2 py-2 sm:py-2 rounded-md transition-all ease-in  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                <ChevronUpDownIcon
+                                                                    className="flex-shrink-0 h-5 w-5 text-gray-600"
+                                                                    aria-hidden="true"
+                                                                />
+                                                            </Menu.Button>
+                                                        </span>
+                                                    </div>
+                                                    <Transition
+                                                        as={Fragment}
+                                                        enter="transition ease-out duration-100"
+                                                        enterFrom="transform opacity-0 scale-95"
+                                                        enterTo="transform opacity-100 scale-100"
+                                                        leave="transition ease-in duration-75"
+                                                        leaveFrom="transform opacity-100 scale-100"
+                                                        leaveTo="transform opacity-0 scale-95"
+                                                    >
+                                                        <Menu.Items className="z-10 min-w-[11rem] sm:min-w-[13rem] absolute right-0 mt-1 rounded-md shadow-2xl bg-gray-100 ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
+                                                            <div className="grid gap-3 py-1 px-1 max-h-64 overflow-y-scroll">
+                                                                <Menu.Item>
+                                                                    <Link
+                                                                        href="#"
+                                                                        onClick={() => setNavigation("workspace")}
+                                                                        className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                        <span className="text-gray-700 text-sm truncate">Disney</span>
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                                <Menu.Item>
+                                                                    <Link
+                                                                        href="#"
+                                                                        onClick={() => setNavigation("workspace")}
+                                                                        className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                        <span className="text-gray-700 text-sm truncate">Coca Cola</span>
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                                <Menu.Item>
+                                                                    <Link
+                                                                        href="#"
+                                                                        onClick={() => setNavigation("workspace")}
+                                                                        className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                        <span className="text-gray-700 text-sm truncate">McDonald&apos;s</span>
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                                <Menu.Item>
+                                                                    <Link
+                                                                        href="#"
+                                                                        onClick={() => setNavigation("workspace")}
+                                                                        className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                        <span className="text-gray-700 text-sm truncate">Consultoria</span>
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                                <Menu.Item>
+                                                                    <Link
+                                                                        href="#"
+                                                                        onClick={() => setNavigation("workspace")}
+                                                                        className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                        <span className="text-gray-700 text-sm truncate">Consultoria</span>
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                                <Menu.Item>
+                                                                    <Link
+                                                                        href="#"
+                                                                        onClick={() => setNavigation("workspace")}
+                                                                        className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                        <span className="text-gray-700 text-sm truncate">Consultoria</span>
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                                <Menu.Item>
+                                                                    <Link
+                                                                        href="#"
+                                                                        onClick={() => setNavigation("workspace")}
+                                                                        className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                        <span className="text-gray-700 text-sm truncate">Consultoria</span>
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                                <Menu.Item>
+                                                                    <Link
+                                                                        href="#"
+                                                                        onClick={() => setNavigation("workspace")}
+                                                                        className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                        <span className="text-gray-700 text-sm truncate">Consultoria</span>
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                                <Menu.Item>
+                                                                    <Link
+                                                                        href="#"
+                                                                        onClick={() => setNavigation("workspace")}
+                                                                        className="hover:bg-gray-200 px-4 py-4 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                        <span className="text-gray-700 text-sm truncate">Consultoria</span>
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                            </div>
+                                                            <div className="bg-white rounded-b-md grid gap-1 pt-1 ">
+                                                                <Menu.Item>
+                                                                    <Link
+                                                                        href="#"
+                                                                        className={'text-gray-700 font-medium flex flex-row items-center gap-2 px-4 py-4 text-xs hover:bg-gray-100'}
+                                                                    >
+                                                                        <PlusIcon className='h-5 w-5' />
+                                                                        Criar Projeto
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                                <Menu.Item>
+                                                                    <Link
+                                                                        href="#"
+                                                                        className={'text-gray-700 font-medium flex flex-row items-center gap-2 px-4 py-4 text-xs hover:bg-gray-100 rounded-b-md'}
+                                                                    >
+                                                                        <Cog6ToothIcon className='h-5 w-5' />
+                                                                        Gerenciar Projetos
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                            </div>
+                                                        </Menu.Items>
+                                                    </Transition>
+                                                </Menu>
+                                            </>
                                         }
 
                                     </div>
