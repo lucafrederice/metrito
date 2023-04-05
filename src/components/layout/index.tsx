@@ -120,7 +120,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <div className="min-h-full relative ">
-                <div className='absolute -z-10 w-full h-[20rem] bg-gray-50 shadow-md'></div>
+                <div className='absolute -z-10 w-full h-[25rem] bg-gray-50 shadow-md'></div>
 
                 <div className="max-w-7xl mx-auto w-full">
                     <div className="grid grid-cols-2 grid-rows-2 sm:flex sm:justify-start py-2 sm:py-0 px-2 sm:px-0">
