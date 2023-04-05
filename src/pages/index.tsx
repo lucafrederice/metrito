@@ -34,9 +34,9 @@ export default function Index() {
                                 <h2 className="font-semibold text-lg">Nome</h2>
                                 <p>Role</p>
                             </div>
-                            <div className="grid shadow rounded-md bg-gray-200">
+                            <div className="grid place-items-center shadow rounded-md bg-gray-200">
                                 <div className="py-20 px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 grid place-items-center gap-2" >
-                                    <h2 className="font-semibold text-lg text-gray-600 drop-shadow-lg">+ Adicionar Workspace</h2>
+                                    <h2 className="font-semibold text-lg text-gray-600 text-center drop-shadow-lg">+ Adicionar Workspace</h2>
                                 </div>
                             </div>
                         </div>
