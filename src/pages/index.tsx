@@ -1,5 +1,5 @@
 import MotionWrapper from "@/components/animation/motionWrapper";
-import { ChevronDownIcon, ChevronUpIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon, ChevronUpIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -69,7 +69,13 @@ export default function Index() {
                         ref={worskpacesRef}
                         className={`p-0  w-full md:col-span-2 grid gap-4 ${isWorkspacesOpen ? "" : "max-h-[70vh] overflow-y-hidden"} md:max-h-full relative`}
                     >
-                        <h1 className="font-medium text-gray-600">Workspaces que você tem acesso:</h1>
+                        <div className="grid grid-flow-col-dense gap-8 sm:flex sm:justify-between ">
+                            <h1 className="w-4/6 sm:w-full col-span-2 text-lg font-medium text-gray-600">Workspaces que você tem acesso:</h1>
+                            <button className="justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-800 text-gray-100">
+                                <PlusIcon className="h-4 w-4" />
+                                <span className="hidden sm:block">Criar Workspace</span>
+                            </button>
+                        </div>
 
                         <div
                             className="grid grid-cols-2 grid-rows-2 gap-2"
@@ -87,7 +93,7 @@ export default function Index() {
                             <div className="grid shadow rounded-md bg-gray-200">
                                 <div className="py-16 md:py-20 px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 grid place-items-center md:flex justify-center items-center gap-2" >
                                     <PlusIcon className="w-6 h-6 md:w-8 md:h-8" />
-                                    <h2 className="font-semibold text-base  sm:text-lg text-gray-600 text-center drop-shadow-lg">Adicionar Workspace</h2>
+                                    <h2 className="font-semibold text-base  sm:text-lg text-gray-600 text-center drop-shadow-lg">Criar Workspace</h2>
                                 </div>
                             </div>
                         </div>
