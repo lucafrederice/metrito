@@ -32,7 +32,7 @@ export default function Index() {
                                 <img className="mx-auto h-16 w-16 rounded-full" src={user.imageUrl} alt="" />
                             </div>
                             <div className="grid place-items-center sm:text-left">
-                                <p className="text-sm font-medium text-gray-600 truncate max-w-[12rem] sm:max-w-sm">Bem vindo(a) de volta,
+                                <p className="text-sm font-medium text-gray-600 truncate max-w-[14rem] sm:max-w-sm">Bem vindo(a) de volta,
                                     <br />
                                     <span className="text-xl font-bold text-gray-900 sm:text-2xl truncate">Alice Oliveira Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, animi dolorem expedita aliquid repellendus architecto ea alias delectus voluptas quas, aspernatur quidem minima optio quaerat eos consectetur impedit tempora. Sit obcaecati reiciendis iusto odit officiis tenetur! Non nesciunt ipsa saepe ducimus sint magni, fuga molestiae blanditiis rerum maiores similique dolor!</span>
                                 </p>
