@@ -1,4 +1,5 @@
 import MotionWrapper from "@/components/animation/motionWrapper";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
@@ -35,8 +36,9 @@ export default function Index() {
                                 <p>Role</p>
                             </div>
                             <div className="grid shadow rounded-md bg-gray-200">
-                                <div className="py-16 md:py-20 px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 grid place-items-center gap-2" >
-                                    <h2 className="font-semibold text-lg text-gray-600 text-center drop-shadow-lg">+ Adicionar Workspace</h2>
+                                <div className="py-16 md:py-20 px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 grid place-items-center md:flex justify-center items-center gap-2" >
+                                    <PlusIcon className="w-6 h-6 md:w-8 md:h-8" />
+                                    <h2 className="font-semibold text-base  sm:text-lg text-gray-600 text-center drop-shadow-lg">Adicionar Workspace</h2>
                                 </div>
                             </div>
                         </div>
