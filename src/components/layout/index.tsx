@@ -183,7 +183,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                     <div>
                                                         <span className="flex w-full justify-between items-center gap-1">
                                                             <Link
-                                                                href="/workspaces/workspace"
+                                                                href={`/workspaces/${router?.query?.workspace}`}
                                                                 onClick={() => setNavigation("workspace")}
                                                                 className="hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
                                                                 <img
@@ -271,7 +271,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                 <div>
                                                     <span className="flex w-full justify-between items-center gap-1">
                                                         <Link
-                                                            href="/workspaces/workspace/brands/brand"
+                                                            href={`/workspaces/${router?.query?.workspace}/brands/${router?.query?.brand}`}
                                                             onClick={() => setNavigation("brand")}
                                                             className="cursor-pointer hover:bg-gray-200 px-1 sm:px-2 py-2 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
                                                         >
@@ -513,7 +513,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                             item => (
                                                                 <Link
                                                                     key={item.id}
-                                                                    href={`/workspaces/workspace/${item.href}`}
+                                                                    href={`/workspaces/${router?.query?.workspace}/${item.href}`}
                                                                     className="text-sm text-gray-500 whitespace-nowrap font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
                                                                 >
                                                                     <item.Icon className='w-4 h-4' />
@@ -527,7 +527,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                                 item => (
                                                                     <Link
                                                                         key={item.id}
-                                                                        href={`/workspaces/workspace/brands/brand/${item.href}`}
+                                                                        href={`/workspaces/${router?.query?.workspace}/brands/${router?.query?.brand}/${item.href}`}
                                                                         className="text-sm text-gray-500 whitespace-nowrap font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
                                                                     >
                                                                         <item.Icon className='w-4 h-4' />

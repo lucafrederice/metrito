@@ -63,11 +63,11 @@ export default function Index() {
                 </div> */}
 
 
-                <div className="grid place-items-center items-start md:grid-flow-col-dense gap-10 w-full h-full min-h-[70vh] max-w-7xl md:border-2  md:border-gray-300 md:border-dashed rounded-xl">
+                <div className="grid place-items-center items-start md:grid-flow-col-dense gap-10 w-full h-full min-h-[70vh] max-w-7xl rounded-xl">
 
                     <div
                         ref={worskpacesRef}
-                        className={`p-0 md:p-5 w-full md:col-span-2 grid gap-4 ${isWorkspacesOpen ? "" : "max-h-[70vh] overflow-y-hidden"} md:max-h-full relative`}
+                        className={`p-0  w-full md:col-span-2 grid gap-4 ${isWorkspacesOpen ? "" : "max-h-[70vh] overflow-y-hidden"} md:max-h-full relative`}
                     >
                         <h1 className="font-medium text-gray-600">Workspaces que você tem acesso:</h1>
 
