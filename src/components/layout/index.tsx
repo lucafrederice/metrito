@@ -261,7 +261,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                         leaveFrom="transform opacity-100 scale-100"
                                         leaveTo="transform opacity-0 scale-95"
                                     >
-                                        <Menu.Items className="z-10 min-w-[13rem] sm:min-w-[13rem] origin-top absolute right-0 left-0 mt-1 rounded-md shadow-2xl bg-gray-100 ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
+                                        <Menu.Items className="z-10 min-w-[9rem] sm:min-w-[13rem] origin-top absolute right-0 left-0 mt-1 rounded-md shadow-2xl bg-gray-100 ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
                                             <div className="grid gap-3 py-1 px-1 max-h-64 overflow-y-scroll">
                                                 <Menu.Item>
                                                     <Link
