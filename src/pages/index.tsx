@@ -1,6 +1,7 @@
 import MotionWrapper from "@/components/animation/motionWrapper";
 import { ChevronDownIcon, ChevronUpIcon, PlusIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 function classNames(...classes: any) {
@@ -63,49 +64,26 @@ export default function Index() {
 
 
                 <div className="grid place-items-center items-start md:grid-flow-col-dense gap-10 w-full h-full min-h-[70vh] max-w-7xl md:border-2  md:border-gray-300 md:border-dashed rounded-xl">
+
                     <div
                         ref={worskpacesRef}
                         className={`p-0 md:p-5 w-full md:col-span-2 grid gap-4 ${isWorkspacesOpen ? "" : "max-h-[70vh] overflow-y-hidden"} md:max-h-full relative`}
                     >
                         <h1 className="font-medium text-gray-600">Workspaces que você tem acesso:</h1>
+
                         <div
                             className="grid grid-cols-2 grid-rows-2 gap-2"
                         >
-                            <div className="py-16 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
-                                <span>Foto</span>
-                                <h2 className="font-semibold text-lg">Nome</h2>
-                                <p>Role</p>
-                            </div>
-                            <div className="py-16 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
-                                <span>Foto</span>
-                                <h2 className="font-semibold text-lg">Nome</h2>
-                                <p>Role</p>
-                            </div>
-                            <div className="py-16 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
-                                <span>Foto</span>
-                                <h2 className="font-semibold text-lg">Nome</h2>
-                                <p>Role</p>
-                            </div>
-                            <div className="py-16 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
-                                <span>Foto</span>
-                                <h2 className="font-semibold text-lg">Nome</h2>
-                                <p>Role</p>
-                            </div>
-                            <div className="py-16 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
-                                <span>Foto</span>
-                                <h2 className="font-semibold text-lg">Nome</h2>
-                                <p>Role</p>
-                            </div>
-                            <div className="py-16 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
-                                <span>Foto</span>
-                                <h2 className="font-semibold text-lg">Nome</h2>
-                                <p>Role</p>
-                            </div>
-                            <div className="py-16 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
-                                <span>Foto</span>
-                                <h2 className="font-semibold text-lg">Nome</h2>
-                                <p>Role</p>
-                            </div>
+                            {
+                                [1, 2, 3, 4, 5, 6, 7].map(
+                                    item =>
+                                        <Link key={item} href={'/workspaces/workspace'} className="py-16 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
+                                            <span>Foto</span>
+                                            <h2 className="font-semibold text-lg">Nome</h2>
+                                            <p>Role</p>
+                                        </Link>
+                                )
+                            }
                             <div className="grid shadow rounded-md bg-gray-200">
                                 <div className="py-16 md:py-20 px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 grid place-items-center md:flex justify-center items-center gap-2" >
                                     <PlusIcon className="w-6 h-6 md:w-8 md:h-8" />
@@ -113,6 +91,7 @@ export default function Index() {
                                 </div>
                             </div>
                         </div>
+
                         {
                             needsOverflowWorkspaces &&
                             <div className={`${isWorkspacesOpen ? "" : "absolute"} md:hidden bg-gradient-to-t from-gray-200 bottom-0 w-full h-28 grid place-items-center`}>
@@ -137,6 +116,7 @@ export default function Index() {
                             </div>
                         }
                     </div>
+
                     <div
                         className="p-0 md:p-5  w-full grid gap-4"
                     >
@@ -144,24 +124,18 @@ export default function Index() {
                         <div
                             className="w-full grid grid-flow-row gap-4"
                         >
-                            <div className="py-7 px-5  rounded-md bg-white shadow-md sm:shadow-xl border-2 grid place-items-center" >
-                                <h2 className="font-semibold text-md">Nome da Brand</h2>
-                                <p className="text-xs">Workspace • Role</p>
-                            </div>
-                            <div className="py-7 px-5  rounded-md bg-white shadow-md sm:shadow-xl border-2 grid place-items-center" >
-                                <h2 className="font-semibold text-md">Nome da Brand</h2>
-                                <p className="text-xs">Workspace • Role</p>
-                            </div>
-                            <div className="py-7 px-5  rounded-md bg-white shadow-md sm:shadow-xl border-2 grid place-items-center" >
-                                <h2 className="font-semibold text-md">Nome da Brand</h2>
-                                <p className="text-xs">Workspace • Role</p>
-                            </div>
-                            <div className="py-7 px-5  rounded-md bg-white shadow-md sm:shadow-xl border-2 grid place-items-center" >
-                                <h2 className="font-semibold text-md">Nome da Brand</h2>
-                                <p className="text-xs">Workspace • Role</p>
-                            </div>
+                            {
+                                [1, 2, 3, 4].map(
+                                    item =>
+                                        <Link key={item} href={"/workspaces/workspace/brands/brand"} className="py-7 px-5  rounded-md bg-white shadow-md sm:shadow-xl border-2 grid place-items-center" >
+                                            <h2 className="font-semibold text-md">Nome da Brand</h2>
+                                            <p className="text-xs">Workspace • Role</p>
+                                        </Link>
+                                )
+                            }
                         </div>
                     </div>
+
                 </div>
             </div>
         </MotionWrapper>
