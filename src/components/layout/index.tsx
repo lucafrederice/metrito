@@ -237,14 +237,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                             <Link
                                                 href="#"
                                                 onClick={() => setNavigation("brand")}
-                                                className="cursor-pointer hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                                                className="cursor-pointer hover:bg-gray-200 px-1 sm:px-2 py-2 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
                                             >
 
                                                 <span className="flex-1 flex flex-col min-w-0">
                                                     <span className="text-gray-900 text-sm font-medium tracking-wide truncate">Ifood</span>
                                                 </span>
                                             </Link>
-                                            <Menu.Button className="self-stretch px-1 rounded-md transition-all ease-in  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                            <Menu.Button className="self-stretch px-1 sm:px-2 py-2 sm:py-2 rounded-md transition-all ease-in  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
                                                 <ChevronUpDownIcon
                                                     className="flex-shrink-0 h-5 w-5 text-gray-600"
                                                     aria-hidden="true"
@@ -329,7 +329,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
                             <Link
                                 href="#"
-                                className="text-sm text-gray-600 font-medium rounded-md px-1 sm:px-2 sm:py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                                className="text-sm text-gray-600 font-medium rounded-md px-1 sm:px-2 py-2 sm:py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
                             >
                                 <BellIcon className='w-5 h-5' />
                             </Link>
