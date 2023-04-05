@@ -39,7 +39,7 @@ export default function Index() {
 
     return (
         <MotionWrapper>
-            <div key="index" className="min-h-screen px-4 py-6 md:py-10 w-full grid place-items-center auto-rows-min gap-10">
+            <div key="index" className="min-h-screen px-4 py-6 md:py-10 w-full grid place-items-center auto-rows-min gap-14">
 
                 <div className="w-full max-w-7xl">
                     <div className="max-w-lg">
@@ -114,7 +114,7 @@ export default function Index() {
                             </div>
                         </div>
                         {
-                            // needsOverflowWorkspaces &&
+                            needsOverflowWorkspaces &&
                             <div className={`${isWorkspacesOpen ? "" : "absolute"} md:hidden bg-gradient-to-t from-gray-200 bottom-0 w-full h-28 grid place-items-center`}>
                                 <button onClick={toggleWorkspaces} className="px-4 py-3 font-medium text-gray-600 bg-white border border-gray-300 rounded-md shadow-xl flex items-center justify-center gap-3">
                                     {
