@@ -144,19 +144,19 @@ export default function Index() {
                         <div
                             className="w-full grid grid-flow-row gap-4"
                         >
-                            <div className="py-7 px-5  rounded-md bg-white shadow-xl border-2 grid place-items-center" >
+                            <div className="py-7 px-5  rounded-md bg-white shadow-lg border-2 grid place-items-center" >
                                 <h2 className="font-semibold text-md">Nome da Brand</h2>
                                 <p className="text-xs">Workspace • Role</p>
                             </div>
-                            <div className="py-7 px-5  rounded-md bg-white shadow-xl border-2 grid place-items-center" >
+                            <div className="py-7 px-5  rounded-md bg-white shadow-lg border-2 grid place-items-center" >
                                 <h2 className="font-semibold text-md">Nome da Brand</h2>
                                 <p className="text-xs">Workspace • Role</p>
                             </div>
-                            <div className="py-7 px-5  rounded-md bg-white shadow-xl border-2 grid place-items-center" >
+                            <div className="py-7 px-5  rounded-md bg-white shadow-lg border-2 grid place-items-center" >
                                 <h2 className="font-semibold text-md">Nome da Brand</h2>
                                 <p className="text-xs">Workspace • Role</p>
                             </div>
-                            <div className="py-7 px-5  rounded-md bg-white shadow-xl border-2 grid place-items-center" >
+                            <div className="py-7 px-5  rounded-md bg-white shadow-lg border-2 grid place-items-center" >
                                 <h2 className="font-semibold text-md">Nome da Brand</h2>
                                 <p className="text-xs">Workspace • Role</p>
                             </div>
