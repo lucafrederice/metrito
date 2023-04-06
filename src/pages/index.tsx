@@ -67,11 +67,11 @@ export default function Index() {
 
                     <div
                         ref={worskpacesRef}
-                        className={`p-0  w-full md:col-span-2 grid gap-4 ${isWorkspacesOpen ? "" : "max-h-[70vh] overflow-y-hidden"} md:max-h-full relative`}
+                        className={`p-0  w-full md:col-span-2 grid gap-4 ${isWorkspacesOpen ? "" : "max-sm:max-h-[70vh] max-sm:overflow-y-hidden"} md:max-h-full relative`}
                     >
-                        <div className="grid grid-flow-col-dense gap-8 sm:flex sm:justify-between ">
-                            <h1 className="w-4/6 sm:w-full col-span-2 text-lg font-medium text-gray-600">Workspaces que você tem acesso:</h1>
-                            <button className="justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-800 text-gray-100">
+                        <div className="grid grid-flow-col-dense gap-8 sm:flex sm:justify-between">
+                            <h1 className="w-4/6 sm:w-full col-span-2 text-lg font-medium text-gray-600 sm:border-b-2">Workspaces que você tem acesso:</h1>
+                            <button className="max-sm:self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700 hover:bg-gray-600 text-gray-50 shadow-lg hover:shadow-xl shadow-gray-300 hover:shadow-gray-300 transition-all ease-in">
                                 <PlusIcon className="h-4 w-4" />
                                 <span className="hidden sm:block">Criar Workspace</span>
                             </button>
@@ -83,20 +83,20 @@ export default function Index() {
                             {
                                 [1, 2, 3, 4, 5, 6, 7].map(
                                     item =>
-                                        <Link key={item} href={'/workspaces/workspace'} className="py-8 md:py-16 px-4 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-4" >
-                                            <img src={'v4.png'} alt="workspace" className="w-20 h-20 rounded-md" />
+                                        <Link key={item} href={'/workspaces/workspace'} className="py-8 md:py-16 px-4 min rounded-md bg-white shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid place-items-center gap-4" >
+                                            <img src={'v4.png'} alt="workspace" className="w-20 h-20 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100 transition-none ease-in" />
                                             <header className="grid place-items-center">
-                                                <h2 className="font-semibold text-md">V4 Company</h2>
-                                                <p className="text-xs">Proprietário</p>
+                                                <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900">V4 Company</h2>
+                                                <p className="text-xs text-gray-600 group-hover:text-gray-700">Proprietário</p>
                                             </header>
                                         </Link>
                                 )
                             }
                             <div className="grid shadow rounded-md bg-gray-200">
-                                <div className="py-16 md:py-20 px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 grid place-items-center md:flex justify-center items-center gap-2" >
-                                    <PlusIcon className="w-6 h-6 md:w-8 md:h-8" />
-                                    <h2 className="font-semibold text-base  sm:text-lg text-gray-600 text-center drop-shadow-lg">Criar Workspace</h2>
-                                </div>
+                                <button className="py-16 md:py-20 px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 hover:border-gray-600 grid place-items-center md:flex justify-center items-center gap-2 transition-all ease-in group" >
+                                    <PlusIcon className="w-6 h-6 md:w-8 md:h-8 text-gray-600 group-hover:text-gray-800" />
+                                    <h2 className="font-semibold text-base  sm:text-lg text-gray-600 group-hover:text-gray-800 text-center drop-shadow-lg">Criar Workspace</h2>
+                                </button>
                             </div>
                         </div>
 
@@ -135,11 +135,11 @@ export default function Index() {
                             {
                                 [1, 2, 3, 4].map(
                                     item =>
-                                        <Link key={item} href={"/workspaces/workspace/brands/brand"} className="py-5 px-5 rounded-md bg-white shadow-md sm:shadow-xl border-2 grid grid-flow-col gap-5 place-items-center" >
-                                            <img src={'v4.png'} alt="workspace" className="w-10 h-10 rounded-md" />
+                                        <Link key={item} href={"/workspaces/workspace/brands/brand"} className="py-5 px-5 rounded-md bg-white shadow-md sm:shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid grid-flow-col gap-5 place-items-center" >
+                                            <img src={'v4.png'} alt="workspace" className="w-10 h-10 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100" />
                                             <div className="col-span-2 justify-self-start">
-                                                <h2 className="font-semibold text-md">Nome da Brand</h2>
-                                                <p className="text-xs">Workspace</p>
+                                                <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900">Nome da Brand</h2>
+                                                <p className="text-xs text-gray-600 group-hover:text-gray-700">Workspace</p>
                                             </div>
                                             <div>
                                                 <p className="text-xs">Role</p>
