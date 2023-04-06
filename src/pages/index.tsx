@@ -1,8 +1,8 @@
 import MotionWrapper from "@/components/animation/motionWrapper";
-import { ChevronDownIcon, ChevronUpIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
@@ -10,36 +10,20 @@ function classNames(...classes: any) {
 
 export default function Index() {
 
-    const [workspaces, setWorkspaces] = useState([1, 2, 3, 4, 5])
-    const workspaceOverflowCoeff = 60
-    const worskpacesRef = useRef<HTMLDivElement>(null)
-    const [needsOverflowWorkspaces, setNeedsOverflowWorkpaces] = useState<boolean>()
-    const [isWorkspacesOpen, setIsWorkspacesOpen] = useState(false)
+    const [workspaces, setWorkspaces] = useState([1, 2, 3, 4, 5, 6, 7])
+    const needsOverflow = useMemo(
+        () => workspaces.length > 4 ? true : false,
+        [workspaces]
+    )
+
+    console.log(needsOverflow)
+
+    const [isWorkspacesOpen, setIsWorkspacesOpen] = useState<boolean>(false)
 
     const toggleWorkspaces = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         setIsWorkspacesOpen(state => !state)
     }
-
-    useEffect(
-        () => {
-            const handleResize = () => {
-                const coeff = workspaceOverflowCoeff
-                const sizeComparation = globalThis?.window?.innerHeight / 100 * coeff
-                if (worskpacesRef?.current?.scrollHeight && worskpacesRef?.current?.scrollHeight > sizeComparation)
-                    setNeedsOverflowWorkpaces(true)
-                if (worskpacesRef?.current?.scrollHeight && worskpacesRef?.current?.scrollHeight <= sizeComparation)
-                    setNeedsOverflowWorkpaces(false)
-            }
-
-            handleResize()
-
-            worskpacesRef?.current?.addEventListener("resize", handleResize)
-
-            return () => worskpacesRef?.current?.removeEventListener("resize", handleResize)
-        },
-        []
-    )
 
     return (
         <MotionWrapper>
@@ -73,15 +57,23 @@ export default function Index() {
                     >
                         <div className="grid grid-flow-col-dense gap-8 sm:flex sm:justify-between">
                             <h1 className="w-4/6 sm:w-full col-span-2 text-lg font-medium text-gray-600 sm:border-b-2 sm:pb-2">Workspaces que você tem acesso:</h1>
-                            <button className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
+                            <button
+                                onClick={() => setWorkspaces(prev => {
+                                    const array = structuredClone(prev)
+                                    array.pop()
+                                    return [...array]
+                                })}
+                                className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
+                                <MinusIcon className="h-4 w-4" />
+                            </button>
+                            <button onClick={() => setWorkspaces(prev => [...prev, prev[-1] + 1])} className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
                                 <PlusIcon className="h-4 w-4" />
                                 <span className="hidden sm:block">Criar Workspace</span>
                             </button>
                         </div>
 
                         <div
-                            ref={worskpacesRef}
-                            className={`${isWorkspacesOpen ? "" : `max-sm:max-h-[${workspaceOverflowCoeff}vh] max-sm:overflow-y-hidden`}`}
+                            className={`${!needsOverflow ? "" : isWorkspacesOpen ? "max-sm:max-h-full" : "max-sm:max-h-[60vh] max-sm:overflow-y-hidden"}`}
                         >
                             <div
                                 className={`grid grid-cols-2 grid-rows-2 gap-4`}
@@ -111,7 +103,7 @@ export default function Index() {
                             </div>
 
                             {
-                                needsOverflowWorkspaces &&
+                                needsOverflow &&
                                 <div className={`${isWorkspacesOpen ? "" : "absolute"} md:hidden bg-gradient-to-t from-gray-200 -bottom-1 w-full h-28 grid place-items-center`}>
                                     <button onClick={toggleWorkspaces} className="px-4 py-3 font-medium text-gray-600 bg-white border border-gray-300 rounded-md shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-100 hover:shadow-gray-300 transition-all ease-in flex items-center justify-center gap-3">
                                         {

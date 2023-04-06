@@ -64,7 +64,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     const router = useRouter()
 
-    const [response] = useAxios("/api/products");
     const [navigation, setNavigation] = useState("")
 
     useEffect(() => {
