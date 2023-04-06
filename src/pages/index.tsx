@@ -50,33 +50,37 @@ export default function Index() {
                 </div> */}
 
 
-                <div className="grid place-items-center items-start md:grid-flow-col-dense gap-24 w-full h-full min-h-[70vh] max-w-7xl rounded-xl">
+                <div className="grid place-items-center items-start md:grid-flow-col-dense gap-8 md:gap-24 w-full h-full min-h-[70vh] max-w-7xl rounded-xl">
 
                     <div
-                        className={`p-0  w-full md:col-span-2 grid gap-4  md:max-h-full relative transition-all ease-in`}
+                        className={`p-0  w-full md:col-span-2 grid gap-4 md:max-h-full relative transition-all ease-in`}
                     >
-                        <div className="grid grid-flow-col-dense gap-8 sm:flex sm:justify-between">
-                            <h1 className="w-4/6 sm:w-full col-span-2 text-lg font-medium text-gray-600 sm:border-b-2 sm:pb-2">Workspaces que você tem acesso:</h1>
-                            <button
-                                onClick={() => setWorkspaces(prev => {
-                                    const array = structuredClone(prev)
-                                    array.pop()
-                                    return [...array]
-                                })}
-                                className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
-                                <MinusIcon className="h-4 w-4" />
-                            </button>
-                            <button onClick={() => setWorkspaces(prev => [...prev, prev[-1] + 1])} className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
-                                <PlusIcon className="h-4 w-4" />
-                                <span className="hidden sm:block">Criar Workspace</span>
-                            </button>
-                        </div>
+                        {
+                            workspaces.length > 0 &&
+                            <div className="grid grid-flow-col-dense gap-8 sm:flex sm:justify-between">
+                                <h1 className="w-4/6 sm:w-full col-span-2 text-lg font-medium text-gray-600 sm:border-b-2 sm:pb-2">Workspaces que você tem acesso:</h1>
+                                <button
+                                    onClick={() => setWorkspaces(prev => {
+                                        const array = structuredClone(prev)
+                                        array.pop()
+                                        return [...array]
+                                    })}
+                                    className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
+                                    <MinusIcon className="h-4 w-4" />
+                                </button>
+                                <button onClick={() => setWorkspaces(prev => [...prev, prev[-1] + 1])} className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
+                                    <PlusIcon className="h-4 w-4" />
+                                    <span className="hidden sm:block">Criar Workspace</span>
+                                </button>
+                            </div>
+                        }
+
 
                         <div
                             className={`${!needsOverflow ? "" : isWorkspacesOpen ? "max-sm:max-h-full" : "max-sm:max-h-[60vh] max-sm:overflow-y-hidden"}`}
                         >
                             <div
-                                className={`grid grid-cols-2 grid-rows-2 gap-4`}
+                                className={`grid grid-cols-2 ${workspaces.length < 3 ? "grid-rows-1" : "grid-rows-2"} gap-4`}
                             >
                                 {
                                     workspaces.map(
@@ -97,7 +101,9 @@ export default function Index() {
                                 <div className={`${workspaces.length % 2 === 0 ? "col-span-2" : ""}  grid shadow rounded-md bg-gray-200`}>
                                     <button className={`${workspaces.length % 2 === 0 ? "py-8 md:py-10 flex" : "py-16 md:py-20 grid"} px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 hover:border-gray-600  place-items-center md:flex justify-center items-center gap-2 transition-all ease-in group`} >
                                         <PlusIcon className="w-6 h-6 md:w-8 md:h-8 text-gray-600 group-hover:text-gray-800 drop-shadow-lg" />
-                                        <h2 className="font-semibold text-base  sm:text-lg text-gray-600 group-hover:text-gray-800 text-center drop-shadow-lg">Criar Workspace</h2>
+                                        <h2 className="font-semibold text-base  sm:text-lg text-gray-600 group-hover:text-gray-800 text-center drop-shadow-lg">
+                                            {workspaces.length > 0 ? "Criar Workspaces" : "Crie sua primeira workspace"}
+                                        </h2>
                                     </button>
                                 </div>
                             </div>
@@ -132,7 +138,7 @@ export default function Index() {
                         className="p-0 justify-self-stretch md:justify-self-end w-full grid gap-4"
                     >
                         <header className="max-w-[13rem] lg:max-w-xs">
-                            <h1 className="font-medium text-lg text-gray-600 sm:border-b-2 sm:pb-2 whitespace-pre-line truncate">Projetos compartilhadas com você:</h1>
+                            <h1 className="font-medium text-lg text-gray-600 sm:border-b-2 sm:pb-2 whitespace-pre-line truncate">Projetos compartilhados com você:</h1>
                         </header>
                         <div
                             className="w-full grid grid-flow-row gap-4"

@@ -168,7 +168,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <div className="min-h-full relative  ">
-                <div className='absolute -z-10 w-full h-[30rem] md:h-[28rem] bg-gray-50 shadow-md' />
+                <div className='absolute -z-10 w-full h-[38rem] md:h-[28rem] bg-gray-50 shadow-md' />
 
                 <div className='w-full bg-gray-50'>
                     <div className="max-w-7xl mx-auto w-full ">
