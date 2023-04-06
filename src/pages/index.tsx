@@ -36,6 +36,8 @@ export default function Index() {
         setIsWorkspacesOpen(state => !state)
     }
 
+    const [sharedBrands, setSharedBrands] = useState([1,2,3,4,5,6,7,8,9,10])
+
     return (
         <MotionWrapper>
             <div key="index" className="min-h-screen px-4 py-6 md:py-10 w-full grid place-items-center auto-rows-min gap-14">
@@ -99,10 +101,10 @@ export default function Index() {
                                             <Link key={item} href={'/workspaces/workspace'} className="py-8 md:py-16 px-4 min rounded-md bg-white shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid place-items-center gap-4" >
                                                 <img src={'v4.png'} alt="workspace" className="w-20 h-20 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100 transition-none ease-in" />
                                                 <header className="grid place-items-center text-center">
-                                                    <div className="max-w-[7rem] sm:max-w-[10rem]">
+                                                    <div className={`max-w-[7rem] ${sharedBrands.length === 0 ? "sm:max-w-[12rem]" : "sm:max-w-[10rem]"}`}>
                                                         <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate">V4 Company Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, dicta?</h2>
                                                     </div>
-                                                    <div className="max-w-[7rem] sm:max-w-[10rem] lg:max-w-[12rem]">
+                                                    <div className={`max-w-[7rem] ${sharedBrands.length === 0 ? "sm:max-w-[12rem] lg:max-w-[14rem]" : "sm:max-w-[10rem] lg:max-w-[12rem]"} `}>
                                                         <p className="text-xs text-gray-600 group-hover:text-gray-700 truncate">Proprietário Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, animi? </p>
                                                     </div>
                                                 </header>
@@ -145,34 +147,38 @@ export default function Index() {
                         </div>
                     </div>
 
-                    <div
-                        className="p-0 justify-self-stretch md:justify-self-end w-full grid gap-4"
-                    >
-                        <header className="max-w-[13rem] lg:max-w-xs">
-                            <h1 className="font-medium text-lg text-gray-600 sm:border-b-2 sm:pb-2 whitespace-pre-line truncate">Projetos compartilhados com você:</h1>
-                        </header>
+
+                    {
+                        sharedBrands.length > 0 &&
                         <div
-                            className="w-full grid grid-flow-row gap-4"
+                            className="p-0 justify-self-stretch md:justify-self-end w-full grid gap-4"
                         >
-                            {
-                                [1, 2, 3, 4].map(
-                                    item =>
-                                        <Link key={item} href={"/workspaces/workspace/brands/brand"} className="py-5 px-3 rounded-md bg-white shadow-md sm:shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid grid-flow-col gap-2 place-items-center" >
-                                            <img src={'v4.png'} alt="workspace" className="col-span-1 max-sm:justify-self-start w-10 h-10 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100" />
-                                            <div className="col-span-2 justify-self-center max-w-[12rem] md:max-w-[8rem] lg:max-w-[11rem]">
-                                                <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate">Nome da Brand asdasdasda</h2>
-                                                <p className="text-xs text-gray-600 group-hover:text-gray-700 truncate">Workspace Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, magnam.</p>
-                                            </div>
-                                            <div className="max-w-[3rem] col-span-4 relative w-full h-full">
-                                                <div className="absolute inset-0 h-full grid items-center">
-                                                    <p className="text-xs truncate text-center font-medium text-gray-500 group-hover:text-gray-600">Viewer</p>
+                            <header className="max-w-[13rem] lg:max-w-xs">
+                                <h1 className="font-medium text-lg text-gray-600 sm:border-b-2 sm:pb-2 whitespace-pre-line truncate">Projetos compartilhados com você:</h1>
+                            </header>
+                            <div
+                                className="w-full grid grid-flow-row gap-4"
+                            >
+                                {
+                                    sharedBrands.map(
+                                        item =>
+                                            <Link key={item} href={"/workspaces/workspace/brands/brand"} className="py-5 px-3 rounded-md bg-white shadow-md sm:shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid grid-flow-col gap-2 place-items-center" >
+                                                <img src={'v4.png'} alt="workspace" className="col-span-1 max-sm:justify-self-start w-10 h-10 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100" />
+                                                <div className="col-span-2 justify-self-center max-w-[12rem] md:max-w-[8rem] lg:max-w-[11rem]">
+                                                    <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate">Nome da Brand asdasdasda</h2>
+                                                    <p className="text-xs text-gray-600 group-hover:text-gray-700 truncate">Workspace Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, magnam.</p>
                                                 </div>
-                                            </div>
-                                        </Link>
-                                )
-                            }
+                                                <div className="max-w-[3rem] col-span-4 relative w-full h-full">
+                                                    <div className="absolute inset-0 h-full grid items-center">
+                                                        <p className="text-xs truncate text-center font-medium text-gray-500 group-hover:text-gray-600">Viewer</p>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                    )
+                                }
+                            </div>
                         </div>
-                    </div>
+                    }
 
                 </div>
             </div>

@@ -1,10 +1,15 @@
 import MotionWrapper from "@/components/animation/motionWrapper";
+import { useBgOverlay } from "@/contexts/bgOverlayContext";
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
 }
 
 export default function Index() {
+
+    const { size: bgOverlaySize, setSize: setBgOverlaySize } = useBgOverlay()
+    setBgOverlaySize("100%")
+
     return (
         <MotionWrapper>
             <div key="workspace" className="min-h-screen p-5 py-10 w-full grid place-items-center auto-rows-min gap-4">
