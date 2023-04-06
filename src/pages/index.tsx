@@ -126,23 +126,27 @@ export default function Index() {
                     </div>
 
                     <div
-                        className="p-0 w-full grid gap-4"
+                        className="p-0 justify-self-stretch md:justify-self-end w-full grid gap-4"
                     >
-                        <h1 className="font-medium text-lg text-gray-600 sm:border-b-2 sm:pb-2">Brands compartilhadas com você:</h1>
+                        <header className="max-w-[13rem] lg:max-w-xs">
+                            <h1 className="font-medium text-lg text-gray-600 sm:border-b-2 sm:pb-2 whitespace-pre-line truncate">Projetos compartilhadas com você:</h1>
+                        </header>
                         <div
                             className="w-full grid grid-flow-row gap-4"
                         >
                             {
                                 [1, 2, 3, 4].map(
                                     item =>
-                                        <Link key={item} href={"/workspaces/workspace/brands/brand"} className="py-5 px-5 rounded-md bg-white shadow-md sm:shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid grid-flow-col gap-5 place-items-center" >
-                                            <img src={'v4.png'} alt="workspace" className="w-10 h-10 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100" />
-                                            <div className="col-span-2 justify-self-start">
-                                                <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900">Nome da Brand</h2>
-                                                <p className="text-xs text-gray-600 group-hover:text-gray-700">Workspace</p>
+                                        <Link key={item} href={"/workspaces/workspace/brands/brand"} className="py-5 px-5 rounded-md bg-white shadow-md sm:shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid grid-flow-col place-items-center" >
+                                            <img src={'v4.png'} alt="workspace" className="max-sm:justify-self-start w-10 h-10 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100" />
+                                            <div className="justify-self-start max-w-[10rem]">
+                                                <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate">Nome da Brand asdasdasda</h2>
+                                                <p className="text-xs text-gray-600 group-hover:text-gray-700 truncate">Workspace Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, magnam.</p>
                                             </div>
-                                            <div>
-                                                <p className="text-xs">Role</p>
+                                            <div className="max-w-[3rem] relative w-full h-full">
+                                                <div className="absolute inset-0 h-full grid items-center">
+                                                    <p className="text-xs truncate text-center font-medium text-gray-500 group-hover:text-gray-600">Viewer</p>
+                                                </div>
                                             </div>
                                         </Link>
                                 )
