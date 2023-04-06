@@ -78,15 +78,17 @@ export default function Index() {
                         </div>
 
                         <div
-                            className="grid grid-cols-2 grid-rows-2 gap-2"
+                            className="grid grid-cols-2 grid-rows-2 gap-4"
                         >
                             {
                                 [1, 2, 3, 4, 5, 6, 7].map(
                                     item =>
-                                        <Link key={item} href={'/workspaces/workspace'} className="py-16 md:py-20 px-5 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-2" >
-                                            <span>Foto</span>
-                                            <h2 className="font-semibold text-lg">Nome</h2>
-                                            <p>Role</p>
+                                        <Link key={item} href={'/workspaces/workspace'} className="py-8 md:py-16 px-4 min rounded-md bg-white shadow-xl border-2 grid place-items-center gap-4" >
+                                            <img src={'v4.png'} alt="workspace" className="w-20 h-20 rounded-md" />
+                                            <header className="grid place-items-center">
+                                                <h2 className="font-semibold text-md">V4 Company</h2>
+                                                <p className="text-xs">Proprietário</p>
+                                            </header>
                                         </Link>
                                 )
                             }
@@ -133,9 +135,15 @@ export default function Index() {
                             {
                                 [1, 2, 3, 4].map(
                                     item =>
-                                        <Link key={item} href={"/workspaces/workspace/brands/brand"} className="py-7 px-5  rounded-md bg-white shadow-md sm:shadow-xl border-2 grid place-items-center" >
-                                            <h2 className="font-semibold text-md">Nome da Brand</h2>
-                                            <p className="text-xs">Workspace • Role</p>
+                                        <Link key={item} href={"/workspaces/workspace/brands/brand"} className="py-5 px-5 rounded-md bg-white shadow-md sm:shadow-xl border-2 grid grid-flow-col gap-5 place-items-center" >
+                                            <img src={'v4.png'} alt="workspace" className="w-10 h-10 rounded-md" />
+                                            <div className="col-span-2 justify-self-start">
+                                                <h2 className="font-semibold text-md">Nome da Brand</h2>
+                                                <p className="text-xs">Workspace</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-xs">Role</p>
+                                            </div>
                                         </Link>
                                 )
                             }
