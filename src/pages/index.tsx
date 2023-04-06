@@ -11,7 +11,7 @@ function classNames(...classes: any) {
 export default function Index() {
 
     const [workspaces, setWorkspaces] = useState([1, 2, 3, 4, 5])
-
+    const workspaceOverflowCoeff = 65
     const worskpacesRef = useRef<HTMLDivElement>(null)
     const [needsOverflowWorkspaces, setNeedsOverflowWorkpaces] = useState<boolean>()
     const [isWorkspacesOpen, setIsWorkspacesOpen] = useState(false)
@@ -24,10 +24,11 @@ export default function Index() {
     useEffect(
         () => {
             const handleResize = () => {
-                console.log(worskpacesRef?.current?.scrollHeight)
-                if (worskpacesRef?.current?.scrollHeight && worskpacesRef?.current?.scrollHeight > globalThis?.window?.innerHeight / 100 * 70)
+                const coeff = workspaceOverflowCoeff
+                const sizeComparation = globalThis?.window?.innerHeight / 100 * coeff
+                if (worskpacesRef?.current?.scrollHeight && worskpacesRef?.current?.scrollHeight > sizeComparation)
                     setNeedsOverflowWorkpaces(true)
-                if (worskpacesRef?.current?.scrollHeight && worskpacesRef?.current?.scrollHeight <= globalThis?.window?.innerHeight / 100 * 70)
+                if (worskpacesRef?.current?.scrollHeight && worskpacesRef?.current?.scrollHeight <= sizeComparation)
                     setNeedsOverflowWorkpaces(false)
             }
 
@@ -68,8 +69,7 @@ export default function Index() {
                 <div className="grid place-items-center items-start md:grid-flow-col-dense gap-24 w-full h-full min-h-[70vh] max-w-7xl rounded-xl">
 
                     <div
-                        ref={worskpacesRef}
-                        className={`p-0  w-full md:col-span-2 grid gap-4 ${isWorkspacesOpen ? "" : "max-sm:max-h-[70vh] max-sm:overflow-y-hidden"} md:max-h-full relative transition-all ease-in`}
+                        className={`p-0  w-full md:col-span-2 grid gap-4  md:max-h-full relative transition-all ease-in`}
                     >
                         <div className="grid grid-flow-col-dense gap-8 sm:flex sm:justify-between">
                             <h1 className="w-4/6 sm:w-full col-span-2 text-lg font-medium text-gray-600 sm:border-b-2 sm:pb-2">Workspaces que você tem acesso:</h1>
@@ -80,55 +80,60 @@ export default function Index() {
                         </div>
 
                         <div
-                            className="grid grid-cols-2 grid-rows-2 gap-4"
+                            ref={worskpacesRef}
+                            className={`${isWorkspacesOpen ? "" : `max-sm:max-h-[${workspaceOverflowCoeff}vh] max-sm:overflow-y-hidden`}`}
                         >
-                            {
-                                workspaces.map(
-                                    item =>
-                                        <Link key={item} href={'/workspaces/workspace'} className="py-8 md:py-16 px-4 min rounded-md bg-white shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid place-items-center gap-4" >
-                                            <img src={'v4.png'} alt="workspace" className="w-20 h-20 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100 transition-none ease-in" />
-                                            <header className="grid place-items-center text-center">
-                                                <div className="max-w-[7rem] sm:max-w-[10rem]">
-                                                    <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate">V4 Company Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, dicta?</h2>
-                                                </div>
-                                                <div className="max-w-[7rem] sm:max-w-[10rem] lg:max-w-[12rem]">
-                                                    <p className="text-xs text-gray-600 group-hover:text-gray-700 truncate">Proprietário Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, animi? </p>
-                                                </div>
-                                            </header>
-                                        </Link>
-                                )
-                            }
-                            <div className={`${workspaces.length % 2 === 0 ? "col-span-2" : ""}  grid shadow rounded-md bg-gray-200`}>
-                                <button className={`${workspaces.length % 2 === 0 ? "py-8 md:py-10 flex" : "py-16 md:py-20 grid"} px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 hover:border-gray-600  place-items-center md:flex justify-center items-center gap-2 transition-all ease-in group`} >
-                                    <PlusIcon className="w-6 h-6 md:w-8 md:h-8 text-gray-600 group-hover:text-gray-800 drop-shadow-lg" />
-                                    <h2 className="font-semibold text-base  sm:text-lg text-gray-600 group-hover:text-gray-800 text-center drop-shadow-lg">Criar Workspace</h2>
-                                </button>
+                            <div
+                                className={`grid grid-cols-2 grid-rows-2 gap-4`}
+                            >
+                                {
+                                    workspaces.map(
+                                        item =>
+                                            <Link key={item} href={'/workspaces/workspace'} className="py-8 md:py-16 px-4 min rounded-md bg-white shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid place-items-center gap-4" >
+                                                <img src={'v4.png'} alt="workspace" className="w-20 h-20 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100 transition-none ease-in" />
+                                                <header className="grid place-items-center text-center">
+                                                    <div className="max-w-[7rem] sm:max-w-[10rem]">
+                                                        <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate">V4 Company Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, dicta?</h2>
+                                                    </div>
+                                                    <div className="max-w-[7rem] sm:max-w-[10rem] lg:max-w-[12rem]">
+                                                        <p className="text-xs text-gray-600 group-hover:text-gray-700 truncate">Proprietário Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, animi? </p>
+                                                    </div>
+                                                </header>
+                                            </Link>
+                                    )
+                                }
+                                <div className={`${workspaces.length % 2 === 0 ? "col-span-2" : ""}  grid shadow rounded-md bg-gray-200`}>
+                                    <button className={`${workspaces.length % 2 === 0 ? "py-8 md:py-10 flex" : "py-16 md:py-20 grid"} px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 hover:border-gray-600  place-items-center md:flex justify-center items-center gap-2 transition-all ease-in group`} >
+                                        <PlusIcon className="w-6 h-6 md:w-8 md:h-8 text-gray-600 group-hover:text-gray-800 drop-shadow-lg" />
+                                        <h2 className="font-semibold text-base  sm:text-lg text-gray-600 group-hover:text-gray-800 text-center drop-shadow-lg">Criar Workspace</h2>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
 
-                        {
-                            needsOverflowWorkspaces &&
-                            <div className={`${isWorkspacesOpen ? "" : "absolute"} md:hidden bg-gradient-to-t from-gray-200 bottom-0 w-full h-28 grid place-items-center`}>
-                                <button onClick={toggleWorkspaces} className="px-4 py-3 font-medium text-gray-600 bg-white border border-gray-300 rounded-md shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-100 hover:shadow-gray-300 transition-all ease-in flex items-center justify-center gap-3">
-                                    {
-                                        isWorkspacesOpen ?
-                                            (
-                                                <>
-                                                    <ChevronUpIcon className="h-4 w-4" />
-                                                    Mostrar menos
-                                                </>
-                                            )
-                                            :
-                                            (
-                                                <>
-                                                    <ChevronDownIcon className="h-4 w-4" />
-                                                    Mostrar mais
-                                                </>
-                                            )
-                                    }
-                                </button>
-                            </div>
-                        }
+                            {
+                                needsOverflowWorkspaces &&
+                                <div className={`${isWorkspacesOpen ? "" : "absolute"} md:hidden bg-gradient-to-t from-gray-200 -bottom-1 w-full h-28 grid place-items-center`}>
+                                    <button onClick={toggleWorkspaces} className="px-4 py-3 font-medium text-gray-600 bg-white border border-gray-300 rounded-md shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-100 hover:shadow-gray-300 transition-all ease-in flex items-center justify-center gap-3">
+                                        {
+                                            isWorkspacesOpen ?
+                                                (
+                                                    <>
+                                                        <ChevronUpIcon className="h-4 w-4" />
+                                                        Mostrar menos
+                                                    </>
+                                                )
+                                                :
+                                                (
+                                                    <>
+                                                        <ChevronDownIcon className="h-4 w-4" />
+                                                        Mostrar mais
+                                                    </>
+                                                )
+                                        }
+                                    </button>
+                                </div>
+                            }
+                        </div>
                     </div>
 
                     <div
