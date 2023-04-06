@@ -517,8 +517,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                 <button
                                     type="button"
                                     ref={fullscreenRef}
-                                    onClick={e => console.log(e)}
-                                    className="text-sm text-gray-600 font-medium rounded-md px-1 sm:px-2 sm:py-2 bg-black bg-opacity-0 hover:bg-opacity-10  justify-between items-center gap-2 flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 transition-all ease-in"
+                                    className="text-sm text-gray-600 font-medium rounded-md px-1 sm:px-2 py-2 sm:py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 transition-all ease-in"
                                 >
                                     {
                                         isFullscreen ?
