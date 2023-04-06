@@ -23,7 +23,8 @@ import {
     TableCellsIcon,
     ArrowTrendingUpIcon,
     RectangleGroupIcon,
-    PlusIcon
+    PlusIcon,
+    ArrowsPointingInIcon
 } from '@heroicons/react/24/outline'
 import { ChevronRightIcon, ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
@@ -138,6 +139,31 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         []
     )
 
+    const fullscreenRef = useRef<HTMLButtonElement>(null)
+    const [isFullscreen, setIsFullscreen] = useState<boolean>()
+
+    useEffect(() => {
+        const handleClick = () => {
+            // If there's an element in fullscreen, exit
+            // Otherwise, enter it
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+                setIsFullscreen(false)
+            } else {
+                if (document.fullscreenEnabled) {
+
+                    document.documentElement.requestFullscreen();
+                    setIsFullscreen(true)
+                }
+            }
+        };
+
+        fullscreenRef.current?.addEventListener("click", handleClick);
+
+        return () => {
+            fullscreenRef.current?.removeEventListener("click", handleClick);
+        };
+    }, [fullscreenRef]);
 
 
     return (
@@ -154,7 +180,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                     <Link
                                         href={'/'}
                                         onClick={() => setNavigation("")}
-                                        className='cursor-pointer grid justify-items-center content-center bg-black bg-opacity-0 hover:bg-opacity-10 px-0 sm:px-1 py-0 sm:py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500'
+                                        className='cursor-pointer grid justify-items-center content-center bg-black bg-opacity-0 hover:bg-opacity-10 px-0 sm:px-1 py-0 sm:py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 transition-all ease-in'
                                     >
                                         {/* <Icon
                                         className="md:hidden w-9 h-9 fill-gray-700 "
@@ -185,7 +211,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                             <Link
                                                                 href={`/workspaces/${router?.query?.workspace}`}
                                                                 onClick={() => setNavigation("workspace")}
-                                                                className="hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                className="hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500  transition-all ease-in">
                                                                 <img
                                                                     className="w-8 h-8 bg-gray-300 rounded flex-shrink-0"
                                                                     src="/v4.png"
@@ -195,7 +221,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                                     <span className="text-gray-900 text-sm font-medium tracking-wide truncate">V4 Company</span>
                                                                 </span>
                                                             </Link>
-                                                            <Menu.Button className="self-stretch px-1 rounded-md transition-all ease-in  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                            <Menu.Button className="self-stretch px-1 rounded-md transition-all ease-in  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 ">
                                                                 <ChevronUpDownIcon
                                                                     className="flex-shrink-0 h-5 w-5 text-gray-600"
                                                                     aria-hidden="true"
@@ -274,7 +300,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                             <Link
                                                                 href={`/workspaces/${router?.query?.workspace}/brands/${router?.query?.brand}`}
                                                                 onClick={() => setNavigation("brand")}
-                                                                className="cursor-pointer hover:bg-gray-200 px-1 sm:px-2 py-2 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                                                                className="cursor-pointer hover:bg-gray-200 px-1 sm:px-2 py-2 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 transition-all ease-in"
                                                             >
 
                                                                 <span className="flex-1 flex flex-col min-w-0">
@@ -410,7 +436,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
                                 <Link
                                     href="#"
-                                    className="text-sm text-gray-600 font-medium rounded-md px-1 sm:px-2 py-2 sm:py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                                    className="text-sm text-gray-600 font-medium rounded-md px-1 sm:px-2 py-2 sm:py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 transition-all ease-in"
                                 >
                                     <BellIcon className='w-5 h-5' />
                                 </Link>
@@ -419,7 +445,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
                                 {/* Profile dropdown */}
                                 <Menu as="div" className="relative inline-block text-left sm:w-fit sm:max-w-[12rem]">
-                                    <Menu.Button className="flex w-full justify-between items-center gap-0 sm:hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-full sm:rounded-md min-w-0 space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                    <Menu.Button className="flex w-full justify-between items-center gap-0 sm:hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-full sm:rounded-md min-w-0 space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 transition-all ease-in">
                                         <img
                                             className="h-8 w-8 rounded-full"
                                             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -488,12 +514,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                 </Menu>
 
 
-                                <Link
-                                    href="#"
-                                    className="text-sm text-gray-600 font-medium rounded-md px-1 sm:px-2 sm:py-2 bg-black bg-opacity-0 hover:bg-opacity-10  justify-between items-center gap-2 hidden sm:flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                                <button
+                                    type="button"
+                                    ref={fullscreenRef}
+                                    onClick={e => console.log(e)}
+                                    className="text-sm text-gray-600 font-medium rounded-md px-1 sm:px-2 sm:py-2 bg-black bg-opacity-0 hover:bg-opacity-10  justify-between items-center gap-2 flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 transition-all ease-in"
                                 >
-                                    <ArrowsPointingOutIcon className='w-5 h-5' />
-                                </Link>
+                                    {
+                                        isFullscreen ?
+                                            <ArrowsPointingInIcon className='w-5 h-5' />
+                                            :
+                                            <ArrowsPointingOutIcon className='w-5 h-5' />
+                                    }
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -516,7 +549,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                                 <Link
                                                                     key={item.id}
                                                                     href={`/workspaces/${router?.query?.workspace}/${item.href}`}
-                                                                    className="text-sm text-gray-500 whitespace-nowrap font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                                                                    className="text-sm text-gray-500 whitespace-nowrap font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500  transition-all ease-in"
                                                                 >
                                                                     <item.Icon className='w-4 h-4' />
                                                                     {item.name}
@@ -530,7 +563,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                                     <Link
                                                                         key={item.id}
                                                                         href={`/workspaces/${router?.query?.workspace}/brands/${router?.query?.brand}/${item.href}`}
-                                                                        className="text-sm text-gray-500 whitespace-nowrap font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+                                                                        className="text-sm text-gray-500 whitespace-nowrap font-medium rounded-md px-3 py-2 bg-black bg-opacity-0 hover:bg-opacity-10 flex justify-between items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 transition-all ease-in"
                                                                     >
                                                                         <item.Icon className='w-4 h-4' />
                                                                         {item.name}
