@@ -137,13 +137,13 @@ export default function Index() {
                             {
                                 [1, 2, 3, 4].map(
                                     item =>
-                                        <Link key={item} href={"/workspaces/workspace/brands/brand"} className="py-5 px-5 rounded-md bg-white shadow-md sm:shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid grid-flow-col place-items-center" >
-                                            <img src={'v4.png'} alt="workspace" className="max-sm:justify-self-start w-10 h-10 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100" />
-                                            <div className="justify-self-start max-w-[10rem]">
+                                        <Link key={item} href={"/workspaces/workspace/brands/brand"} className="py-5 px-3 rounded-md bg-white shadow-md sm:shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid grid-flow-col gap-2 place-items-center" >
+                                            <img src={'v4.png'} alt="workspace" className="col-span-1 max-sm:justify-self-start w-10 h-10 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100" />
+                                            <div className="col-span-2 justify-self-center max-w-[8rem] lg:max-w-[10rem]">
                                                 <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate">Nome da Brand asdasdasda</h2>
                                                 <p className="text-xs text-gray-600 group-hover:text-gray-700 truncate">Workspace Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, magnam.</p>
                                             </div>
-                                            <div className="max-w-[3rem] relative w-full h-full">
+                                            <div className="max-w-[3rem] col-span-4 relative w-full h-full">
                                                 <div className="absolute inset-0 h-full grid items-center">
                                                     <p className="text-xs truncate text-center font-medium text-gray-500 group-hover:text-gray-600">Viewer</p>
                                                 </div>
