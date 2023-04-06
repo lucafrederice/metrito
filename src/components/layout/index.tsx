@@ -173,7 +173,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="min-h-full relative  ">
                 <div
                     style={{
-                        height: bgOverlaySize || "36rem"
+                        height: globalThis?.window?.innerWidth < 640 ? bgOverlaySize || "36rem" : ""
                     }}
                     className='absolute -z-10 w-full h-[36rem] md:h-[28rem] bg-gray-50 shadow-md transition-all ease-in duration-300'
                 />
