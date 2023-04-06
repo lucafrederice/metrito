@@ -11,7 +11,7 @@ function classNames(...classes: any) {
 export default function Index() {
 
     const [workspaces, setWorkspaces] = useState([1, 2, 3, 4, 5])
-    const workspaceOverflowCoeff = 65
+    const workspaceOverflowCoeff = 60
     const worskpacesRef = useRef<HTMLDivElement>(null)
     const [needsOverflowWorkspaces, setNeedsOverflowWorkpaces] = useState<boolean>()
     const [isWorkspacesOpen, setIsWorkspacesOpen] = useState(false)
