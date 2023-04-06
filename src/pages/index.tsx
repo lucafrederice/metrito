@@ -100,7 +100,7 @@ export default function Index() {
                             }
                             <div className={`${workspaces.length % 2 === 0 ? "col-span-2" : ""}  grid shadow rounded-md bg-gray-200`}>
                                 <button className={`${workspaces.length % 2 === 0 ? "py-8 md:py-10 flex" : "py-16 md:py-20 grid"} px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 hover:border-gray-600  place-items-center md:flex justify-center items-center gap-2 transition-all ease-in group`} >
-                                    <PlusIcon className="w-6 h-6 md:w-8 md:h-8 text-gray-600 group-hover:text-gray-800" />
+                                    <PlusIcon className="w-6 h-6 md:w-8 md:h-8 text-gray-600 group-hover:text-gray-800 drop-shadow-lg" />
                                     <h2 className="font-semibold text-base  sm:text-lg text-gray-600 group-hover:text-gray-800 text-center drop-shadow-lg">Criar Workspace</h2>
                                 </button>
                             </div>
