@@ -20,7 +20,7 @@ export default function Index() {
     )
 
     useEffect(
-        () => workspaces.length === 1 ? setBgOverlaySize("48rem") : setBgOverlaySize(""),
+        () => workspaces.length > 0 && workspaces.length < 3 ? setBgOverlaySize("48rem") : setBgOverlaySize(""),
         [workspaces]
     )
 
