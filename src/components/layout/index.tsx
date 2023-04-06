@@ -34,6 +34,7 @@ import { Product } from '@prisma/client'
 import Icon from '../logo'
 import Metrito from '../metrito'
 import { useRouter } from 'next/router'
+import { useBgOverlay } from '@/contexts/bgOverlayContext'
 
 const WorkspaceNavigation = [
     { id: 1001, name: 'Overview', href: '', Icon: (props: any) => <ChartBarIcon {...props} /> },
@@ -61,6 +62,8 @@ function classNames(...classes: string[]) {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+
+    const { size: bgOverlaySize } = useBgOverlay()
 
     const router = useRouter()
 
@@ -168,7 +171,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <>
             <div className="min-h-full relative  ">
-                <div className='absolute -z-10 w-full h-[38rem] md:h-[28rem] bg-gray-50 shadow-md' />
+                <div
+                    style={{
+                        height: bgOverlaySize || "36rem"
+                    }}
+                    className='absolute -z-10 w-full h-[36rem] md:h-[28rem] bg-gray-50 shadow-md transition-all ease-in duration-300'
+                />
 
                 <div className='w-full bg-gray-50'>
                     <div className="max-w-7xl mx-auto w-full ">

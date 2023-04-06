@@ -1,4 +1,5 @@
 import MotionWrapper from "@/components/animation/motionWrapper";
+import { useBgOverlay } from "@/contexts/bgOverlayContext";
 import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,13 +11,18 @@ function classNames(...classes: any) {
 
 export default function Index() {
 
+    const { size: bgOverlaySize, setSize: setBgOverlaySize } = useBgOverlay()
+
     const [workspaces, setWorkspaces] = useState([1, 2, 3, 4, 5, 6, 7])
     const needsOverflow = useMemo(
         () => workspaces.length > 4 ? true : false,
         [workspaces]
     )
 
-    console.log(needsOverflow)
+    useEffect(
+        () => workspaces.length === 1 ? setBgOverlaySize("48rem") : setBgOverlaySize(""),
+        [workspaces]
+    )
 
     const [isWorkspacesOpen, setIsWorkspacesOpen] = useState<boolean>(false)
 
@@ -50,7 +56,7 @@ export default function Index() {
                 </div> */}
 
 
-                <div className="grid place-items-center items-start md:grid-flow-col-dense gap-8 md:gap-24 w-full h-full min-h-[70vh] max-w-7xl rounded-xl">
+                <div className="grid place-items-center items-start md:grid-flow-col-dense gap-16 md:gap-24 w-full h-full min-h-[70vh] max-w-7xl rounded-xl">
 
                     <div
                         className={`p-0  w-full md:col-span-2 grid gap-4 md:max-h-full relative transition-all ease-in`}
