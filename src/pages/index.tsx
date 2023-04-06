@@ -63,15 +63,15 @@ export default function Index() {
                 </div> */}
 
 
-                <div className="grid place-items-center items-start md:grid-flow-col-dense gap-10 w-full h-full min-h-[70vh] max-w-7xl rounded-xl">
+                <div className="grid place-items-center items-start md:grid-flow-col-dense gap-24 w-full h-full min-h-[70vh] max-w-7xl rounded-xl">
 
                     <div
                         ref={worskpacesRef}
                         className={`p-0  w-full md:col-span-2 grid gap-4 ${isWorkspacesOpen ? "" : "max-sm:max-h-[70vh] max-sm:overflow-y-hidden"} md:max-h-full relative`}
                     >
                         <div className="grid grid-flow-col-dense gap-8 sm:flex sm:justify-between">
-                            <h1 className="w-4/6 sm:w-full col-span-2 text-lg font-medium text-gray-600 sm:border-b-2">Workspaces que você tem acesso:</h1>
-                            <button className="max-sm:self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700 hover:bg-gray-600 text-gray-50 shadow-lg hover:shadow-xl shadow-gray-300 hover:shadow-gray-300 transition-all ease-in">
+                            <h1 className="w-4/6 sm:w-full col-span-2 text-lg font-medium text-gray-600 sm:border-b-2 sm:pb-2">Workspaces que você tem acesso:</h1>
+                            <button className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700 hover:bg-gray-600 text-gray-50 shadow-lg hover:shadow-xl shadow-gray-300 hover:shadow-gray-300 transition-all ease-in">
                                 <PlusIcon className="h-4 w-4" />
                                 <span className="hidden sm:block">Criar Workspace</span>
                             </button>
@@ -126,9 +126,9 @@ export default function Index() {
                     </div>
 
                     <div
-                        className="p-0 md:p-5  w-full grid gap-4"
+                        className="p-0 w-full grid gap-4"
                     >
-                        <h1 className="font-medium text-gray-600">Brands compartilhadas com você:</h1>
+                        <h1 className="font-medium text-lg text-gray-600 sm:border-b-2 sm:pb-2">Brands compartilhadas com você:</h1>
                         <div
                             className="w-full grid grid-flow-row gap-4"
                         >
