@@ -1,6 +1,6 @@
 import MotionWrapper from "@/components/animation/motionWrapper";
 import { useBgOverlay } from "@/contexts/bgOverlayContext";
-import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon, PlusSmallIcon, StarIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -36,7 +36,7 @@ export default function Index() {
         setIsWorkspacesOpen(state => !state)
     }
 
-    const [sharedBrands, setSharedBrands] = useState([1,2,3,4,5,6,7,8,9,10])
+    const [sharedBrands, setSharedBrands] = useState([1,2,3,4])
 
     return (
         <MotionWrapper>
@@ -93,25 +93,35 @@ export default function Index() {
                             className={`${!needsOverflow ? "" : isWorkspacesOpen ? "max-sm:max-h-full" : "max-sm:max-h-[60vh] max-sm:overflow-y-hidden"}`}
                         >
                             <div
-                                className={`grid grid-cols-2 ${workspaces.length < 3 ? "grid-rows-1" : "grid-rows-2"} gap-4`}
+                                className={`grid grid-cols-2 ${sharedBrands.length === 0 ? "md:grid-cols-3" : ""} ${workspaces.length < 3 ? "grid-rows-1" : "grid-rows-2"} gap-4`}
                             >
                                 {
                                     workspaces.map(
                                         item =>
-                                            <Link key={item} href={'/workspaces/workspace'} className="py-8 md:py-16 px-4 min rounded-md bg-white shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid place-items-center gap-4" >
+                                            <Link key={item} href={'/workspaces/workspace'} className="py-6 md:py-12 px-4 min rounded-md bg-white shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid place-items-center gap-4" >
                                                 <img src={'v4.png'} alt="workspace" className="w-20 h-20 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100 transition-none ease-in" />
-                                                <header className="grid place-items-center text-center">
+                                                <header className="grid place-items-center text-center gap-1">
                                                     <div className={`max-w-[7rem] ${sharedBrands.length === 0 ? "sm:max-w-[12rem]" : "sm:max-w-[10rem]"}`}>
-                                                        <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate">V4 Company Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, dicta?</h2>
+                                                        <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate">V4 Company</h2>
                                                     </div>
+
+                                                    <StarIcon className="h-4 w-4 mt-6 sm:mt-8" />
+
                                                     <div className={`max-w-[7rem] ${sharedBrands.length === 0 ? "sm:max-w-[12rem] lg:max-w-[14rem]" : "sm:max-w-[10rem] lg:max-w-[12rem]"} `}>
-                                                        <p className="text-xs text-gray-600 group-hover:text-gray-700 truncate">Proprietário Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, animi? </p>
+                                                        <p className="text-xs text-gray-600 group-hover:text-gray-700 truncate">Proprietário</p>
                                                     </div>
                                                 </header>
                                             </Link>
                                     )
                                 }
-                                <div className={`${workspaces.length % 2 === 0 ? "col-span-2" : ""}  grid shadow rounded-md bg-gray-200`}>
+                                <div className={`${workspaces.length === 0 ?
+                                    "col-span-2"
+                                    : sharedBrands.length > 0 ?
+                                        workspaces.length % 2 === 0 ?
+                                            "col-span-2" : ""
+                                        : workspaces.length % 3 === 0 ?
+                                            "col-span-3" : ""
+                                    } ${workspaces.length % 2 === 0 ? "max-md:col-span-2" : ""}  grid shadow rounded-md bg-gray-200`}>
                                     <button key={"add-workspace-grid"} onClick={() => setWorkspaces(prev => [...prev, prev[-1] + 1])} className={`${workspaces.length % 2 === 0 ? "py-8 md:py-10 flex" : "py-16 md:py-20 grid"} px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 hover:border-gray-600  place-items-center md:flex justify-center items-center gap-2 transition-all ease-in group`} >
                                         <PlusIcon className="w-6 h-6 md:w-8 md:h-8 text-gray-600 group-hover:text-gray-800 drop-shadow-lg" />
                                         <h2 className="font-semibold text-base  sm:text-lg text-gray-600 group-hover:text-gray-800 text-center drop-shadow-lg">
