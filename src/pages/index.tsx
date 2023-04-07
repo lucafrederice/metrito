@@ -1,6 +1,8 @@
 import MotionWrapper from "@/components/animation/motionWrapper";
+import WorkspaceCard from "@/components/workspace/card";
 import { useBgOverlay } from "@/contexts/bgOverlayContext";
-import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon, PlusSmallIcon, StarIcon } from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/20/solid";
+import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -9,8 +11,119 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function Index() {
+const sharedBrands = [
+    {
+        id: 1,
+        name: "Ifood",
+        role: "admin",
+        workspace: "V4 Company",
+        src: "/v4.png"
+    },
+    {
+        id: 2,
+        name: "ge",
+        role: "viewer",
+        workspace: "Globo",
+        src: "/globo.svg"
+    },
+    {
+        id: 3,
+        name: "Transformando Palavras em Dinheiro",
+        role: "viewer",
+        workspace: "onovomercado",
+        src: "/onovomercado.png"
+    },
+    {
+        id: 4,
+        name: "g1",
+        role: "admin",
+        workspace: "Globo",
+        src: "/globo.svg"
+    },
+    {
+        id: 5,
+        name: "Disney",
+        role: "editor",
+        workspace: "V4 Company",
+        src: "/v4.png"
+    },
+]
 
+const workspaces: {
+    id: number,
+    name: string,
+    role: "owner" | "manager" | "member",
+    src: string
+}[] = [
+        {
+            id: 1,
+            name: "V4 Company",
+            role: "owner",
+            src: "/v4.png",
+        },
+        {
+            id: 2,
+            name: "Ifood",
+            role: "member",
+            src: "/ifood.png"
+        },
+        {
+            id: 3,
+            name: "Globo",
+            role: "manager",
+            src: "/globo.svg"
+        },
+        {
+            id: 4,
+            name: "Black Rat",
+            role: "owner",
+            src: "/blackrat.png"
+        },
+        {
+            id: 5,
+            name: "G4 Educação",
+            role: "owner",
+            src: "/g4.png"
+        },
+        {
+            id: 6,
+            name: "onovomercado",
+            role: "manager",
+            src: "/onovomercado.png"
+        },
+        {
+            id: 7,
+            name: "Tendency",
+            role: "manager",
+            src: "/tendency.png"
+        },
+        {
+            id: 8,
+            name: "Vercel",
+            role: "member",
+            src: "/vercel.svg"
+        },
+        {
+            id: 9,
+            name: "Facebook",
+            role: "manager",
+            src: "/facebook.png"
+        },
+        {
+            id: 10,
+            name: "Google",
+            role: "member",
+            src: "/google.png"
+        },
+    ]
+
+const data = {
+    workspaces,
+    sharedBrands,
+}
+
+
+export default function Index() {
     const { size: bgOverlaySize, setSize: setBgOverlaySize } = useBgOverlay()
 
     const [workspaces, setWorkspaces] = useState([1, 2, 3, 4, 5, 6, 7])
@@ -18,6 +131,10 @@ export default function Index() {
         () => workspaces.length > 4 ? true : false,
         [workspaces]
     )
+
+    const addW = () => {
+        setWorkspaces(prev => prev[-1] + 1 > data.workspaces.length ? [...prev] : [...prev, prev[-1] + 1])
+    }
 
     useEffect(
         () => {
@@ -36,7 +153,7 @@ export default function Index() {
         setIsWorkspacesOpen(state => !state)
     }
 
-    const [sharedBrands, setSharedBrands] = useState([1,2,3,4])
+    const [sharedBrands, setSharedBrands] = useState([1, 2, 3, 4])
 
     return (
         <MotionWrapper>
@@ -81,7 +198,7 @@ export default function Index() {
                                     className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
                                     <MinusIcon className="h-4 w-4" />
                                 </button>
-                                <button onClick={() => setWorkspaces(prev => [...prev, prev[-1] + 1])} className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
+                                <button onClick={() => addW()} className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
                                     <PlusIcon className="h-4 w-4" />
                                     <span className="hidden sm:block">Criar Workspace</span>
                                 </button>
@@ -97,23 +214,11 @@ export default function Index() {
                             >
                                 {
                                     workspaces.map(
-                                        item =>
-                                            <Link key={item} href={'/workspaces/workspace'} className="py-6 md:py-12 px-4 min rounded-md bg-white shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid place-items-center gap-4" >
-                                                <img src={'v4.png'} alt="workspace" className="w-20 h-20 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100 transition-none ease-in" />
-                                                <header className="grid place-items-center text-center gap-1">
-                                                    <div className={`max-w-[7rem] ${sharedBrands.length === 0 ? "sm:max-w-[12rem]" : "sm:max-w-[10rem]"}`}>
-                                                        <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate">V4 Company</h2>
-                                                    </div>
-
-                                                    <StarIcon className="h-4 w-4 mt-6 sm:mt-8" />
-
-                                                    <div className={`max-w-[7rem] ${sharedBrands.length === 0 ? "sm:max-w-[12rem] lg:max-w-[14rem]" : "sm:max-w-[10rem] lg:max-w-[12rem]"} `}>
-                                                        <p className="text-xs text-gray-600 group-hover:text-gray-700 truncate">Proprietário</p>
-                                                    </div>
-                                                </header>
-                                            </Link>
+                                        (item, i) =>
+                                            <WorkspaceCard key={data.workspaces[i].id} {...{ id: data.workspaces[i].id, name: data.workspaces[i].name, src: data.workspaces[i].src, role: data.workspaces[i].role, shareBrandsLength: sharedBrands.length }} />
                                     )
                                 }
+
                                 <div className={`${workspaces.length === 0 ?
                                     "col-span-2"
                                     : sharedBrands.length > 0 ?
@@ -122,7 +227,7 @@ export default function Index() {
                                         : workspaces.length % 3 === 0 ?
                                             "col-span-3" : ""
                                     } ${workspaces.length % 2 === 0 ? "max-md:col-span-2" : ""}  grid shadow rounded-md bg-gray-200`}>
-                                    <button key={"add-workspace-grid"} onClick={() => setWorkspaces(prev => [...prev, prev[-1] + 1])} className={`${workspaces.length % 2 === 0 ? "py-8 md:py-10 flex" : "py-16 md:py-20 grid"} px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 hover:border-gray-600  place-items-center md:flex justify-center items-center gap-2 transition-all ease-in group`} >
+                                    <button key={"add-workspace-grid"} onClick={() => addW()} className={`${workspaces.length % 2 === 0 ? "py-8 md:py-10 flex" : "py-16 md:py-20 grid"} px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 hover:border-gray-600  place-items-center md:flex justify-center items-center gap-2 transition-all ease-in group`} >
                                         <PlusIcon className="w-6 h-6 md:w-8 md:h-8 text-gray-600 group-hover:text-gray-800 drop-shadow-lg" />
                                         <h2 className="font-semibold text-base  sm:text-lg text-gray-600 group-hover:text-gray-800 text-center drop-shadow-lg">
                                             {workspaces.length > 0 ? "Criar Workspaces" : "Crie sua primeira workspace"}
