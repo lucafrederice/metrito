@@ -126,14 +126,14 @@ const data = {
 export default function Index() {
     const { size: bgOverlaySize, setSize: setBgOverlaySize } = useBgOverlay()
 
-    const [workspaces, setWorkspaces] = useState([1, 2, 3, 4, 5, 6, 7])
+    const [workspaces, setWorkspaces] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     const needsOverflow = useMemo(
         () => workspaces.length > 4 ? true : false,
         [workspaces]
     )
 
     const addW = () => {
-        setWorkspaces(prev => prev[-1] + 1 > data.workspaces.length ? [...prev] : [...prev, prev[-1] + 1])
+        setWorkspaces(prev => prev.length >= data.workspaces.length ? prev : [...prev, prev[1]])
     }
 
     useEffect(

@@ -104,24 +104,25 @@ export default function WorkspaceCard({ id, name, role, src, shareBrandsLength }
             <Link
                 href={`/workspaces/${id}`}
                 style={{
-                    "--tw-shadow-color": `hsl(${h}deg, ${s}%, ${70}%, 0.2)`,
+                    "--tw-shadow-color": `hsl(${h}deg, ${s}%, ${20}%, 0.3)`,
                     "--tw-shadow": "var(--tw-shadow-colored)",
                 } as React.CSSProperties}
-                className="py-6 md:py-12 px-4 min rounded-md bg-white shadow-lg hover:shadow-xl transition-all ease-in group grid place-items-center gap-4 md:gap-5 relative"
+                className="py-6 md:py-12 px-4 min rounded-md bg-white shadow-lg hover:shadow-2xl transition-all ease-in group grid place-items-center gap-4 md:gap-5 relative"
             >
                 <div
                     style={{
-                        borderColor: `hsl(${h}deg,${s > 70 ? 70 : s}%,${50}%, 0.5)`,
-                        backgroundImage: `radial-gradient(farthest-corner at 50px 50px, hsl(${h}deg, ${s > 50 ? 50 : s}%, ${l > 80 ? 60 : l < 70 ? 70 : l}%, 0.7), hsl(${h}deg, ${s > 50 ? 50 : s}%, ${l > 80 ? 60 : l < 70 ? 70 : l}%, 0.9))`,
+                        borderColor: `hsl(${h}deg,${s}%,${l}%, 0.5)`,
+                        // backgroundColor: `hsl(${h}deg,${s}%,${l > 50 ? 0 : 100}%, 1)`
+                        // backgroundImage: `radial-gradient(farthest-corner at 50px 50px, hsl(${h}deg, ${s}%, ${l}%, 1), hsl(${h}deg, ${s}%, ${l}%, 1))`,
                     }}
-                    className="absolute inset-0 rounded-md border-2"
+                    className="absolute inset-0 rounded-md hover:border-2"
                 />
-                <img ref={imageRef} src={src} alt="workspace" className="w-20 h-20 md:w-32 md:h-32 rounded-md object-contain drop-shadow-lg opacity-1 saturate-[1] group-hover:opacity-100 group-hover:saturate-100 transition-none ease-in" />
+                <img ref={imageRef} src={src} alt="workspace" className="w-20 h-20 md:w-32 md:h-32 rounded-md object-contain opacity-1 saturate-[1] group-hover:opacity-100 group-hover:saturate-100 transition-none ease-in" />
                 <header className="z-10 grid place-items-center text-center gap-5">
                     <div className={`max-w-[7rem] ${shareBrandsLength === 0 ? "sm:max-w-[12rem]" : "sm:max-w-[10rem]"}`}>
                         <h2 className="font-semibold text-md md:text-xl text-gray-700 group-hover:text-gray-900 truncate"
                             style={{
-                                color: `hsl(${h}deg, ${s}%, 95%, 1)`
+                                color: `hsl(${h}deg, ${s}%, ${l}%, 1)`
                             }}
                         >
                             {name}
