@@ -301,7 +301,7 @@ export default function Index() {
 
                     </div>
                 </div>
-                <div ref={constraintsRef} className="fixed inset-0 pointer-events-auto">
+                <div ref={constraintsRef} className="fixed inset-0 pointer-events-none">
                     
                 </div>
 <motion.div drag dragElastic={0.1} dragMomentum={false} dragConstraints={constraintsRef} className="bg-black/75 backdrop-blur-[2px] w-fit px-6 py-4 rounded-md border border-black shadow-xl shadow-black/30 hover:shadow-xl hover:shadow-black/50 transition-shadow ease-in text-white">
