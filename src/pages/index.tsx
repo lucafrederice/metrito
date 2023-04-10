@@ -139,6 +139,10 @@ export default function Index() {
         setWorkspaces(prev => prev.length >= data.workspaces.length ? prev : [...prev, prev[1]])
     }
 
+    const handleAdd = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+    }
+
     useEffect(
         () => {
             if (globalThis?.window?.innerWidth < 640)
@@ -177,7 +181,7 @@ export default function Index() {
                                 <div className="grid grid-flow-col-dense gap-8 sm:flex sm:justify-between">
                                     <h1 className="w-4/6 sm:w-full col-span-2 text-lg font-medium text-gray-600 sm:border-b-2 sm:pb-2">Workspaces que você tem acesso:</h1>
 
-                                    <button onClick={() => addW()} className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
+                                    <button onClick={(e) => handleAdd(e)} className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
                                         <PlusIcon className="h-4 w-4" />
                                         <span className="hidden sm:block">Criar Workspace</span>
                                     </button>
@@ -206,7 +210,7 @@ export default function Index() {
                                             : workspaces.length % 3 === 0 ?
                                                 "md:colcol-span-3" : ""
                                         } ${workspaces.length % 2 === 0 ? "max-md:col-span-2" : ""}  grid shadow rounded-md backdrop-blur-md transition-all ease-in`}>
-                                        <button key={"add-workspace-grid"} onClick={() => addW()} className={`${workspaces.length % 2 === 0 ? "py-8 md:py-10 flex" : "py-16 md:py-20 grid"} px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 hover:border-gray-600  place-items-center md:flex justify-center items-center gap-2 transition-all ease-in group`} >
+                                        <button key={"add-workspace-grid"} onClick={(e) => handleAdd(e)} className={`${workspaces.length % 2 === 0 ? "py-8 md:py-10 flex" : "py-16 md:py-20 grid"} px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 hover:border-gray-600  place-items-center md:flex justify-center items-center gap-2 transition-all ease-in group`} >
                                             <PlusIcon className="w-6 h-6 md:w-8 md:h-8 text-gray-600 group-hover:text-gray-800 drop-shadow-lg" />
                                             <h2 className="font-semibold text-base  sm:text-lg text-gray-600 group-hover:text-gray-800 text-center drop-shadow-lg">
                                                 {workspaces.length > 0 ? "Criar Workspaces" : "Crie sua primeira workspace"}
