@@ -1,8 +1,8 @@
 import MotionWrapper from "@/components/animation/motionWrapper";
 import WorkspaceCard from "@/components/workspace/card";
 import { useBgOverlay } from "@/contexts/bgOverlayContext";
-import { StarIcon } from "@heroicons/react/20/solid";
-import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
+import { RectangleGroupIcon, StarIcon } from "@heroicons/react/20/solid";
+import { ChevronDownIcon, ChevronUpIcon, EllipsisHorizontalIcon, EllipsisVerticalIcon, MinusIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -193,15 +193,7 @@ export default function Index() {
                                 workspaces.length > 0 &&
                                 <div className="grid grid-flow-col-dense gap-8 sm:flex sm:justify-between">
                                     <h1 className="w-4/6 sm:w-full col-span-2 text-lg font-medium text-gray-600 sm:border-b-2 sm:pb-2">Workspaces que você tem acesso:</h1>
-                                    <button
-                                        onClick={() => setWorkspaces(prev => {
-                                            const array = structuredClone(prev)
-                                            array.pop()
-                                            return [...array]
-                                        })}
-                                        className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
-                                        <MinusIcon className="h-4 w-4" />
-                                    </button>
+
                                     <button onClick={() => addW()} className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
                                         <PlusIcon className="h-4 w-4" />
                                         <span className="hidden sm:block">Criar Workspace</span>
@@ -212,7 +204,6 @@ export default function Index() {
 
                             <div
                                 className={`${!needsOverflow ? "" : isWorkspacesOpen ? "max-sm:max-h-full" : "max-sm:max-h-[60vh] max-sm:overflow-y-hidden"}`}
-style={{overflowX: "visible"}}
                             >
                                 <div
                                     className={`grid grid-cols-2 ${sharedBrands.length === 0 ? "grid-cols-2 md:grid-cols-3" : ""} ${workspaces.length < 3 ? "grid-rows-1" : "grid-rows-2"} gap-4`}
@@ -303,11 +294,34 @@ style={{overflowX: "visible"}}
                     </div>
                 </div>
                 <div ref={constraintsRef} className="fixed inset-0 pointer-events-none">
-                    
+
                 </div>
-<motion.div drag dragElastic={0.1} dragMomentum={false} dragConstraints={constraintsRef} className=" fixed top-0 left-0 bg-black/75 backdrop-blur-[2px] w-fit px-6 py-4 rounded-md border border-black shadow-xl shadow-black/30 hover:shadow-xl hover:shadow-black/50 transition-shadow ease-in text-white">
-                        <button onClick={() => setSharedBrands(prev => prev?.length > 0 ? [] : [1, 2, 3, 4])} >sharedBrands</button>
-                    </motion.div>
+                <motion.div drag dragElastic={0.1} dragMomentum={false} dragConstraints={constraintsRef} className=" fixed bottom-2 inset-x-2 bg-black/75 backdrop-blur-[2px] w-fit px-3 py-2 rounded-md border border-black shadow-xl shadow-black/30 hover:shadow-xl hover:shadow-black/50 transition-shadow ease-in text-white grid gap-2 grid-flow-row place-items-center  cursor-grab hover:cursor-grabbing">
+                    <div className="place-items-center pointer-events-none mx-auto w-14 h-[2px] bg-white rounded">
+                        {/* <EllipsisHorizontalIcon className="pointer-events-none" /> */}
+                    </div>
+                    <div className="flex">
+                        <button onClick={() => setSharedBrands(prev => prev?.length > 0 ? [] : [1, 2, 3, 4])}
+                            className="px-4 py-2 rounded-md hover:bg-white/10"
+                        >
+                            <RectangleGroupIcon className="h-4 w-4"/>
+                        </button>
+                        <button
+                            onClick={() => addW()}
+                            className="px-4 py-2 rounded-md hover:bg-white/10">
+                            <PlusIcon className="h-4 w-4" />
+                        </button>
+                        <button
+                            onClick={() => setWorkspaces(prev => {
+                                const array = structuredClone(prev)
+                                array.pop()
+                                return [...array]
+                            })}
+                            className="px-4 py-2 rounded-md hover:bg-white/10">
+                            <MinusIcon className="h-4 w-4" />
+                        </button>
+                    </div>
+                </motion.div>
             </div>
         </MotionWrapper>
     )
