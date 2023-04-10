@@ -125,7 +125,6 @@ const data = {
     sharedBrands,
 }
 
-
 export default function Index() {
     const { size: bgOverlaySize, setSize: setBgOverlaySize } = useBgOverlay()
 
@@ -208,7 +207,7 @@ export default function Index() {
                                             workspaces.length % 2 === 0 ?
                                                 "md:col-span-2" : ""
                                             : workspaces.length % 3 === 0 ?
-                                                "md:colcol-span-3" : ""
+                                                "md:col-span-3" : ""
                                         } ${workspaces.length % 2 === 0 ? "max-md:col-span-2" : ""}  grid shadow rounded-md backdrop-blur-md transition-all ease-in`}>
                                         <button key={"add-workspace-grid"} onClick={(e) => handleAdd(e)} className={`${workspaces.length % 2 === 0 ? "py-8 md:py-10 flex" : "py-16 md:py-20 grid"} px-5 min rounded-md shadow-inner shadow-gray-300 border-2 border-dashed border-gray-400 hover:border-gray-600  place-items-center md:flex justify-center items-center gap-2 transition-all ease-in group`} >
                                             <PlusIcon className="w-6 h-6 md:w-8 md:h-8 text-gray-600 group-hover:text-gray-800 drop-shadow-lg" />
@@ -287,14 +286,16 @@ export default function Index() {
                     </div>
                     <div className="flex">
                         <button onClick={() => setSharedBrands(prev => prev?.length > 0 ? [] : [1, 2, 3, 4])}
-                            className="px-4 py-2 rounded-md hover:bg-white/10"
+                            className="px-4 py-3 rounded-md hover:bg-white/10 relative"
                         >
-                            <RectangleGroupIcon className="h-4 w-4" />
-                        </button>
-                        <button
-                            onClick={() => addW()}
-                            className="px-4 py-2 rounded-md hover:bg-white/10">
-                            <PlusIcon className="h-4 w-4" />
+                            <RectangleGroupIcon className={`h-4 w-4 ${sharedBrands.length > 0 ? "text-white/75" : "text-white"}`} />
+                            {
+                                sharedBrands.length > 0 && (
+                                    <div className="absolute inset-0 grid place-items-center">
+                                        <div className="mx-auto -rotate-[20deg] h-[1px] w-7 bg-white" />
+                                    </div>
+                                )
+                            }
                         </button>
                         <button
                             onClick={() => setWorkspaces(prev => {
@@ -302,8 +303,13 @@ export default function Index() {
                                 array.pop()
                                 return [...array]
                             })}
-                            className="px-4 py-2 rounded-md hover:bg-white/10">
+                            className="px-4 py-3 rounded-md hover:bg-white/10">
                             <MinusIcon className="h-4 w-4" />
+                        </button>
+                        <button
+                            onClick={() => addW()}
+                            className="px-4 py-3 rounded-md hover:bg-white/10">
+                            <PlusIcon className="h-4 w-4" />
                         </button>
                     </div>
                 </motion.div>
