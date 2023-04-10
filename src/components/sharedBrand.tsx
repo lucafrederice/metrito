@@ -11,7 +11,7 @@ export default function SharedBrand({ id, name, role, src, workspaceId, workspac
                 "--tw-shadow-color": `hsl(${h}deg, ${s}%, ${30}%, 0.1)`,
                 "--tw-shadow": "var(--tw-shadow-colored)",
             } as React.CSSProperties}
-            className="py-5 px-3 rounded-md bg-white shadow-lg hover:shadow-xl transition-all ease-in group grid grid-cols-5 gap-4 place-items-center relative"
+            className="py-5 px-5 md:px-3 rounded-md bg-white shadow-lg hover:shadow-xl transition-all ease-in group grid grid-cols-5 gap-4 place-items-center relative"
         >
             <div
                 style={{
