@@ -8,7 +8,7 @@ export default function SharedBrand({ id, name, role, src, workspaceId, workspac
     return (
         <Link key={id} href={`/workspaces/${workspaceId}/brands/${id}`}
             style={{
-                "--tw-shadow-color": `hsl(${h}deg, ${s}%, ${30}%, 0.15)`,
+                "--tw-shadow-color": `hsl(${h}deg, ${s}%, ${30}%, 0.1)`,
                 "--tw-shadow": "var(--tw-shadow-colored)",
             } as React.CSSProperties}
             className="py-5 px-3 rounded-md bg-white shadow-lg hover:shadow-xl transition-all ease-in group grid grid-cols-5 gap-4 place-items-center relative"
