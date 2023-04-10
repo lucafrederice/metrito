@@ -4,18 +4,16 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export default function WorkspaceCard({ id, name, role, src, shareBrandsLength }: { id: number, name: string, role: "owner" | "manager" | "member", src: string, shareBrandsLength: number }) {
-    const imageRef = useRef<HTMLImageElement>(null)
-
     const [h, s, l] = useColorThief(src)
 
     return (
         <Link
             href={`/workspaces/${id}`}
             style={{
-                "--tw-shadow-color": `hsl(${h}deg, ${s}%, ${20}%, 0.3)`,
+                "--tw-shadow-color": `hsl(${h}deg, ${s}%, ${30}%, 0.15)`,
                 "--tw-shadow": "var(--tw-shadow-colored)",
             } as React.CSSProperties}
-            className="group py-6 md:py-12 px-4 min rounded-md bg-white shadow-lg hover:shadow-2xl transition-all ease-in group grid place-items-center gap-4 md:gap-5 relative"
+            className="group py-6 md:py-12 px-4 min rounded-md bg-white shadow-lg hover:shadow-xl transition-all ease-in group grid place-items-center gap-4 md:gap-5 relative"
         >
             <div
                 style={{
@@ -25,7 +23,7 @@ export default function WorkspaceCard({ id, name, role, src, shareBrandsLength }
                 } as React.CSSProperties}
                 className="absolute inset-0 rounded-md group-hover:border-2"
             />
-            <img ref={imageRef} src={src} alt="workspace" className="w-20 h-20 md:w-32 md:h-32 rounded-md object-contain opacity-90 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100 transition-none ease-in" />
+            <img src={src} alt="workspace" className="w-20 h-20 md:w-32 md:h-32 rounded-md object-contain opacity-90 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100 transition-none ease-in" />
             <header className="grid place-items-center text-center gap-5">
                 <div className={`max-w-[7rem] ${shareBrandsLength === 0 ? "sm:max-w-[12rem]" : "sm:max-w-[10rem]"}`}>
                     <h2 className="font-semibold text-md md:text-xl text-gray-700 group-hover:text-gray-900 truncate"

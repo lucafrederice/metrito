@@ -1,5 +1,6 @@
 import MotionWrapper from "@/components/animation/motionWrapper";
 import TwoCols from "@/components/layout/grids/twoCols";
+import SharedBrand from "@/components/sharedBrand";
 import Welcome from "@/components/user/welcome";
 import WorkspaceCard from "@/components/workspace/card";
 import WorkspacesList from "@/components/workspace/list";
@@ -209,18 +210,7 @@ export default function Index() {
                                     {
                                         sharedBrands.map(
                                             (item, i) =>
-                                                <Link key={data.sharedBrands[i].id} href={`/workspaces/${data.sharedBrands[i].workspaceId}/brands/${data.sharedBrands[i].id}`} className="py-5 px-3 rounded-md bg-white shadow-md sm:shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid grid-cols-5 gap-4 place-items-center" >
-                                                    <img src={data.sharedBrands[i].src} alt="workspace" className="max-sm:justify-self-start w-10 h-10 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100" />
-                                                    <div className="col-span-3 justify-self-start text-left max-w-[12rem] md:max-w-[8rem] lg:max-w-[12rem]">
-                                                        <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate">{data.sharedBrands[i].name}</h2>
-                                                        <p className="text-xs text-gray-600 group-hover:text-gray-700 truncate">{data.sharedBrands[i].workspaceName}</p>
-                                                    </div>
-                                                    <div className="max-w-[3rem] col-span-1 relative w-full h-full">
-                                                        <div className="absolute inset-0 h-full grid items-center">
-                                                            <p className="text-xs truncate text-center font-medium text-gray-400 group-hover:text-gray-500">{data.sharedBrands[i].role}</p>
-                                                        </div>
-                                                    </div>
-                                                </Link>
+                                                <SharedBrand key={data.sharedBrands[i].id} {...{ id: data.sharedBrands[i].id, name: data.sharedBrands[i].name, role: data.sharedBrands[i].role, src: data.sharedBrands[i].src, workspaceId: data.sharedBrands[i].workspaceId, workspaceName: data.sharedBrands[i].workspaceName }} />
                                         )
                                     }
                                 </div>
