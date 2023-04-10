@@ -1,4 +1,6 @@
 import MotionWrapper from "@/components/animation/motionWrapper";
+import TwoCols from "@/components/layout/grids/twoCols";
+import Welcome from "@/components/user/welcome";
 import WorkspaceCard from "@/components/workspace/card";
 import { useBgOverlay } from "@/contexts/bgOverlayContext";
 import { RectangleGroupIcon, StarIcon } from "@heroicons/react/20/solid";
@@ -163,28 +165,9 @@ export default function Index() {
             <div className="relative">
                 <div key="index" className="min-h-screen px-4 py-6 md:py-10 w-full grid place-items-center auto-rows-min gap-14">
 
-                    <div className="w-full max-w-7xl">
-                        <div className="max-w-lg">
-                            <div className="flex gap-5">
-                                <div className="flex-shrink-0">
-                                    <img className="mx-auto h-16 w-16 rounded-full" src={"https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"} alt="" />
-                                </div>
-                                <div className="grid place-items-center sm:text-left">
-                                    <p className="text-sm font-medium text-gray-600 truncate whitespace-pre-line max-w-[13rem] sm:max-w-sm">Bem vindo(a) de volta,
-                                        <br />
-                                        <span className="text-xl font-bold text-gray-900 sm:text-2xl truncate">Alice Oliveira Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, animi dolorem expedita aliquid repellendus architecto ea alias delectus voluptas quas, aspernatur quidem minima optio quaerat eos consectetur impedit tempora. Sit obcaecati reiciendis iusto odit officiis tenetur! Non nesciunt ipsa saepe ducimus sint magni, fuga molestiae blanditiis rerum maiores similique dolor!</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Welcome />
 
-                    {/* <div className="text-left w-full max-w-7xl">
-                    <h1 className="text-lg font-semibold text-gray-500">Nome da página</h1>
-                </div> */}
-
-
-                    <div className="grid place-items-center items-start md:grid-flow-col-dense gap-16 md:gap-24 w-full h-full min-h-[70vh] max-w-7xl rounded-xl">
+                    <TwoCols>
 
                         <div
                             className={`p-0  w-full md:col-span-2 grid gap-4 md:max-h-full relative transition-all ease-in`}
@@ -258,7 +241,6 @@ export default function Index() {
                             </div>
                         </div>
 
-
                         {
                             sharedBrands.length > 0 &&
                             <div
@@ -291,11 +273,10 @@ export default function Index() {
                             </div>
                         }
 
-                    </div>
+                    </TwoCols>
                 </div>
-                <div ref={constraintsRef} className="fixed inset-0 pointer-events-none">
 
-                </div>
+                <div ref={constraintsRef} className="fixed inset-0 pointer-events-none" />
                 <motion.div drag dragElastic={0.1} dragMomentum={false} dragConstraints={constraintsRef} className=" fixed bottom-2 inset-x-2 bg-black/75 backdrop-blur-[2px] w-fit px-3 py-2 rounded-md border border-black shadow-xl shadow-black/30 hover:shadow-xl hover:shadow-black/50 transition-shadow ease-in text-white grid gap-2 grid-flow-row place-items-center  cursor-grab hover:cursor-grabbing">
                     <div className="place-items-center pointer-events-none mx-auto w-14 h-[2px] bg-white rounded">
                         {/* <EllipsisHorizontalIcon className="pointer-events-none" /> */}
@@ -304,7 +285,7 @@ export default function Index() {
                         <button onClick={() => setSharedBrands(prev => prev?.length > 0 ? [] : [1, 2, 3, 4])}
                             className="px-4 py-2 rounded-md hover:bg-white/10"
                         >
-                            <RectangleGroupIcon className="h-4 w-4"/>
+                            <RectangleGroupIcon className="h-4 w-4" />
                         </button>
                         <button
                             onClick={() => addW()}

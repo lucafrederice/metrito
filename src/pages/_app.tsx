@@ -1,6 +1,6 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import Layout from '@/components/layout'
+import Layout from '@/components/layout/wrapper'
 import AnimationWrapper from '@/components/animation/animateWrapper'
 import { BgOverlayProvider } from '@/contexts/bgOverlayContext'
 
