@@ -28,18 +28,18 @@ export default function List({ workspaces, handleAdd, sharedBrands, data, classN
 
     return (
         <div
-            className={`p-0  w-full md:col-span-2 grid gap-4 md:max-h-full relative transition-all ease-in ${className}`}
+            className={`p-0 w-full md:col-span-3 grid gap-4 md:max-h-full relative transition-all ease-in ${className}`}
         >
             {
                 workspaces.length > 0 &&
-                <div className={`grid grid-flow-col-dense gap-8 sm:flex sm:justify-between ${inlinePadding}`}>
+                <header className={`grid grid-flow-col-dense gap-8 sm:flex sm:justify-between ${inlinePadding}`}>
                     <h1 className="w-4/6 sm:w-full col-span-2 text-lg font-medium text-gray-600 sm:border-b-2 sm:pb-2">Workspaces que você tem acesso:</h1>
 
                     <button onClick={(e) => handleAdd(e)} className="self-center justify-self-end flex flex-shrink-0 gap-2 items-center w-fit sm:w-auto h-fit text-sm font-medium px-3 sm:px-4 py-3 sm:py-2 rounded-md bg-gray-700  text-gray-50 shadow-lg shadow-gray-300 hover:shadow-xl hover:bg-gray-600 hover:shadow-gray-300 transition-all ease-in">
                         <PlusIcon className="h-4 w-4" />
                         <span className="hidden sm:block">Criar Workspace</span>
                     </button>
-                </div>
+                </header>
             }
 
 

@@ -19,7 +19,8 @@ export type SharedBrandsType = {
     id: number,
     name: string,
     role: "admin" | "editor" | "viewer",
-    workspace: string,
+    workspaceName: string,
+    workspaceId: number,
     src: string
 }[]
 
@@ -36,35 +37,40 @@ const sharedBrands:
             id: 1,
             name: "Ifood",
             role: "admin",
-            workspace: "V4 Company",
+            workspaceName: "V4 Company",
+            workspaceId: 1,
             src: "/v4.png"
         },
         {
             id: 2,
             name: "ge",
             role: "viewer",
-            workspace: "Globo",
+            workspaceName: "Globo",
+            workspaceId: 3,
             src: "/globo.svg"
         },
         {
             id: 3,
             name: "Transformando Palavras em Dinheiro",
             role: "viewer",
-            workspace: "onovomercado",
+            workspaceName: "onovomercado",
+            workspaceId: 6,
             src: "/onovomercado.png"
         },
         {
             id: 4,
             name: "g1",
             role: "admin",
-            workspace: "Globo",
+            workspaceName: "Globo",
+            workspaceId: 3,
             src: "/globo.svg"
         },
         {
             id: 5,
             name: "Disney",
             role: "editor",
-            workspace: "V4 Company",
+            workspaceName: "V4 Company",
+            workspaceId: 1,
             src: "/v4.png"
         },
     ]
@@ -176,7 +182,7 @@ export default function Index() {
 
     const constraintsRef = useRef<HTMLDivElement>(null)
 
-    const inlinePadding = "px-4"
+    const inlinePadding = "max-sm:px-4"
 
     return (
         <MotionWrapper>
@@ -192,7 +198,7 @@ export default function Index() {
                         {
                             sharedBrands.length > 0 &&
                             <div
-                                className="p-0 justify-self-stretch md:justify-self-end w-full grid gap-4"
+                                className={`p-0 justify-self-stretch md:justify-self-end w-full grid gap-4 ${inlinePadding}`}
                             >
                                 <header className="max-w-[13rem] lg:max-w-xs">
                                     <h1 className="font-medium text-lg text-gray-600 sm:border-b-2 sm:pb-2 whitespace-pre-line truncate">Projetos compartilhados com você:</h1>
@@ -202,16 +208,16 @@ export default function Index() {
                                 >
                                     {
                                         sharedBrands.map(
-                                            item =>
-                                                <Link key={item} href={"/workspaces/workspace/brands/brand"} className="py-5 px-3 rounded-md bg-white shadow-md sm:shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid grid-flow-col gap-2 place-items-center" >
-                                                    <img src={'v4.png'} alt="workspace" className="col-span-1 max-sm:justify-self-start w-10 h-10 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100" />
-                                                    <div className="col-span-2 justify-self-center max-w-[12rem] md:max-w-[8rem] lg:max-w-[11rem]">
-                                                        <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate">Nome da Brand asdasdasda</h2>
-                                                        <p className="text-xs text-gray-600 group-hover:text-gray-700 truncate">Workspace Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, magnam.</p>
+                                            (item, i) =>
+                                                <Link key={data.sharedBrands[i].id} href={`/workspaces/${data.sharedBrands[i].workspaceId}/brands/${data.sharedBrands[i].id}`} className="py-5 px-3 rounded-md bg-white shadow-md sm:shadow-xl hover:shadow-2xl transition-all ease-in group border-2 hover:border-gray-400 grid grid-cols-5 gap-4 place-items-center" >
+                                                    <img src={data.sharedBrands[i].src} alt="workspace" className="max-sm:justify-self-start w-10 h-10 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100" />
+                                                    <div className="col-span-3 justify-self-start text-left max-w-[12rem] md:max-w-[8rem] lg:max-w-[12rem]">
+                                                        <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate">{data.sharedBrands[i].name}</h2>
+                                                        <p className="text-xs text-gray-600 group-hover:text-gray-700 truncate">{data.sharedBrands[i].workspaceName}</p>
                                                     </div>
-                                                    <div className="max-w-[3rem] col-span-4 relative w-full h-full">
+                                                    <div className="max-w-[3rem] col-span-1 relative w-full h-full">
                                                         <div className="absolute inset-0 h-full grid items-center">
-                                                            <p className="text-xs truncate text-center font-medium text-gray-500 group-hover:text-gray-600">Viewer</p>
+                                                            <p className="text-xs truncate text-center font-medium text-gray-400 group-hover:text-gray-500">{data.sharedBrands[i].role}</p>
                                                         </div>
                                                     </div>
                                                 </Link>
@@ -230,7 +236,7 @@ export default function Index() {
                         {/* <EllipsisHorizontalIcon className="pointer-events-none" /> */}
                     </div>
                     <div className="flex">
-                        <button onClick={() => setSharedBrands(prev => prev?.length > 0 ? [] : [1, 2, 3, 4])}
+                        <button onClick={() => setSharedBrands(prev => prev?.length > 0 ? [] : [1, 2, 3, 4, 5])}
                             className="px-4 py-3 rounded-md hover:bg-white/10 relative"
                         >
                             <RectangleGroupIcon className={`h-4 w-4 ${sharedBrands.length > 0 ? "text-white/75" : "text-white"}`} />
