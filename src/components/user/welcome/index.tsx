@@ -1,8 +1,8 @@
 
 
-export default function Welcome() {
+export default function Welcome({ className }: { className: string }) {
     return (
-        <div className="w-full max-w-7xl">
+        <div className={`w-full max-w-7xl ${className}`}>
             <div className="max-w-lg">
                 <div className="flex gap-5">
                     <div className="flex-shrink-0">
