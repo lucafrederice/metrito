@@ -1,5 +1,5 @@
 import { useColorThief } from "@/hooks/useColorThief";
-import { StarIcon, UserCircleIcon, WrenchIcon } from "@heroicons/react/20/solid";
+import { Squares2X2Icon, StarIcon, UserCircleIcon, WrenchIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
@@ -21,9 +21,18 @@ export default function WorkspaceCard({ id, name, role, src, sharedBrandsLength 
                     // backgroundColor: `hsl(${h}deg,${s}%,${l > 50 ? 0 : 100}%, 1)`
                     // backgroundImage: `radial-gradient(farthest-corner at 50px 50px, hsl(${h}deg, ${s}%, ${l}%, 1), hsl(${h}deg, ${s}%, ${l}%, 1))`,
                 } as React.CSSProperties}
-                className="absolute inset-0 rounded-md group-hover:border-2"
+                className="absolute inset-0 rounded-md group-hover:border-2 group-hover:border-gray-600"
             />
-            <img src={src} alt="workspace" className="w-20 h-20 md:w-32 md:h-32 rounded-md object-contain opacity-90 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100 transition-none ease-in" />
+
+
+            {
+                src && <img src={src} alt="workspace" className="w-20 h-20 md:w-32 md:h-32 rounded-md object-contain opacity-90 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100 transition-none ease-in" />
+            }
+
+            {
+                !src && <Squares2X2Icon className="w-20 h-20 md:w-32 md:h-32 rounded-md object-contain opacity-90 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100 transition-none ease-in text-gray-800" />
+            }
+
             <header className="grid place-items-center text-center gap-5">
                 <div className={`max-w-[7rem] ${sharedBrandsLength === 0 ? "sm:max-w-[12rem]" : "sm:max-w-[10rem]"}`}>
                     <h2 className="font-semibold text-md md:text-xl text-gray-700 group-hover:text-gray-900 truncate"

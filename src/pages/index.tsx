@@ -71,9 +71,17 @@ const sharedBrands:
             id: 5,
             name: "Disney",
             role: "editor",
-            workspaceName: "V4 Company",
-            workspaceId: 1,
-            src: "/v4.png"
+            workspaceName: "Tendency",
+            workspaceId: 7,
+            src: ""
+        },
+        {
+            id: 6,
+            name: "Sem foto",
+            role: "editor",
+            workspaceName: "Sem foto",
+            workspaceId: 11,
+            src: ""
         },
     ]
 
@@ -138,6 +146,12 @@ const workspaces:
             name: "Google",
             role: "member",
             src: "/google.png"
+        },
+        {
+            id: 11,
+            name: "Sem foto",
+            role: "member",
+            src: ""
         },
     ]
 

@@ -1,4 +1,5 @@
 import { useColorThief } from "@/hooks/useColorThief"
+import { Squares2X2Icon } from "@heroicons/react/20/solid"
 import Link from "next/link"
 
 export default function SharedBrand({ id, name, role, src, workspaceId, workspaceName }: { id: number, name: string, role: "admin" | "editor" | "viewer", src: string, workspaceId: number, workspaceName: string }) {
@@ -19,9 +20,16 @@ export default function SharedBrand({ id, name, role, src, workspaceId, workspac
                     // backgroundColor: `hsl(${h}deg,${s}%,${l > 50 ? 0 : 100}%, 1)`
                     // backgroundImage: `radial-gradient(farthest-corner at 50px 50px, hsl(${h}deg, ${s}%, ${l}%, 1), hsl(${h}deg, ${s}%, ${l}%, 1))`,
                 } as React.CSSProperties}
-                className="absolute inset-0 rounded-md group-hover:border"
+                className="absolute inset-0 rounded-md group-hover:border group-hover:border-gray-600"
             />
-            <img src={src} alt="workspace" className="max-sm:justify-self-start w-10 h-10 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100" />
+            {
+                src &&
+                <img src={src} className="max-sm:justify-self-start w-10 h-10 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100" />
+            }
+            {
+                !src && <Squares2X2Icon className="max-sm:justify-self-start w-10 h-10 text-gray-800 rounded-md opacity-80 saturate-[0.9] group-hover:opacity-100 group-hover:saturate-100" />
+            }
+
             <div className="col-span-3 justify-self-start text-left max-w-[12rem] md:max-w-[8rem] lg:max-w-[12rem]">
                 <h2 className="font-semibold text-md text-gray-700 group-hover:text-gray-900 truncate"
                     style={{
