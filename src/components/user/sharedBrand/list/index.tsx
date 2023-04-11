@@ -7,24 +7,24 @@ import { useEffect, useRef } from "react";
 export default function SharedBrands({ sharedBrands, workspaces, inlinePadding, data, loading }: { sharedBrands: number[], workspaces: number[], inlinePadding: string, data: { sharedBrands: SharedBrandsType }, loading: boolean }) {
 
     const headerRef = useRef<HTMLHeadingElement>(null)
-    const { size: bgOverlaySize, setSize: setBgOverlaySize } = useBgOverlay()
+    // const { size: bgOverlaySize, setSize: setBgOverlaySize } = useBgOverlay()
 
-    useEffect(
-        () => {
-            if (loading) setBgOverlaySize("")
-            
-            if (!loading) {
-                if (globalThis?.window?.innerWidth < 640 && headerRef.current)
-                    workspaces.length > 0 && workspaces.length < 3 ?
-                        setBgOverlaySize(headerRef.current?.getBoundingClientRect().top ? `${(headerRef.current?.getBoundingClientRect().top / 16) + 7}rem` : "50rem")
-                        : setBgOverlaySize("")
-            }
+    // useEffect(
+    //     () => {
+    //         if (loading) setBgOverlaySize("")
+
+    //         if (!loading) {
+    //             if (globalThis?.window?.innerWidth < 640 && headerRef.current)
+    //                 workspaces.length > 0 && workspaces.length < 3 ?
+    //                     setBgOverlaySize(headerRef.current?.getBoundingClientRect().top ? `${(headerRef.current?.getBoundingClientRect().top / 16) + 7}rem` : "50rem")
+    //                     : setBgOverlaySize("")
+    //         }
 
 
-            return () => setBgOverlaySize("")
-        },
-        [workspaces, headerRef.current, loading]
-    )
+    //         return () => setBgOverlaySize("")
+    //     },
+    //     [workspaces, headerRef.current, loading]
+    // )
 
     if (loading) return <Skeleton {...{ sharedBrands, inlinePadding }} />
 

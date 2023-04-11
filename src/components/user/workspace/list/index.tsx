@@ -32,6 +32,28 @@ export default function List({ workspaces, handleAdd, sharedBrands, data, classN
 
     const [isWorkspacesOpen, setIsWorkspacesOpen] = useState<boolean>(false)
 
+    const { size: bgOverlaySize, setSize: setBgOverlaySize } = useBgOverlay()
+
+    useEffect(
+        () => {
+            if (loading) setBgOverlaySize("")
+
+            if (!loading) {
+                if (globalThis?.window?.innerWidth < 640)
+                    workspaces.length === 1 ?
+                        setBgOverlaySize("26rem")
+                        : workspaces.length > 2 ?
+                            setBgOverlaySize("40rem")
+                            : setBgOverlaySize("")
+            }
+
+
+            return () => setBgOverlaySize("")
+        },
+        [workspaces, loading]
+    )
+
+
     if (loading) return <Skeleton {...{ className, inlinePadding, workspaces, sharedBrands }} />
 
     if (workspaces.length === 0) return (
@@ -56,7 +78,6 @@ export default function List({ workspaces, handleAdd, sharedBrands, data, classN
             </div>
         </div>
     )
-
 
     return (
         <div
