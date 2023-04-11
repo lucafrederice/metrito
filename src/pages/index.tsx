@@ -1,12 +1,13 @@
 import MotionWrapper from "@/components/animation/motionWrapper";
 import TwoCols from "@/components/layout/grids/twoCols";
-import SharedBrand from "@/components/sharedBrand";
+import SharedBrand from "@/components/user/sharedBrand/card";
+import SharedBrands from "@/components/user/sharedBrand/list";
 import Welcome from "@/components/user/welcome";
 import WorkspaceCard from "@/components/workspace/card";
 import WorkspacesList from "@/components/workspace/list";
 import { useBgOverlay } from "@/contexts/bgOverlayContext";
 import { RectangleGroupIcon, StarIcon } from "@heroicons/react/20/solid";
-import { ChevronDownIcon, ChevronUpIcon, EllipsisHorizontalIcon, EllipsisVerticalIcon, MinusIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
+import { ArrowPathIcon, ChevronDownIcon, ChevronUpIcon, EllipsisHorizontalIcon, EllipsisVerticalIcon, MinusIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -185,37 +186,22 @@ export default function Index() {
 
     const inlinePadding = "max-sm:px-4"
 
+    const [loading, setLoading] = useState(false)
+
     return (
         <MotionWrapper>
             <div className="relative">
                 <div key="index" className="min-h-screen py-6 md:py-10 w-full grid place-items-center auto-rows-min gap-14">
-
                     <Welcome {...{ className: `${inlinePadding}` }} />
 
                     <TwoCols>
 
-                        <WorkspacesList {...{ data, handleAdd, sharedBrands, workspaces, inlinePadding }} />
+                        <WorkspacesList {...{ data, handleAdd, sharedBrands, workspaces, inlinePadding, loading }} />
 
                         {
-                            sharedBrands.length > 0 &&
-                            <div
-                                className={`p-0 justify-self-stretch md:justify-self-end w-full grid gap-4 ${inlinePadding}`}
-                            >
-                                <header className="max-w-[13rem] lg:max-w-xs">
-                                    <h1 className="font-medium text-lg text-gray-600 sm:border-b-2 sm:pb-2 whitespace-pre-line truncate">Projetos compartilhados com você:</h1>
-                                </header>
-                                <div
-                                    className="w-full grid grid-flow-row gap-4"
-                                >
-                                    {
-                                        sharedBrands.map(
-                                            (item, i) =>
-                                                <SharedBrand key={data.sharedBrands[i].id} {...{ id: data.sharedBrands[i].id, name: data.sharedBrands[i].name, role: data.sharedBrands[i].role, src: data.sharedBrands[i].src, workspaceId: data.sharedBrands[i].workspaceId, workspaceName: data.sharedBrands[i].workspaceName }} />
-                                        )
-                                    }
-                                </div>
-                            </div>
+                            sharedBrands.length > 0 && <SharedBrands {...{ data, sharedBrands, inlinePadding, loading }} />
                         }
+
 
                     </TwoCols>
                 </div>
@@ -251,6 +237,17 @@ export default function Index() {
                             onClick={() => addW()}
                             className="px-4 py-3 rounded-md hover:bg-white/10">
                             <PlusIcon className="h-4 w-4" />
+                        </button>
+                        <button
+                            onClick={() => setLoading(state => !state)}
+                            className="px-4 py-3 rounded-md hover:bg-white/10 relative">
+                            <ArrowPathIcon className={`h-4 w-4 ${loading ? "text-white/75" : "text-white"}`} />
+                            {
+                                loading && <div className="absolute inset-0 grid place-items-center">
+                                    <div className="mx-auto -rotate-[20deg] h-[1px] w-7 bg-white" />
+                                </div>
+                            }
+
                         </button>
                     </div>
                 </motion.div>

@@ -2,8 +2,9 @@ import { ChevronDownIcon, ChevronUpIcon, PlusIcon } from "@heroicons/react/24/ou
 import { useMemo, useState } from "react"
 import WorkspaceCard from "../card"
 import { SharedBrandsType, WorkspacesType } from "@/pages"
+import Skeleton from "../list/skeleton"
 
-export default function List({ workspaces, handleAdd, sharedBrands, data, className = "", inlinePadding = "" }: {
+export default function List({ workspaces, handleAdd, sharedBrands, data, className = "", inlinePadding = "", loading }: {
     handleAdd: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
     data: {
         workspaces: WorkspacesType,
@@ -12,7 +13,8 @@ export default function List({ workspaces, handleAdd, sharedBrands, data, classN
     workspaces: number[] | [],
     sharedBrands: number[] | [],
     className?: string,
-    inlinePadding?: string
+    inlinePadding?: string,
+    loading: boolean
 }) {
     const needsOverflow = useMemo(
         () => workspaces.length > 4 ? true : false,
@@ -25,6 +27,8 @@ export default function List({ workspaces, handleAdd, sharedBrands, data, classN
     }
 
     const [isWorkspacesOpen, setIsWorkspacesOpen] = useState<boolean>(false)
+
+    if (loading) return <Skeleton {...{ className, inlinePadding, workspaces, sharedBrands }} />
 
     return (
         <div
@@ -52,7 +56,7 @@ export default function List({ workspaces, handleAdd, sharedBrands, data, classN
                     {
                         workspaces.map(
                             (item: any, i: number) =>
-                                <WorkspaceCard key={data.workspaces[i].id} {...{ id: data.workspaces[i].id, name: data.workspaces[i].name, src: data.workspaces[i].src, role: data.workspaces[i].role, shareBrandsLength: sharedBrands.length }} />
+                                <WorkspaceCard key={data.workspaces[i].id} {...{ id: data.workspaces[i].id, name: data.workspaces[i].name, src: data.workspaces[i].src, role: data.workspaces[i].role, sharedBrandsLength: sharedBrands.length }} />
                         )
                     }
 
