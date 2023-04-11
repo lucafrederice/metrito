@@ -34,7 +34,7 @@ import { Product } from '@prisma/client'
 import Icon from '../../logo'
 import Metrito from '../../metrito'
 import { useRouter } from 'next/router'
-import { useBgOverlay } from '@/contexts/bgOverlayContext'
+import { useBgOverlay } from '@/contexts/bgOverlay.context'
 
 const WorkspaceNavigation = [
     { id: 1001, name: 'Overview', href: '', Icon: (props: any) => <ChartBarIcon {...props} /> },
@@ -62,8 +62,6 @@ function classNames(...classes: string[]) {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-
-    const { size: bgOverlaySize } = useBgOverlay()
 
     const router = useRouter()
 
@@ -94,17 +92,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (scrollRef.current && scrollRef.current.scrollWidth > globalThis.window.innerWidth)
+            if (scrollRef.current && scrollRef.current.scrollWidth > globalThis?.window?.innerWidth)
                 setScrollAvailable(true)
-            if (scrollRef.current && scrollRef.current.scrollWidth <= globalThis.window.innerWidth)
+            if (scrollRef.current && scrollRef.current.scrollWidth <= globalThis?.window?.innerWidth)
                 setScrollAvailable(false)
             if (scrollRef.current && scrollRef.current.scrollLeft > 0)
                 setStartScroll(false);
             if (scrollRef.current && scrollRef.current.scrollLeft <= 0)
                 setStartScroll(true);
-            if (scrollRef.current && Math.ceil(scrollRef.current.scrollLeft + globalThis.window.innerWidth) >= scrollRef.current.scrollWidth - 15)
+            if (scrollRef.current && Math.ceil(scrollRef.current.scrollLeft + globalThis?.window?.innerWidth) >= scrollRef.current.scrollWidth - 15)
                 setEndScroll(true);
-            if (scrollRef.current && Math.ceil(scrollRef.current.scrollLeft + globalThis.window.innerWidth) < scrollRef.current.scrollWidth - 15)
+            if (scrollRef.current && Math.ceil(scrollRef.current.scrollLeft + globalThis?.window?.innerWidth) < scrollRef.current.scrollWidth - 15)
                 setEndScroll(false);
         };
 
@@ -170,13 +168,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     return (
         <>
-            <div className="min-h-full relative  ">
-                <div
-                    style={{
-                        height: globalThis?.window?.innerWidth < 640 ? bgOverlaySize || "36rem" : ""
-                    }}
-                    className='absolute -z-10 w-full h-[36rem] md:h-[26rem] bg-gray-50 shadow-md transition-all ease-in duration-500'
-                />
+            <div className="min-h-full relative">
 
                 <div className='w-full bg-gray-50'>
                     <div className="max-w-7xl mx-auto w-full ">
@@ -245,7 +237,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                         leaveFrom="transform opacity-100 scale-100"
                                                         leaveTo="transform opacity-0 scale-95"
                                                     >
-                                                        <Menu.Items className="z-10 min-w-[13rem] sm:min-w-[15rem] origin-top absolute right-0 left-0 mt-1 rounded-md shadow-2xl bg-gray-100 ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
+                                                        <Menu.Items className="z-50 min-w-[13rem] sm:min-w-[15rem] origin-top absolute right-0 left-0 mt-1 rounded-md shadow-2xl bg-gray-100 ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
                                                             <div className="grid gap-3 py-1 px-1 max-h-64 overflow-y-scroll">
                                                                 {
                                                                     [1, 2, 3, 4, 2, 234, 34, 3, 3, 4, 34, 3, 4, 34, 3, 3, 43, 3, 34, 34, 34].map(
@@ -331,7 +323,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                         leaveFrom="transform opacity-100 scale-100"
                                                         leaveTo="transform opacity-0 scale-95"
                                                     >
-                                                        <Menu.Items className="z-10 min-w-[11rem] sm:min-w-[13rem] absolute right-0 mt-1 rounded-md shadow-2xl bg-gray-100 ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
+                                                        <Menu.Items className="z-50 min-w-[11rem] sm:min-w-[13rem] absolute right-0 mt-1 rounded-md shadow-2xl bg-gray-100 ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
                                                             <div className="grid gap-3 py-1 px-1 max-h-64 overflow-y-scroll">
                                                                 <Menu.Item>
                                                                     <Link
@@ -476,7 +468,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                         leaveFrom="transform opacity-100 scale-100"
                                         leaveTo="transform opacity-0 scale-95"
                                     >
-                                        <Menu.Items className="z-20 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        <Menu.Items className="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                             <Menu.Item>
                                                 {({ active }) => (
                                                     <a
@@ -541,7 +533,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 {
                     navigation &&
                     (
-                        <div ref={navbarRef} className={`${navbarShadow ? "shadow-lg" : ""} transition-all ease duration-300 sticky top-0 w-full bg-gray-50`}>
+                        <div ref={navbarRef} className={`z-40 ${navbarShadow ? "shadow-lg" : ""} transition-all ease duration-300 sticky top-0 w-full bg-gray-50`}>
                             <div className="relative max-w-7xl mx-auto w-full border-b border-gray-300 ">
                                 <div ref={scrollRef} className='w-full py-2 px-2 sm:px-0 overflow-x-scroll md:overflow-visible'>
                                     <div className="lg:grid lg:grid-cols-3 lg:gap-8 lg:items-center">

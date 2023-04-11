@@ -1,5 +1,6 @@
 import MotionWrapper from "@/components/animation/motionWrapper";
-import { useBgOverlay } from "@/contexts/bgOverlayContext";
+import Skeleton from "@/components/workspace/brands/list/skeleton";
+import { useBgOverlay } from "@/contexts/bgOverlay.context";
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");

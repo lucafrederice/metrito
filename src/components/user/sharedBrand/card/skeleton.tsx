@@ -1,7 +1,7 @@
 export default function Skeleton() {
     return (
         <div
-            className="py-5 px-5 md:px-3 rounded-md bg-gray-300 grid grid-cols-5 gap-4 place-items-center relative"
+            className="py-5 px-5 md:px-3 rounded-md bg-gray-300 grid grid-cols-5 gap-4 place-items-center relative shadow-md"
         >
             <div className="bg-gray-400 w-10 h-10 rounded-md animate-pulse" />
             <div className="col-span-3 justify-self-start grid gap-2 max-w-[12rem] md:max-w-[8rem] lg:max-w-[12rem]">

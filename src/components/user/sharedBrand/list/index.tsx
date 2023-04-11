@@ -1,7 +1,7 @@
 import { SharedBrandsType } from "@/pages";
 import SharedBrand from "../card";
 import Skeleton from "@/components/user/sharedBrand/list/skeleton";
-import { useBgOverlay } from "@/contexts/bgOverlayContext";
+import { useBgOverlay } from "@/contexts/bgOverlay.context";
 import { useEffect, useRef } from "react";
 
 export default function SharedBrands({ sharedBrands, workspaces, inlinePadding, data, loading }: { sharedBrands: number[], workspaces: number[], inlinePadding: string, data: { sharedBrands: SharedBrandsType }, loading: boolean }) {

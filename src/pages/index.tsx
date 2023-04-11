@@ -5,7 +5,8 @@ import SharedBrands from "@/components/user/sharedBrand/list";
 import Welcome from "@/components/user/welcome";
 import WorkspaceCard from "@/components/user/workspace/card";
 import WorkspacesList from "@/components/user/workspace/list";
-import { useBgOverlay } from "@/contexts/bgOverlayContext";
+import { useBg } from "@/contexts/bg.context";
+import { useBgOverlay } from "@/contexts/bgOverlay.context";
 import { RectangleGroupIcon, StarIcon } from "@heroicons/react/20/solid";
 import { ArrowPathIcon, ChevronDownIcon, ChevronUpIcon, EllipsisHorizontalIcon, EllipsisVerticalIcon, MinusIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
@@ -153,6 +154,8 @@ const data = {
 }
 
 export default function Index() {
+
+    const {setColor} = useBg()
 
     const [workspaces, setWorkspaces] = useState([1])
     const needsOverflow = useMemo(

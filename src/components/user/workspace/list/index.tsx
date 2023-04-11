@@ -5,7 +5,7 @@ import { SharedBrandsType, WorkspacesType } from "@/pages"
 import Skeleton from "@/components/user/workspace/list/skeleton"
 import Link from "next/link"
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid"
-import { useBgOverlay } from "@/contexts/bgOverlayContext"
+import { useBgOverlay } from "@/contexts/bgOverlay.context"
 
 export default function List({ workspaces, handleAdd, sharedBrands, data, className = "", inlinePadding = "", loading }: {
     handleAdd: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
