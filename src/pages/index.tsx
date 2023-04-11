@@ -61,11 +61,11 @@ const sharedBrands:
         },
         {
             id: 4,
-            name: "g1",
-            role: "admin",
-            workspaceName: "Globo",
-            workspaceId: 3,
-            src: "/globo.svg"
+            name: "Sem foto",
+            role: "editor",
+            workspaceName: "Sem foto",
+            workspaceId: 11,
+            src: ""
         },
         {
             id: 5,
@@ -73,15 +73,7 @@ const sharedBrands:
             role: "editor",
             workspaceName: "Tendency",
             workspaceId: 7,
-            src: ""
-        },
-        {
-            id: 6,
-            name: "Sem foto",
-            role: "editor",
-            workspaceName: "Sem foto",
-            workspaceId: 11,
-            src: ""
+            src: "/tendency.png"
         },
     ]
 
