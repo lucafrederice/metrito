@@ -98,7 +98,7 @@ export default function List({ brands, handleAdd, data, className = "", inlinePa
                     <div className="w-full col-span-2 text-lg font-medium text-gray-600 sm:border-b-2 sm:pb-2 flex items-center relative">
                         <MagnifyingGlassIcon className="w-4 h-4 absolute left-2 inset-y-auto pointer-events-none" />
                         <input type="text" id="name" value={search} onChange={(e) => setSearch(e.currentTarget.value)} placeholder="Pesquise por nome"
-                            className="block max-sm:col-span-2 sm:max-w-md sm:w-full rounded-md border-0 py-1.5 pl-8 text-gray-900 bg-transparent placeholder:text-gray-400 focus:ring-transparent sm:text-sm sm:leading-6"
+                            className="block max-sm:col-span-2 sm:max-w-md sm:w-full border-0 py-1.5 pl-8 text-gray-900 bg-transparent placeholder:text-gray-400 focus:ring-transparent sm:text-sm sm:leading-6 max-sm:focus:border-b max-sm:focus:border-gray-300 rounded-none"
                         />
                     </div>
 
