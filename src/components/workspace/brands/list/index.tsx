@@ -29,6 +29,8 @@ export default function List({ brands, handleAdd, data, className = "", inlinePa
                 .includes(search.toLowerCase().replace(/ /g, ""))
         );
 
+    const filteredBrands = filterBySearch(data.brands)
+
     const needsOverflow = useMemo(
         () => brands.length > 4 ? true : false,
         [brands]
@@ -49,9 +51,9 @@ export default function List({ brands, handleAdd, data, className = "", inlinePa
 
             if (!loading) {
                 if (globalThis?.window?.innerWidth < 640)
-                    brands.length === 1 ?
+                filteredBrands.length === 1 ?
                         setBgOverlaySize("26rem")
-                        : brands.length > 2 ?
+                        : filteredBrands.length > 2 ?
                             setBgOverlaySize("40rem")
                             : setBgOverlaySize("")
             }
@@ -59,7 +61,7 @@ export default function List({ brands, handleAdd, data, className = "", inlinePa
 
             return () => setBgOverlaySize("")
         },
-        [brands, loading]
+        [filteredBrands, loading]
     )
 
 
@@ -111,7 +113,7 @@ export default function List({ brands, handleAdd, data, className = "", inlinePa
 
 
             {
-                filterBySearch(data.brands).length <= 0 &&
+                filteredBrands.length <= 0 &&
                 <div
                     className={`w-full py-8 text-center text-gray-500 font-medium ${inlinePadding}`}
                 >
@@ -128,13 +130,13 @@ export default function List({ brands, handleAdd, data, className = "", inlinePa
                     className={`grid grid-cols-2 md:grid-cols-3 gap-4`}
                 >
                     {
-                        filterBySearch(data.brands).map(
+                        filteredBrands.map(
                             (item: any, i: number) =>
                                 <BrandCard key={item.id} {...{ id: item.id, name: item.name, src: item.src, role: item.role, workspaceId: item.workspaceId, workspaceName: item.workspaceId, membersCount: item.membersCount, connectionsCount: item.connectionsCount }} />
                         )
                     }
 
-                    <AddGrid {...{ handleAdd, brands: filterBySearch(data.brands) }} />
+                    <AddGrid {...{ handleAdd, brands: filteredBrands }} />
                 </div>
             </div>
 
