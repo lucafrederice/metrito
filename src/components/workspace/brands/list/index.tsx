@@ -125,7 +125,7 @@ export default function List({ brands, handleAdd, data, className = "", inlinePa
                 className={`${!needsOverflow ? "" : isBrandsOpen ? "max-sm:max-h-full" : "max-sm:max-h-[60vh] max-sm:overflow-y-hidden"} ${inlinePadding}`}
             >
                 <div
-                    className={`grid grid-cols-2 md:grid-cols-3 ${brands.length < 3 ? "grid-rows-1" : "grid-rows-2"} gap-4`}
+                    className={`grid grid-cols-2 md:grid-cols-3 gap-4`}
                 >
                     {
                         filterBySearch(data.brands).map(
@@ -169,7 +169,7 @@ function AddGrid({ brands, handleAdd }: { brands: any[], handleAdd: (e: React.Mo
     return (
         <div className={`${brands.length === 0 ? "col-span-2" : ""} ${brands.length % 2 === 0 || brands.length % 3 === 0 ?
             brands.length % 2 === 0 && brands.length % 3 === 0 ?
-                "max-md:col-span-3 md:col-span-3"
+                "max-md:col-span-2 md:col-span-3"
                 : brands.length % 2 === 0 ?
                     "md:col-span-3"
                     : brands.length % 3 === 0 ?
