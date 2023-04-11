@@ -1,8 +1,31 @@
 import { SharedBrandsType } from "@/pages";
 import SharedBrand from "../card";
 import Skeleton from "@/components/user/sharedBrand/list/skeleton";
+import { useBgOverlay } from "@/contexts/bgOverlayContext";
+import { useEffect, useRef } from "react";
 
-export default function SharedBrands({ sharedBrands, inlinePadding, data, loading }: { sharedBrands: number[], inlinePadding: string, data: { sharedBrands: SharedBrandsType }, loading: boolean }) {
+export default function SharedBrands({ sharedBrands, workspaces, inlinePadding, data, loading }: { sharedBrands: number[], workspaces: number[], inlinePadding: string, data: { sharedBrands: SharedBrandsType }, loading: boolean }) {
+
+    const headerRef = useRef<HTMLHeadingElement>(null)
+    const { size: bgOverlaySize, setSize: setBgOverlaySize } = useBgOverlay()
+
+    useEffect(
+        () => {
+            if (loading) setBgOverlaySize("")
+            
+            if (!loading) {
+                if (globalThis?.window?.innerWidth < 640 && headerRef.current)
+                    workspaces.length > 0 && workspaces.length < 3 ?
+                        setBgOverlaySize(headerRef.current?.getBoundingClientRect().top ? `${(headerRef.current?.getBoundingClientRect().top / 16) + 7}rem` : "50rem")
+                        : setBgOverlaySize("")
+            }
+
+
+            return () => setBgOverlaySize("")
+        },
+        [workspaces, headerRef.current, loading]
+    )
+
     if (loading) return <Skeleton {...{ sharedBrands, inlinePadding }} />
 
     return <>
@@ -11,7 +34,7 @@ export default function SharedBrands({ sharedBrands, inlinePadding, data, loadin
             <div
                 className={`p-0 justify-self-stretch md:justify-self-end w-full grid gap-4 ${inlinePadding}`}
             >
-                <header className="max-w-[13rem] lg:max-w-xs">
+                <header ref={headerRef} className="max-w-[13rem] lg:max-w-xs">
                     <h1 className="font-medium text-lg text-gray-600 sm:border-b-2 sm:pb-2 whitespace-pre-line truncate">Projetos compartilhados com você:</h1>
                 </header>
                 <div

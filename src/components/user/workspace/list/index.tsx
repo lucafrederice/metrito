@@ -1,10 +1,11 @@
 import { ArrowTrendingUpIcon, ChevronDownIcon, ChevronUpIcon, LinkIcon, PlusIcon } from "@heroicons/react/24/outline"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import WorkspaceCard from "../card"
 import { SharedBrandsType, WorkspacesType } from "@/pages"
-import Skeleton from "../list/skeleton"
+import Skeleton from "@/components/user/workspace/list/skeleton"
 import Link from "next/link"
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid"
+import { useBgOverlay } from "@/contexts/bgOverlayContext"
 
 export default function List({ workspaces, handleAdd, sharedBrands, data, className = "", inlinePadding = "", loading }: {
     handleAdd: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
@@ -18,6 +19,7 @@ export default function List({ workspaces, handleAdd, sharedBrands, data, classN
     inlinePadding?: string,
     loading: boolean
 }) {
+
     const needsOverflow = useMemo(
         () => workspaces.length > 4 ? true : false,
         [workspaces]
@@ -54,6 +56,7 @@ export default function List({ workspaces, handleAdd, sharedBrands, data, classN
             </div>
         </div>
     )
+
 
     return (
         <div

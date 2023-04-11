@@ -3,8 +3,8 @@ import TwoCols from "@/components/layout/grids/twoCols";
 import SharedBrand from "@/components/user/sharedBrand/card";
 import SharedBrands from "@/components/user/sharedBrand/list";
 import Welcome from "@/components/user/welcome";
-import WorkspaceCard from "@/components/workspace/card";
-import WorkspacesList from "@/components/workspace/list";
+import WorkspaceCard from "@/components/user/workspace/card";
+import WorkspacesList from "@/components/user/workspace/list";
 import { useBgOverlay } from "@/contexts/bgOverlayContext";
 import { RectangleGroupIcon, StarIcon } from "@heroicons/react/20/solid";
 import { ArrowPathIcon, ChevronDownIcon, ChevronUpIcon, EllipsisHorizontalIcon, EllipsisVerticalIcon, MinusIcon, PlusIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
@@ -153,7 +153,6 @@ const data = {
 }
 
 export default function Index() {
-    const { size: bgOverlaySize, setSize: setBgOverlaySize } = useBgOverlay()
 
     const [workspaces, setWorkspaces] = useState([1])
     const needsOverflow = useMemo(
@@ -168,16 +167,6 @@ export default function Index() {
     const handleAdd = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
     }
-
-    useEffect(
-        () => {
-            if (globalThis?.window?.innerWidth < 640)
-                workspaces.length > 0 && workspaces.length < 3 ?
-                    setBgOverlaySize("50rem")
-                    : setBgOverlaySize("")
-        },
-        [workspaces]
-    )
 
     const [isWorkspacesOpen, setIsWorkspacesOpen] = useState<boolean>(false)
 
@@ -205,7 +194,7 @@ export default function Index() {
                         <WorkspacesList {...{ data, handleAdd, sharedBrands, workspaces, inlinePadding, loading }} />
 
                         {
-                            sharedBrands.length > 0 && <SharedBrands {...{ data, sharedBrands, inlinePadding, loading }} />
+                            sharedBrands.length > 0 && <SharedBrands {...{ data, sharedBrands, inlinePadding, loading, workspaces }} />
                         }
 
 

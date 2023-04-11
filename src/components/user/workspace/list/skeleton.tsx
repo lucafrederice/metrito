@@ -1,4 +1,4 @@
-import CardSkeleton from "@/components/workspace/card/skeleton"
+import CardSkeleton from "@/components/user/workspace/card/skeleton"
 
 
 export default function Skeleton({ inlinePadding, sharedBrands, className, workspaces }: { inlinePadding: string, sharedBrands: number[], className: string, workspaces: number[] }) {
