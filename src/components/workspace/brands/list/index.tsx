@@ -8,12 +8,11 @@ import { ExclamationCircleIcon, MagnifyingGlassIcon } from "@heroicons/react/20/
 import { useBgOverlay } from "@/contexts/bgOverlay.context"
 import BrandCard from "@/components/workspace/brands/card"
 
-export default function List({ brands, handleAdd, data, className = "", inlinePadding = "", loading }: {
+export default function List({ handleAdd, data, className = "", inlinePadding = "", loading }: {
     handleAdd: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
     data: {
-        brands: SharedBrandsType,
+        brands: any[],
     },
-    brands: number[] | [],
     className?: string,
     inlinePadding?: string,
     loading: boolean
@@ -29,11 +28,14 @@ export default function List({ brands, handleAdd, data, className = "", inlinePa
                 .includes(search.toLowerCase().replace(/ /g, ""))
         );
 
-    const filteredBrands = filterBySearch(data.brands)
+    const filteredBrands = useMemo(
+        () => filterBySearch(data.brands),
+        [data]
+    )
 
     const needsOverflow = useMemo(
-        () => brands.length > 4 ? true : false,
-        [brands]
+        () => filteredBrands.length > 4 ? true : false,
+        [filteredBrands]
     )
 
     const toggleBrands = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -51,7 +53,7 @@ export default function List({ brands, handleAdd, data, className = "", inlinePa
 
             if (!loading) {
                 if (globalThis?.window?.innerWidth < 640)
-                filteredBrands.length === 1 ?
+                    filteredBrands.length === 1 ?
                         setBgOverlaySize("26rem")
                         : filteredBrands.length > 2 ?
                             setBgOverlaySize("40rem")
@@ -65,25 +67,25 @@ export default function List({ brands, handleAdd, data, className = "", inlinePa
     )
 
 
-    if (loading) return <Skeleton {...{ className, inlinePadding, brands }} />
+    if (loading) return <Skeleton {...{ className, inlinePadding, filteredBrands }} />
 
-    if (brands.length === 0) return (
+    if (data.brands.length === 0) return (
         <div
             className={`p-0 w-full md:col-span-3 grid md:max-h-full relative transition-all ease-in ${className} ${inlinePadding} grid grid-cols-3 gap-4`}
         >
             <div
-                className={`col-span-3 grid grid-cols-2 md:grid-cols-3 ${brands.length < 3 ? "grid-rows-1" : "grid-rows-2"} gap-4`}
+                className={`col-span-3 grid grid-cols-2 md:grid-cols-3 ${data.brands.length < 3 ? "grid-rows-1" : "grid-rows-2"} gap-4`}
             >
 
-                <AddGrid {...{ handleAdd, brands }} />
-                <Link href={"#"} className="text-right max-sm:max-w-[17rem] col-span-2 justify-self-end flex items-center justify-end gap-2 w-fit mr-0 md:hover:border-b md:hover:border-gray-600 transition-all ease-in text-gray-600 md:hover:text-gray-800 max-sm:hover:underline-offset-2 max-sm:hover:underline">
+                <AddGrid {...{ handleAdd, brands: data.brands }} />
+                <Link href={"#"} className="text-right max-sm:max-w-[17rem] col-span-2 md:col-span-3 justify-self-end flex items-center justify-end gap-2 w-fit mr-0 md:hover:border-b md:hover:border-gray-600 transition-all ease-in text-gray-600 md:hover:text-gray-800 max-sm:hover:underline-offset-2 max-sm:hover:underline">
                     Veja como criar seu primeiro projeto no Metrito
                     <ArrowTrendingUpIcon className="w-4 h-4 max-sm:self-end" />
                 </Link>
 
             </div>
 
-            <div className={`mt-10 col-span-3 md:col-span-2 p-8 py-16 rounded-md bg-white border-2 border-gray-300 hover:border-gray-400 cursor-pointer shadow-lg grid place-items-center gap-4 font-medium text-gray-600 hover:text-gray-700 transition-all ease-in`}>
+            <div className={`mt-10 col-span-3 md:col-span-3 md:mx-64 p-8 py-16 rounded-md bg-white border-2 border-gray-300 hover:border-gray-400 cursor-pointer shadow-lg grid place-items-center gap-4 font-medium text-gray-600 hover:text-gray-700 transition-all ease-in`}>
                 <ExclamationCircleIcon className="h-8 w-8" />
                 <span>Ainda não criou um projeto?</span>
             </div>
@@ -95,7 +97,7 @@ export default function List({ brands, handleAdd, data, className = "", inlinePa
             className={`p-0 w-full md:col-span-3 grid gap-4 md:max-h-full relative transition-all ease-in ${className}`}
         >
             {
-                brands.length > 0 &&
+                data.brands.length > 0 &&
                 <header className={`grid grid-flow-col-dense gap-8 sm:flex sm:justify-between ${inlinePadding}`}>
                     <div className="w-full col-span-2 text-lg font-medium text-gray-600 sm:border-b-2 sm:pb-2 flex items-center relative">
                         <MagnifyingGlassIcon className="w-4 h-4 absolute left-2 inset-y-auto pointer-events-none" />
@@ -169,13 +171,13 @@ export default function List({ brands, handleAdd, data, className = "", inlinePa
 
 function AddGrid({ brands, handleAdd }: { brands: any[], handleAdd: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void }) {
     return (
-        <div className={`${brands.length === 0 ? "col-span-2" : ""} ${brands.length % 2 === 0 || brands.length % 3 === 0 ?
+        <div className={`${brands.length === 0 ? "col-span-2 md:col-span-3" : brands.length % 2 === 0 || brands.length % 3 === 0 ?
             brands.length % 2 === 0 && brands.length % 3 === 0 ?
-                "max-md:col-span-2 md:col-span-3"
+                "max-sm:col-span-2 md:col-span-3"
                 : brands.length % 2 === 0 ?
-                    "md:col-span-3"
+                    "max-sm:col-span-2"
                     : brands.length % 3 === 0 ?
-                        "max-md:col-span-2"
+                        "md:col-span-3"
                         : ""
             : ""
             }  grid shadow rounded-md backdrop-blur-md transition-all ease-in`}>
