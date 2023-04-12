@@ -150,8 +150,8 @@ export default function Index() {
             <div key="brands" className="max-w-7xl mx-auto min-h-screen py-10 w-full grid place-items-center auto-rows-min gap-4">
                 <List {...{ data: { brands: brands }, handleAdd, loading, inlinePadding, }} />
             </div>
-            <div ref={constraintsRef} className="fixed inset-0 pointer-events-none" />
 
+            <div ref={constraintsRef} className="fixed inset-0 pointer-events-none" />
             <motion.div drag dragElastic={0.1} dragMomentum={false} dragConstraints={constraintsRef} className=" fixed bottom-2 inset-x-2 bg-black/75 backdrop-blur-[2px] w-fit px-3 py-2 rounded-md border border-black shadow-xl shadow-black/30 hover:shadow-xl hover:shadow-black/50 transition-shadow ease-in text-white grid gap-2 grid-flow-row place-items-center  cursor-grab hover:cursor-grabbing">
                 <div className="place-items-center pointer-events-none mx-auto w-14 h-[2px] bg-white rounded">
                     {/* <EllipsisHorizontalIcon className="pointer-events-none" /> */}
