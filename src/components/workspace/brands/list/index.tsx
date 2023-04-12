@@ -28,10 +28,7 @@ export default function List({ handleAdd, data, className = "", inlinePadding = 
                 .includes(search.toLowerCase().replace(/ /g, ""))
         );
 
-    const filteredBrands = useMemo(
-        () => filterBySearch(data.brands),
-        [data]
-    )
+    const filteredBrands = filterBySearch(data.brands)
 
     const needsOverflow = useMemo(
         () => filteredBrands.length > 4 ? true : false,

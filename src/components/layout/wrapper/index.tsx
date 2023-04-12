@@ -286,6 +286,94 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                             </>
                                         }
 
+                                        {/* {
+                                            router.query?.brand &&
+                                            <>
+                                                <div className="grid place-items-center">
+                                                    <ChevronRightIcon className="h-6 w-6 text-gray-300" aria-hidden="true" />
+                                                </div>
+                                                <Menu as="div" className="relative inline-block text-left max-w-[11rem] sm:w-fit sm:max-w-[13rem]">
+                                                    <div>
+                                                        <span className="flex w-full justify-between items-center gap-1">
+                                                            <Link
+                                                                href={`/workspaces/${router?.query?.workspace}/brands/${router?.query?.brand}`}
+                                                                onClick={() => setNavigation("brand")}
+                                                                className="hover:bg-gray-200 px-0 sm:px-1 py-0 sm:py-1 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500  transition-all ease-in">
+                                                                <img
+                                                                    className="w-8 h-8 bg-gray-300 rounded flex-shrink-0"
+                                                                    src="/v4.png"
+                                                                    alt=""
+                                                                />
+                                                                <span className="flex-1 flex flex-col min-w-0">
+                                                                    <span className="text-gray-900 text-sm font-medium tracking-wide truncate">Ifood</span>
+                                                                </span>
+                                                            </Link>
+                                                            <Menu.Button className="self-stretch px-1 rounded-md transition-all ease-in  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 ">
+                                                                <ChevronUpDownIcon
+                                                                    className="flex-shrink-0 h-5 w-5 text-gray-600"
+                                                                    aria-hidden="true"
+                                                                />
+                                                            </Menu.Button>
+                                                        </span>
+                                                    </div>
+                                                    <Transition
+                                                        as={Fragment}
+                                                        enter="transition ease-out duration-100"
+                                                        enterFrom="transform opacity-0 scale-95"
+                                                        enterTo="transform opacity-100 scale-100"
+                                                        leave="transition ease-in duration-75"
+                                                        leaveFrom="transform opacity-100 scale-100"
+                                                        leaveTo="transform opacity-0 scale-95"
+                                                    >
+                                                        <Menu.Items className="z-50 min-w-[13rem] sm:min-w-[15rem] origin-top absolute right-0 mt-1 rounded-md shadow-2xl bg-gray-100 ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none">
+                                                            <div className="grid gap-3 py-1 px-1 max-h-64 overflow-y-scroll">
+                                                                {
+                                                                    [1, 2, 3, 4, 2, 234, 34, 3, 3, 4, 34, 3, 4, 34, 3, 3, 43, 3, 34, 34, 34].map(
+                                                                        (item, i) =>
+                                                                            <Menu.Item key={i}>
+                                                                                <Link
+                                                                                    href={`/workspaces/${i}`}
+                                                                                    onClick={() => setNavigation("workspace")}
+                                                                                    className="hover:bg-gray-200 px-3 py-2 sm:py-2 rounded-md flex min-w-0 items-center justify-between space-x-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                                                                    <img
+                                                                                        className="w-7 h-7 bg-gray-300 rounded flex-shrink-0"
+                                                                                        src="/v4.png"
+                                                                                        alt=""
+                                                                                    />
+                                                                                    <span className="flex-1 flex flex-col min-w-0">
+                                                                                        <span className="text-gray-500 text-xs font-medium truncate">Ifood</span>
+                                                                                    </span>
+                                                                                </Link>
+                                                                            </Menu.Item>
+                                                                    )
+                                                                }
+                                                            </div>
+                                                            <div className="bg-white rounded-b-md grid gap-1 pt-1 ">
+                                                                <Menu.Item>
+                                                                    <Link
+                                                                        href="#"
+                                                                        className={'text-gray-700 font-medium flex flex-row items-center gap-2 px-4 py-4 text-xs hover:bg-gray-100'}
+                                                                    >
+                                                                        <PlusIcon className='h-5 w-5' />
+                                                                        Criar Workspace
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                                <Menu.Item>
+                                                                    <Link
+                                                                        href="#"
+                                                                        className={'text-gray-700 font-medium flex flex-row items-center gap-2 px-4 py-4 text-xs hover:bg-gray-100 rounded-b-md'}
+                                                                    >
+                                                                        <Cog6ToothIcon className='h-5 w-5' />
+                                                                        Gerenciar Workspaces
+                                                                    </Link>
+                                                                </Menu.Item>
+                                                            </div>
+                                                        </Menu.Items>
+                                                    </Transition>
+                                                </Menu>
+                                            </>
+                                        } */}
+
                                         {
                                             router.query?.brand &&
                                             <>
