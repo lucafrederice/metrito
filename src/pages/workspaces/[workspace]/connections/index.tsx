@@ -172,7 +172,7 @@ export default function Index() {
                                             {item.name}
                                         </div>
 
-                                        <div className={`capitalize col-span-2 text-xs text-teal-800/70 font-semibold justify-self-start self-start ${item.status === "active" ? "text-teal-900/60" : item.status === "alert" ? "text-amber-900/60" : item.status === "error" ? "text-red-900/60" : "text-gray-900/60"}`}>{item.source}</div>
+                                        <div className={`capitalize col-span-2 text-xs font-semibold justify-self-start self-start ${item.status === "active" ? "text-teal-900/60" : item.status === "alert" ? "text-amber-900/60" : item.status === "error" ? "text-red-900/60" : "text-gray-900/60"}`}>{item.source}</div>
 
                                         <div className={`h-2.5 w-2.5 rounded-full shadow-md justify-self-end self-start ${item.status === "active" ? "bg-teal-500 shadow-teal-500/50" : item.status === "alert" ? "bg-amber-500 shadow-amber-500/50 " : item.status === "error" ? "bg-red-500 shadow-red-500/50" : "bg-gray-500 shadow-gray-500/50"}`} />
 
