@@ -11,11 +11,11 @@ export default function Skeleton({ inlinePadding }: { inlinePadding: string }) {
 
                 {
                     globalThis?.window?.innerWidth < 768 ?
-                        [1, 2, 3, 4].map(
+                        [1, 2, 3, 4, 5, 6, 7, 8].map(
                             (item, i) =>
                                 <CardSkeleton key={i} />
                         )
-                        : [1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24].map(
+                        : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24].map(
                             (item, i) =>
                                 <CardSkeleton key={i} />
                         )

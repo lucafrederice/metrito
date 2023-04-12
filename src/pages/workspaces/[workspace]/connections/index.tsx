@@ -15,18 +15,20 @@ const data = {
             source: "facebook ads",
             status: "error",
             brandsCount: 1
-        }, {
+        },
+        {
+            id: 9,
+            name: "Galeria do Rock",
+            source: "pagar.me",
+            status: "active",
+            brandsCount: 0
+        },
+        {
             id: 2,
             name: "iFood",
             source: "google analytics",
             status: "error",
             brandsCount: 2
-        }, {
-            id: 3,
-            name: "Zé Delivery",
-            source: "google ads",
-            status: "error",
-            brandsCount: 0
         },
         {
             id: 4,
@@ -34,18 +36,6 @@ const data = {
             source: "facebook",
             status: "alert",
             brandsCount: 2
-        }, {
-            id: 5,
-            name: "onovomercado",
-            source: "tiktok ads",
-            status: "alert",
-            brandsCount: 5
-        }, {
-            id: 6,
-            name: "uol",
-            source: "linkedin ads",
-            status: "alert",
-            brandsCount: 4
         },
         {
             id: 7,
@@ -53,60 +43,83 @@ const data = {
             source: "hotmart",
             status: "active",
             brandsCount: 5
-        }, {
-            id: 8,
-            name: "Brechó da Ana",
-            source: "google ads",
-            status: "active",
-            brandsCount: 3
-        }, {
-            id: 9,
-            name: "Galeria do Rock",
-            source: "pagar.me",
-            status: "active",
-            brandsCount: 0
-        }, {
-            id: 10,
-            name: "Iguatemi Shopping",
-            source: "hotmart",
-            status: "active",
-            brandsCount: 1
-        }, {
-            id: 11,
-            name: "Boulevard Shopping",
-            source: "facebook",
-            status: "active",
-            brandsCount: 1
-        }, {
-            id: 12,
-            name: "Bar da rosa",
-            source: "monetizze",
-            status: "active",
-            brandsCount: 2
-        }, {
-            id: 13,
-            name: "Galeria do Rock",
-            source: "pagar.me",
-            status: "expired",
-            brandsCount: 0
-        }, {
-            id: 14,
-            name: "Iguatemi Shopping",
-            source: "hotmart",
-            status: "expired",
-            brandsCount: 1
-        }, {
+        },
+        {
+            id: 5,
+            name: "onovomercado",
+            source: "tiktok ads",
+            status: "alert",
+            brandsCount: 5
+        },
+        {
+            id: 6,
+            name: "uol",
+            source: "linkedin ads",
+            status: "alert",
+            brandsCount: 4
+        },
+        {
             id: 15,
             name: "Boulevard Shopping",
             source: "facebook",
             status: "expired",
             brandsCount: 1
-        }, {
+        },
+        {
+            id: 3,
+            name: "Zé Delivery",
+            source: "google ads",
+            status: "error",
+            brandsCount: 0
+        },
+        {
+            id: 12,
+            name: "Bar da rosa",
+            source: "monetizze",
+            status: "active",
+            brandsCount: 2
+        },
+        {
+            id: 13,
+            name: "Galeria do Rock",
+            source: "pagar.me",
+            status: "expired",
+            brandsCount: 0
+        },
+        {
             id: 16,
             name: "Bar da rosa",
             source: "monetizze",
             status: "expired",
             brandsCount: 2
+        },
+        {
+            id: 8,
+            name: "Brechó da Ana",
+            source: "google ads",
+            status: "active",
+            brandsCount: 3
+        },
+        {
+            id: 10,
+            name: "Iguatemi Shopping",
+            source: "hotmart",
+            status: "active",
+            brandsCount: 1
+        },
+        {
+            id: 11,
+            name: "Boulevard Shopping",
+            source: "facebook",
+            status: "active",
+            brandsCount: 1
+        },
+        {
+            id: 14,
+            name: "Iguatemi Shopping",
+            source: "hotmart",
+            status: "expired",
+            brandsCount: 1
         },
     ]
 }
@@ -120,18 +133,20 @@ export default function Index() {
             source: "facebook ads",
             status: "error",
             brandsCount: 1
-        }, {
+        },
+        {
+            id: 9,
+            name: "Galeria do Rock",
+            source: "pagar.me",
+            status: "active",
+            brandsCount: 0
+        },
+        {
             id: 2,
             name: "iFood",
             source: "google analytics",
             status: "error",
             brandsCount: 2
-        }, {
-            id: 3,
-            name: "Zé Delivery",
-            source: "google ads",
-            status: "error",
-            brandsCount: 0
         },
         {
             id: 4,
@@ -139,18 +154,6 @@ export default function Index() {
             source: "facebook",
             status: "alert",
             brandsCount: 2
-        }, {
-            id: 5,
-            name: "onovomercado",
-            source: "tiktok ads",
-            status: "alert",
-            brandsCount: 5
-        }, {
-            id: 6,
-            name: "uol",
-            source: "linkedin ads",
-            status: "alert",
-            brandsCount: 4
         },
         {
             id: 7,
@@ -158,60 +161,83 @@ export default function Index() {
             source: "hotmart",
             status: "active",
             brandsCount: 5
-        }, {
-            id: 8,
-            name: "Brechó da Ana",
-            source: "google ads",
-            status: "active",
-            brandsCount: 3
-        }, {
-            id: 9,
-            name: "Galeria do Rock",
-            source: "pagar.me",
-            status: "active",
-            brandsCount: 0
-        }, {
-            id: 10,
-            name: "Iguatemi Shopping",
-            source: "hotmart",
-            status: "active",
-            brandsCount: 1
-        }, {
-            id: 11,
-            name: "Boulevard Shopping",
-            source: "facebook",
-            status: "active",
-            brandsCount: 1
-        }, {
-            id: 12,
-            name: "Bar da rosa",
-            source: "monetizze",
-            status: "active",
-            brandsCount: 2
-        }, {
-            id: 13,
-            name: "Galeria do Rock",
-            source: "pagar.me",
-            status: "expired",
-            brandsCount: 0
-        }, {
-            id: 14,
-            name: "Iguatemi Shopping",
-            source: "hotmart",
-            status: "expired",
-            brandsCount: 1
-        }, {
+        },
+        {
+            id: 5,
+            name: "onovomercado",
+            source: "tiktok ads",
+            status: "alert",
+            brandsCount: 5
+        },
+        {
+            id: 6,
+            name: "uol",
+            source: "linkedin ads",
+            status: "alert",
+            brandsCount: 4
+        },
+        {
             id: 15,
             name: "Boulevard Shopping",
             source: "facebook",
             status: "expired",
             brandsCount: 1
-        }, {
+        },
+        {
+            id: 3,
+            name: "Zé Delivery",
+            source: "google ads",
+            status: "error",
+            brandsCount: 0
+        },
+        {
+            id: 12,
+            name: "Bar da rosa",
+            source: "monetizze",
+            status: "active",
+            brandsCount: 2
+        },
+        {
+            id: 13,
+            name: "Galeria do Rock",
+            source: "pagar.me",
+            status: "expired",
+            brandsCount: 0
+        },
+        {
             id: 16,
             name: "Bar da rosa",
             source: "monetizze",
             status: "expired",
             brandsCount: 2
+        },
+        {
+            id: 8,
+            name: "Brechó da Ana",
+            source: "google ads",
+            status: "active",
+            brandsCount: 3
+        },
+        {
+            id: 10,
+            name: "Iguatemi Shopping",
+            source: "hotmart",
+            status: "active",
+            brandsCount: 1
+        },
+        {
+            id: 11,
+            name: "Boulevard Shopping",
+            source: "facebook",
+            status: "active",
+            brandsCount: 1
+        },
+        {
+            id: 14,
+            name: "Iguatemi Shopping",
+            source: "hotmart",
+            status: "expired",
+            brandsCount: 1
         },
     ])
 
