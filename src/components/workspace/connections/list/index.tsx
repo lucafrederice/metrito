@@ -102,7 +102,7 @@ export default function List({ connections, inlinePadding = "", handleAdd, loadi
                 <div
                     className={`w-full py-8 text-center text-gray-500 font-medium ${inlinePadding}`}
                 >
-                    <span>Nenhum resultado{status ? `com o status "${statuses.filter(item => item.status === status)[0].name}"` : ""} para a pesquisa{search ? ` "${search}"` : ""}.</span>
+                    <span>Nenhum resultado{status ? ` com o status "${statuses.filter(item => item.status === status)[0].name}"` : ""} para a pesquisa{search ? ` "${search}"` : ""}.</span>
                 </div>
             }
 
